@@ -6,7 +6,7 @@
 #    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/08/01 18:00:05 by aselnet          ###   ########.fr        #
+#    Updated: 2023/08/01 23:15:41 by aselnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ LIBFT		=	./libft/libft.a
 
 MAIN		=	./srcs/cub3d.c
 
-# CORE		=	./srcs/core/mlx_init.c ./srcs/core/raycast.c ./srcs/core/linecrossed.c ./srcs/core/texture.c ./srcs/core/hooks.c ./srcs/core/tools.c
+CORE		=	./srcs/display.c\
+				./srcs/init.c\
+				./srcs/utils.c\
 
 PARSING		=	
 
-SRCS		=	${MAIN} ${PARSING} #${CORE}
+SRCS		=	${MAIN} ${PARSING} ${CORE}
 
 OBJS		=	${SRCS:.c=.o}
 
