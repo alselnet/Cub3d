@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/01 23:11:40 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/01 23:46:49 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	draw_tile(t_img *img, int x, int y, int color)
 		b++;
 	}
 }
+
 void	draw_map(t_cub *cub)
 {
 	int	x;
@@ -58,5 +59,49 @@ void	draw_map(t_cub *cub)
 		}
 		x = 0;
 		y++;
+	}
+}
+
+void	fetch_player_start(t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while(cub->map[y])
+	{
+		x = 0;
+		while (cub->map[y][x])
+		{
+			if(ft_isinbase(cub->map[y][x], "NSEW"))
+			{
+				cub->player.pos_x = x;
+				cub->player.pos_y = y;
+				return;
+			}
+			x++;
+		}
+		y ++;
+	}
+}
+
+void	draw_player_start(t_cub *cub)
+{
+	int	a;
+	int	b;
+
+	fetch_player_start(cub);
+	if (!cub->player.pos_x || !cub->player.pos_y)
+		return ;
+	b = (cub->player.pos_y*30) + 5;
+	while (b < (cub->player.pos_y*30) + 25 + 1)
+	{
+		a = (cub->player.pos_x*30) + 5;
+		while (a < (cub->player.pos_x*30) + 25 + 1)
+		{
+			my_mlx_pixel_put(&cub->img, a, b, 0x000000);
+			a++;
+		}
+		b++;
 	}
 }

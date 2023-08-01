@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/01 23:14:30 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/02 00:01:58 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct img {
 	int		endian;
 }				t_img;
 
+typedef struct s_player{
+	int pos_x;
+	int pos_y;
+}				t_player;
+
 typedef struct s_cub {
 	t_mlx	mlx;
 	t_img	img;
@@ -43,6 +48,7 @@ typedef struct s_cub {
 	int		dimensions[2];
 	int		res_x;
 	int		res_y;
+	t_player	player;
 }				t_cub;
 
 
@@ -50,6 +56,7 @@ typedef struct s_cub {
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_map(t_cub *cub);
+void	draw_player_start(t_cub *cub);
 
 //init.c
 void	init_mlx(t_cub *cub, int x, int y);
@@ -58,6 +65,8 @@ void	fetch_map(t_cub *cub);
 
 //utils.c
 int	wclose(t_cub *cub);
+
+//movement.c
 int	exec_key(int keycode, t_cub *cub);
 
 # endif
