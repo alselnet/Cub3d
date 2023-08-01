@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/01 20:26:46 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/01 22:22:15 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	wclose(t_cub *cub)
 {
 	ft_free_arr(cub->map);
+	free(cub->path);
 	mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
 	mlx_destroy_display(cub->mlx.mlx);
 	free(cub->mlx.mlx);
@@ -41,14 +42,16 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (!(x >= 0 && y >= 0 && x < 1920 && y < 1080))
+	if (!(x >= 0 && y >= 0 && x < 1152 && y < 870))
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
-void	init_mlx(t_cub *cub)
+void	init_mlx(t_cub *cub, int x, int y)
 {
+	cub->res_x = x;
+	cub->res_y = y;
 	cub->mlx.mlx = mlx_init();
 	cub->mlx.win = mlx_new_window(cub->mlx.mlx, cub->res_x, cub->res_y, "Cub2d");
 	cub->img.img = mlx_new_image(cub->mlx.mlx, cub->res_x, cub->res_y);
@@ -56,53 +59,69 @@ void	init_mlx(t_cub *cub)
 			&cub->img.line_length, &cub->img.endian);
 }
 
-char	*fill_line()
+
+void	get_map_size(t_cub *cub)
 {
-	int	i;
+	int		fd;
 	char	*line;
 
-	i = 0;
-	line = malloc(sizeof(char) * (100 + 1));
+	cub->dimensions[0] = 0;
+	fd = open(cub->path, O_RDONLY);
+	line = get_next_line(fd);
 	if (!line)
-		return (NULL);
-	line[i] = '1';
-	i++;
-	while (i < 100 - 1)
+		return (free(cub->path));
+	cub->dimensions[1] = ft_strlen(line);
+	while (line && *line)
 	{
-		line[i] = '0';
-		i++;
-	}
-	line[i] = '1';
-	i++;
-	line[i] = 0;
-	return (line);
+		free (line);
+		line = get_next_line(fd);
+		cub->dimensions[0]++;
+	}	
+	free(line);
+	close(fd);
+	return;
 }
 
-// No parsing
-int	init_map(t_cub *cub, int x, int y)
+void	fetch_map(t_cub *cub)
 {
-	int	i;
+	int		fd;
+	int		i;
 
-	i = 0;
-	if (x < 0 || y < 0)
-		return (-1);
-	cub->res_x = x;
-	cub->res_y = y;
-	cub->map = malloc(sizeof(char *) * (100 + 1));
+	i = -1;
+	get_map_size(cub);
+	cub->map = ft_calloc((cub->dimensions[0]) + 1, sizeof(char *));
 	if (!cub->map)
-		return (1);
-	while (i < 100)
+		return (free(cub->path));
+	fd = open(cub->path, O_RDONLY);
+	while (++i < cub->dimensions[0])
 	{
-		cub->map[i] = fill_line();
+		cub->map[i] = get_next_line(fd);
 		if (!cub->map[i])
-			return (free(cub->map), 1);
-		i++;
+		{
+			close(fd);
+			return(free(cub->path));
+		}
 	}
-	cub->map[i] = 0;
-	return (0);
+	close (fd);
 }
 
-//void	draw_tile(t_img *img, int x, int y)
+void	draw_tile(t_img *img, int x, int y, int color)
+{
+	int	a;
+	int	b;
+
+	b = y*30;
+	while (b < (y + 1) * 30)
+	{
+		a = x*30;
+		while (a < (x + 1) * 30)
+		{
+			my_mlx_pixel_put(img, a, b, color);
+			a++;
+		}
+		b++;
+	}
+}
 void	draw_map(t_cub *cub)
 {
 	int	x;
@@ -115,9 +134,9 @@ void	draw_map(t_cub *cub)
 		while (x < (int)ft_strlen(cub->map[y]))
 		{
 			if (cub->map[y][x] == '0')
-				my_mlx_pixel_put(&cub->img, x, y, 0xfff0f6);
+				draw_tile(&cub->img, x, y, 0xfff0f6);
 			else if (cub->map[y][x] == '1')
-				my_mlx_pixel_put(&cub->img, x, y, 0xfa6339);
+				draw_tile(&cub->img, x, y, 0xfa6339);
 			x++;
 		}
 		x = 0;
@@ -125,21 +144,24 @@ void	draw_map(t_cub *cub)
 	}
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	init_mlx(&cub);
-	//if (init_map(&cub, 1152, 870) != 0)
-	//	return (1);
-
-	//draw_map(&cub);
-
-	// mlx_put_image_to_window(cub.mlx.mlx, cub.mlx.win, cub.img.img, 0, 0);
-
-	// mlx_hook(cub.mlx.win, 17, 0, wclose, &cub);
-	// mlx_hook(cub.mlx.win, 2, 1L << 0, &exec_key, &cub);
-	// mlx_loop(cub.mlx.mlx);
+	if (argc != 2)
+		return (0);
+	cub.path = ft_strjoin("maps/", argv[1]);
+	if (!cub.path)
+		return (0);
+	init_mlx(&cub, 1152, 870);
+	fetch_map(&cub);
+	if (!cub.map)
+		return (0);
+	draw_map(&cub);
+	mlx_put_image_to_window(cub.mlx.mlx, cub.mlx.win, cub.img.img, 0, 0);
+	mlx_hook(cub.mlx.win, 17, 0, wclose, &cub);
+	mlx_hook(cub.mlx.win, 2, 1L << 0, &exec_key, &cub);
+	mlx_loop(cub.mlx.mlx);
 	
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:51:25 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/01 19:53:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/01 22:24:51 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	ft_free_arr(char **arr)
 		return ;
 	while (arr[i])
 	{
-		if (arr[i])
-			free(arr[i]);
+		free(arr[i]);
 		i++;
 	}
 	free(arr);

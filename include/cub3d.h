@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/01 20:17:01 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/01 22:12:04 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
-	//t_map	map;
-	//char	*path;
 }				t_mlx;
 
 typedef struct img {
@@ -41,6 +39,8 @@ typedef struct s_cub {
 	t_mlx	mlx;
 	t_img	img;
 	char	**map;
+	char	*path;
+	int		dimensions[2];
 	int		res_x;
 	int		res_y;
 }				t_cub;
