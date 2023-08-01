@@ -6,7 +6,7 @@
 #    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/08/01 16:59:26 by aselnet          ###   ########.fr        #
+#    Updated: 2023/08/01 18:00:05 by aselnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME		=	cub3d
 
 LIB_DIR		=	./libft
 
-MLX_DIR		=	./minilibx-linux
+MLX_DIR		=	./mlx
 
-MLX 		= ./minilibx-linux/libmlx.a
+MLX 		=  ./mlx/libmlx.a
 
 DEPS		=	${OBJS:.o=.d}
 
