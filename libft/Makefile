@@ -6,7 +6,7 @@
 #    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 15:46:29 by aselnet           #+#    #+#              #
-#    Updated: 2023/08/01 19:54:29 by jthuysba         ###   ########.fr        #
+#    Updated: 2023/08/01 22:39:27 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ get_next_line.c\
 get_next_line_utils.c\
 ft_arr_len.c\
 ft_free_arr.c\
+ft_calloc.c\
+ft_bzero.c\
 
 
 OBJS = ${SRCS:.c=.o}
