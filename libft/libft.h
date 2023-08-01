@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:00:32 by aselnet           #+#    #+#             */
-/*   Updated: 2023/07/06 02:23:04 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/01 19:53:49 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,9 @@ int			ft_put_upper_hex_fd(unsigned long int value, int fd);
 int			ft_printaddr_fd(unsigned long long value, int fd);
 void		ft_putunsigned_fd(unsigned int n, int fd, int *count);
 int			ft_printf(char const *s, ...);
+
+//MORE
+int	ft_arr_len(char **tab);
+void	ft_free_arr(char **arr);
 
 #endif
