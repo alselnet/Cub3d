@@ -6,15 +6,17 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 00:01:58 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/02 15:53:06 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB2D_H
 # define CUB2D_H
 
+# define PI 3.141592
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <string.h>
@@ -36,8 +38,9 @@ typedef struct img {
 }				t_img;
 
 typedef struct s_player{
-	int pos_x;
-	int pos_y;
+	double	pos_x;
+	double	pos_y;
+	double	direction;
 }				t_player;
 
 typedef struct s_cub {
@@ -57,6 +60,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_map(t_cub *cub);
 void	draw_player_start(t_cub *cub);
+void	draw_direction(t_cub *cub);
 
 //init.c
 void	init_mlx(t_cub *cub, int x, int y);

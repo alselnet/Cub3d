@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 00:13:27 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/02 17:28:35 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	exec_key(int keycode, t_cub *cub)
 {
 	if (keycode == XK_Escape)
 		wclose(cub);
-/* 	else if (keycode == XK_w)
+	/* else if (keycode == XK_w)
 		move(1, mlx);
 	else if (keycode == XK_a)
 		move(2, mlx);
