@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 23:58:09 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/03 00:39:41 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	fetch_player_start(t_cub *cub)
 		y ++;
 	}
 }
-void	draw_vertical_ray(t_cub * cub, t_img *img)
+void	draw_vertical_ray(t_cub * cub, double vector, t_img *img)
 {
 	int	x_px;
 	int	y_px;
@@ -113,9 +113,9 @@ void	draw_vertical_ray(t_cub * cub, t_img *img)
 	while(cub->map[y_px / 50][x_px / 50] != '1')
 	{
 		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
-		if ((cub->player.orientation > (PI * 0.497) && cub->player.orientation < (PI * 0.503)))
+		if ((vector > (PI * 0.499) && vector < (PI * 0.501)))
 			y_px--;
-		else if ((cub->player.orientation > (PI * 1.497) && cub->player.orientation < (PI * 1.503)))
+		else if ((vector > (PI * 1.499) && vector < (PI * 1.501)))
 			y_px++;
 		else
 			break;
@@ -137,10 +137,10 @@ void	draw_ray(t_cub *cub, double vector, t_img *img)
 	monitor = 0;
 	x_px = cub->player.pos_x * 50;
 	y_px = cub->player.pos_y * 50;
-	if ((vector > (PI * 0.497) && vector < (PI * 0.503))
-	|| (vector > (PI * 1.497) && vector < (PI * 1.503)))
+	if ((vector > (PI * 0.499) && vector < (PI * 0.501))
+	|| (vector > (PI * 1.499) && vector < (PI * 1.501)))
 	{
-		draw_vertical_ray(cub, img);
+		draw_vertical_ray(cub, vector, img);
 		return;
 	}
 
@@ -150,9 +150,9 @@ void	draw_ray(t_cub *cub, double vector, t_img *img)
 	{
 		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
 		if (vector > (PI * 0.5) && vector < PI * 1.5)
-			x += 0.01;
+			x += 0.001;
 		else 
-			x -= 0.01;
+			x -= 0.001;
 		y = slope * x;
 		x_px = (x + cub->player.pos_x) * 50;
 		y_px = (y + cub->player.pos_y) * 50;
@@ -169,17 +169,17 @@ void	draw_fov(t_cub *cub, t_img *img)
 {
 	double delta;
 
-	delta = 0.001;
+	delta = 0.0023;
 	draw_ray(cub, cub->player.orientation, img);
 	while (delta < 0.8)
 	{
 		draw_ray(cub, cub->player.orientation + delta, img);
-		delta += 0.001;
+		delta += 0.0023;
 	}
 	while (delta > 0)
 	{
 		draw_ray(cub, cub->player.orientation - delta, img);
-		delta -= 0.001;
+		delta -= 0.0023;
 	}
 }
 
