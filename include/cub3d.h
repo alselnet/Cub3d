@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 17:54:44 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/02 20:51:32 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_map(t_cub *cub, t_img *img);
 void	draw_player_start(t_cub *cub, t_img *img);
 void	draw_direction(t_cub *cub);
-void	draw_ray(t_cub *cub, t_img *img);
+void	draw_ray(t_cub *cub, double vector, t_img *img);
+void	draw_fov(t_cub *cub, t_img *img);
 
 //init.c
 void	init_mlx(t_cub *cub, int x, int y);

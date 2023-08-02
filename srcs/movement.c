@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 20:03:32 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/03 00:00:47 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	rotate(char dir, t_cub *cub)
 			&cub->img.line_length, &cub->img.endian);
 	if (dir == 'L')
 	{
-		printf("left\n");
 		if (cub->player.orientation - (PI / 36) < 0)
 			cub->player.orientation = (2 * PI) - (PI / 36);
 		else
@@ -28,14 +27,13 @@ void	rotate(char dir, t_cub *cub)
 	}
 	else if (dir == 'R')
 	{
-		printf("right\n");
 		if (cub->player.orientation + (PI / 36) > 2 * PI)
 			cub->player.orientation = PI / 36;
 		else
 			cub->player.orientation += PI / 36;
 	}
 	draw_map(cub, &cub->img);
-	draw_ray(cub, &cub->img);
+	draw_fov(cub, &cub->img);
 	mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.win, cub->img.img, 0, 0);
 }
 
@@ -46,10 +44,10 @@ int	exec_key(int keycode, t_cub *cub)
 	else if (keycode == XK_a)
 		rotate('L', cub);
 	// else if (keycode == XK_w)
-	// 	move(2, mlx);
+	//  	move('U', cub);
 	else if (keycode == XK_d)
 		rotate('R', cub);
 	// else if (keycode == XK_s)
-	// 	move(4, mlx);
+	//  	move('D', cub);
 	return (0);
 }

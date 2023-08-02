@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 20:09:09 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/02 23:58:09 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ void	fetch_player_start(t_cub *cub)
 			{
 				cub->player.pos_x = x + 0.5;
 				cub->player.pos_y = y + 0.5;
-				//printf("player pos_x is %f\n", cub->player.pos_x);
-				//printf("player pos_y is %f\n", cub->player.pos_y);
 				fetch_player_starting_orientation(cub);
 				return;
 			}
@@ -110,53 +108,78 @@ void	draw_vertical_ray(t_cub * cub, t_img *img)
 	int	x_px;
 	int	y_px;
 
-	printf("vertical\n");
 	x_px = cub->player.pos_x * 50;
 	y_px = cub->player.pos_y * 50;
 	while(cub->map[y_px / 50][x_px / 50] != '1')
 	{
 		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
-		if ((cub->player.orientation > (PI * 0.48) && cub->player.orientation < (PI * 0.52)))
+		if ((cub->player.orientation > (PI * 0.497) && cub->player.orientation < (PI * 0.503)))
 			y_px--;
-		else
+		else if ((cub->player.orientation > (PI * 1.497) && cub->player.orientation < (PI * 1.503)))
 			y_px++;
+		else
+			break;
 	}
 
 }
 
-void	draw_ray(t_cub *cub, t_img *img)
+void	draw_ray(t_cub *cub, double vector, t_img *img)
 {
 	double	x;
 	double	y;
 	int		x_px;
 	int		y_px;
+	int		monitor;
 	double	slope;
 
 	x = 0;
 	y = 0;
+	monitor = 0;
 	x_px = cub->player.pos_x * 50;
 	y_px = cub->player.pos_y * 50;
-	printf ("orientation is %f\n", cub->player.orientation);
-	printf ("PI * 1/2 is %f\n\n", PI * 0.5);
-	if ((cub->player.orientation > (PI * 0.48) && cub->player.orientation < (PI * 0.52))
-	|| (cub->player.orientation > (PI * 1.48) && cub->player.orientation < (PI * 1.52)))
+	if ((vector > (PI * 0.497) && vector < (PI * 0.503))
+	|| (vector > (PI * 1.497) && vector < (PI * 1.503)))
 	{
 		draw_vertical_ray(cub, img);
 		return;
 	}
 
-	slope = tan(cub->player.orientation);
+	slope = tan(vector);
 	//printf ("slope is %f\n", slope);
-	while(cub->map[y_px / 50][x_px / 50] != '1')
+	while(!monitor)
 	{
 		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
-		if (cub->player.orientation > (PI * 0.5) && cub->player.orientation < PI * 1.5)
-			x += 0.02;
+		if (vector > (PI * 0.5) && vector < PI * 1.5)
+			x += 0.01;
 		else 
-			x -= 0.02;
+			x -= 0.01;
 		y = slope * x;
 		x_px = (x + cub->player.pos_x) * 50;
 		y_px = (y + cub->player.pos_y) * 50;
+		//if ((x_px % 50) <=  2 || (y_px % 50) <= 2 || (x_px % 50) >= 47 || (y_px % 50) >= 47)
+		//{
+			if (cub->map[y_px / 50][x_px / 50] == '1')
+				monitor = 1;
+		//}
+
+	}
+}
+
+void	draw_fov(t_cub *cub, t_img *img)
+{
+	double delta;
+
+	delta = 0.001;
+	draw_ray(cub, cub->player.orientation, img);
+	while (delta < 0.8)
+	{
+		draw_ray(cub, cub->player.orientation + delta, img);
+		delta += 0.001;
+	}
+	while (delta > 0)
+	{
+		draw_ray(cub, cub->player.orientation - delta, img);
+		delta -= 0.001;
 	}
 }
 
@@ -180,5 +203,5 @@ void	draw_player_start(t_cub *cub, t_img *img)
 		b++;
 	}
 	//printf("player orientation is %f\n", cub->player.orientation);
-	draw_ray(cub, img);
+	draw_fov(cub, img);
 }
