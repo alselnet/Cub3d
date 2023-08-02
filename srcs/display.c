@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 17:22:59 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/02 20:09:09 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_tile(t_img *img, int x, int y, int color)
 	}
 }
 
-void	draw_map(t_cub *cub)
+void	draw_map(t_cub *cub, t_img *img)
 {
 	int	x;
 	int	y;
@@ -52,9 +52,9 @@ void	draw_map(t_cub *cub)
 		while (x < (int)ft_strlen(cub->map[y]))
 		{
 			if (ft_isinbase(cub->map[y][x], "0NSEW"))
-				draw_tile(&cub->img, x, y, 0xfff0f6);
+				draw_tile(img, x, y, 0xfff0f6);
 			else if (cub->map[y][x] == '1')
-				draw_tile(&cub->img, x, y, 0xfa6339);
+				draw_tile(img, x, y, 0xfa6339);
 			x++;
 		}
 		x = 0;
@@ -71,13 +71,13 @@ void	fetch_player_starting_orientation(t_cub *cub)
 	player_tile_y = floor(cub->player.pos_y);
 
 	if (cub->map[player_tile_x][player_tile_y] == 'N')
-		cub->player.direction = PI / 2;
+		cub->player.orientation = PI / 2;
 	else if (cub->map[player_tile_x][player_tile_y] == 'E')
-		cub->player.direction = 2 * PI;
+		cub->player.orientation = 2 * PI;
 	else if (cub->map[player_tile_x][player_tile_y] == 'S')
-		cub->player.direction = 3 * PI / 2;
+		cub->player.orientation = 3 * PI / 2;
 	else if (cub->map[player_tile_x][player_tile_y] == 'W')
-		cub->player.direction = PI;
+		cub->player.orientation = PI;
 }
 
 void	fetch_player_start(t_cub *cub)
@@ -95,8 +95,8 @@ void	fetch_player_start(t_cub *cub)
 			{
 				cub->player.pos_x = x + 0.5;
 				cub->player.pos_y = y + 0.5;
-				printf("player pos_x is %f\n", cub->player.pos_x);
-				printf("player pos_y is %f\n", cub->player.pos_y);
+				//printf("player pos_x is %f\n", cub->player.pos_x);
+				//printf("player pos_y is %f\n", cub->player.pos_y);
 				fetch_player_starting_orientation(cub);
 				return;
 			}
@@ -105,17 +105,18 @@ void	fetch_player_start(t_cub *cub)
 		y ++;
 	}
 }
-void	draw_vertical_ray(t_cub * cub)
+void	draw_vertical_ray(t_cub * cub, t_img *img)
 {
 	int	x_px;
 	int	y_px;
 
+	printf("vertical\n");
 	x_px = cub->player.pos_x * 50;
 	y_px = cub->player.pos_y * 50;
 	while(cub->map[y_px / 50][x_px / 50] != '1')
 	{
-		my_mlx_pixel_put(&cub->img, x_px, y_px, 0xdd001c);
-		if (cub->player.direction == PI / 2)
+		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
+		if ((cub->player.orientation > (PI * 0.48) && cub->player.orientation < (PI * 0.52)))
 			y_px--;
 		else
 			y_px++;
@@ -123,7 +124,7 @@ void	draw_vertical_ray(t_cub * cub)
 
 }
 
-void	draw_ray(t_cub *cub)
+void	draw_ray(t_cub *cub, t_img *img)
 {
 	double	x;
 	double	y;
@@ -135,18 +136,21 @@ void	draw_ray(t_cub *cub)
 	y = 0;
 	x_px = cub->player.pos_x * 50;
 	y_px = cub->player.pos_y * 50;
-	if (cub->player.direction == PI / 2 || cub->player.direction == PI * 3 / 2)
+	printf ("orientation is %f\n", cub->player.orientation);
+	printf ("PI * 1/2 is %f\n\n", PI * 0.5);
+	if ((cub->player.orientation > (PI * 0.48) && cub->player.orientation < (PI * 0.52))
+	|| (cub->player.orientation > (PI * 1.48) && cub->player.orientation < (PI * 1.52)))
 	{
-		draw_vertical_ray(cub);
+		draw_vertical_ray(cub, img);
 		return;
 	}
 
-	slope = tan(cub->player.direction);
-	printf ("slope is %f\n", slope);
+	slope = tan(cub->player.orientation);
+	//printf ("slope is %f\n", slope);
 	while(cub->map[y_px / 50][x_px / 50] != '1')
 	{
-		my_mlx_pixel_put(&cub->img, x_px, y_px, 0xdd001c);
-		if (cub->player.direction > PI / 2 && cub->player.direction < PI * 3 / 2)
+		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
+		if (cub->player.orientation > (PI * 0.5) && cub->player.orientation < PI * 1.5)
 			x += 0.02;
 		else 
 			x -= 0.02;
@@ -156,7 +160,7 @@ void	draw_ray(t_cub *cub)
 	}
 }
 
-void	draw_player_start(t_cub *cub)
+void	draw_player_start(t_cub *cub, t_img *img)
 {
 	int	a;
 	int	b;
@@ -170,11 +174,11 @@ void	draw_player_start(t_cub *cub)
 		a = (cub->player.pos_x*50) - 9;
 		while (a < (cub->player.pos_x*50) + 10 + 1)
 		{
-			my_mlx_pixel_put(&cub->img, a, b, 0x000000);
+			my_mlx_pixel_put(img, a, b, 0x000000);
 			a++;
 		}
 		b++;
 	}
-	printf("player orientation is %f\n", cub->player.direction);
-	draw_ray(cub);
+	//printf("player orientation is %f\n", cub->player.orientation);
+	draw_ray(cub, img);
 }

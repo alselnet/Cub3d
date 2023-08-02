@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 15:53:06 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/02 17:54:44 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct img {
 typedef struct s_player{
 	double	pos_x;
 	double	pos_y;
-	double	direction;
+	double	orientation;
 }				t_player;
 
 typedef struct s_cub {
@@ -58,9 +58,10 @@ typedef struct s_cub {
 //display.c
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_tile(t_img *img, int x, int y, int color);
-void	draw_map(t_cub *cub);
-void	draw_player_start(t_cub *cub);
+void	draw_map(t_cub *cub, t_img *img);
+void	draw_player_start(t_cub *cub, t_img *img);
 void	draw_direction(t_cub *cub);
+void	draw_ray(t_cub *cub, t_img *img);
 
 //init.c
 void	init_mlx(t_cub *cub, int x, int y);
