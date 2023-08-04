@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 20:51:32 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/05 00:40:07 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ typedef struct s_cub {
 	t_player	player;
 }				t_cub;
 
+typedef struct	s_parsing
+{
+	char	*file;
+	char	**map;
+}	t_parsing;
 
 //display.c
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
@@ -74,5 +79,12 @@ int	wclose(t_cub *cub);
 
 //movement.c
 int	exec_key(int keycode, t_cub *cub);
+
+/*	PARSING */
+
+void	parsing(char *file);
+
+//parse_utils.c
+int	count_lines(char *file);
 
 # endif

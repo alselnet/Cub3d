@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
+#    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/08/01 23:48:28 by aselnet          ###   ########.fr        #
+#    Updated: 2023/08/05 00:40:35 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ CORE		=	./srcs/display.c\
 				./srcs/init.c\
 				./srcs/utils.c\
 				./srcs/movement.c\
+				./srcs/parsing/parsing.c\
+				./srcs/parsing/parse_utils.c\
 
 PARSING		=	
 
