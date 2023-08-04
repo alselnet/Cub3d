@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/04 12:15:54 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:48:51 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void	draw_tile(t_img *img, int x, int y, int color)
 	int	a;
 	int	b;
 
-	b = y*50;
-	while (b < (y + 1) * 50)
+	a = x*50;
+	while (a < (x + 1) * 50)
 	{
-		a = x*50;
-		while (a < (x + 1) * 50)
+		b = y*50;
+		while (b < (y + 1) * 50)
 		{
-			my_mlx_pixel_put(img, a, b, color);
-			a++;
+			my_mlx_pixel_put(img, b, a, color);
+			b++;
 		}
-		b++;
+		a++;
 	}
 }
 
@@ -46,19 +46,18 @@ void	draw_map(t_cub *cub, t_img *img)
 	int	y;
 
 	x = 0;
-	y = 0;
-	while (y < ft_arr_len(cub->map))
+	while (x < ft_arr_len(cub->map))
 	{
-		while (x < (int)ft_strlen(cub->map[y]))
+		y = 0;
+		while (y < (int)ft_strlen(cub->map[x]))
 		{
-			if (ft_isinbase(cub->map[y][x], "0NSEW"))
+			if (ft_isinbase(cub->map[x][y], "0NSEW"))
 				draw_tile(img, x, y, 0xfff0f6);
-			else if (cub->map[y][x] == '1')
+			else if (cub->map[x][y] == '1')
 				draw_tile(img, x, y, 0xfa6339);
-			x++;
+			y++;
 		}
-		x = 0;
-		y++;
+		x++;
 	}
 }
 
@@ -70,14 +69,14 @@ void	fetch_player_starting_orientation(t_cub *cub)
 	player_tile_x = floor(cub->player.pos_x);
 	player_tile_y = floor(cub->player.pos_y);
 
-	if (cub->map[player_tile_x][player_tile_y] == 'N')
-		cub->player.orientation = PI / 2;
+	if (cub->map[player_tile_x][player_tile_y] == 'W')
+		cub->player.orientation = PI * 0.5;
+	else if (cub->map[player_tile_x][player_tile_y] == 'N')
+		cub->player.orientation = 2 * PI;
 	else if (cub->map[player_tile_x][player_tile_y] == 'E')
-		cub->player.orientation = PI;
+		cub->player.orientation = PI * 1.5;
 	else if (cub->map[player_tile_x][player_tile_y] == 'S')
-		cub->player.orientation = 3 * PI / 2;
-	else if (cub->map[player_tile_x][player_tile_y] == 'W')
-		cub->player.orientation =  2 * PI;
+		cub->player.orientation =  PI;
 }
 
 void	fetch_player_start(t_cub *cub)
@@ -85,22 +84,24 @@ void	fetch_player_start(t_cub *cub)
 	int	x;
 	int	y;
 
-	y = 0;
-	while(cub->map[y])
+	x = 0;
+	while(cub->map[x])
 	{
-		x = 0;
-		while (cub->map[y][x])
+		y = 0;
+		while (cub->map[x][y])
 		{
-			if(ft_isinbase(cub->map[y][x], "NSEW"))
+			if(ft_isinbase(cub->map[x][y], "NSEW"))
 			{
-				cub->player.pos_x = x + 0.5;
-				cub->player.pos_y = y + 0.5;
+				cub->player.pos_x = x;
+				cub->player.pos_y = y;
 				fetch_player_starting_orientation(cub);
+				cub->player.pos_x += 0.5;
+				cub->player.pos_y += 0.5;
 				return;
 			}
-			x++;
+			y++;
 		}
-		y ++;
+		x ++;
 	}
 }
 void	draw_vertical_ray(t_cub * cub, double vector, t_img *img)
@@ -110,12 +111,12 @@ void	draw_vertical_ray(t_cub * cub, double vector, t_img *img)
 
 	x_px = cub->player.pos_x * 50;
 	y_px = cub->player.pos_y * 50;
-	while(cub->map[y_px / 50][x_px / 50] != '1')
+	while(cub->map[x_px / 50][y_px / 50] != '1')
 	{
-		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
-		if ((vector > (PI * 0.499) && vector < (PI * 0.501)))
+		my_mlx_pixel_put(img, y_px, x_px, 0xdd001c);
+		if ((vector > (PI * 0.498161) && vector < (PI * 0.501839)))
 			y_px--;
-		else if ((vector > (PI * 1.499) && vector < (PI * 1.501)))
+		else if ((vector > (PI * 1.498161) && vector < (PI * 1.501839)))
 			y_px++;
 		else
 			break;
@@ -137,8 +138,8 @@ void	draw_ray(t_cub *cub, double vector, t_img *img)
 	monitor = 0;
 	x_px = cub->player.pos_x * 50;
 	y_px = cub->player.pos_y * 50;
-	if ((vector > (PI * 0.499) && vector < (PI * 0.501))
-	|| (vector > (PI * 1.499) && vector < (PI * 1.501)))
+	if ((vector > (PI * 0.498161) && vector < (PI * 0.501839))
+	|| (vector > (PI * 1.498161) && vector < (PI * 1.501839)))
 	{
 		draw_vertical_ray(cub, vector, img);
 		return;
@@ -148,7 +149,7 @@ void	draw_ray(t_cub *cub, double vector, t_img *img)
 	//printf ("slope is %f\n", slope);
 	while(!monitor)
 	{
-		my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
+		my_mlx_pixel_put(img, y_px, x_px, 0xdd001c);
 		if (vector > (PI * 0.5) && vector < PI * 1.5)
 			x += 0.001;
 		else 
@@ -158,7 +159,7 @@ void	draw_ray(t_cub *cub, double vector, t_img *img)
 		y_px = (y + cub->player.pos_y) * 50;
 		//if ((x_px % 50) <=  2 || (y_px % 50) <= 2 || (x_px % 50) >= 47 || (y_px % 50) >= 47)
 		//{
-			if (cub->map[y_px / 50][x_px / 50] == '1')
+			if (cub->map[x_px / 50][y_px / 50] == '1')
 				monitor = 1;
 		//}
 
@@ -169,39 +170,25 @@ void	draw_fov(t_cub *cub, t_img *img)
 {
 	double delta;
 
-	delta = 0.0023;
+	delta = 0.001839;
 	draw_ray(cub, cub->player.orientation, img);
 	while (delta < 0.8)
 	{
 		draw_ray(cub, cub->player.orientation + delta, img);
-		delta += 0.0023;
+		delta += 0.001839;
 	}
 	while (delta > 0)
 	{
 		draw_ray(cub, cub->player.orientation - delta, img);
-		delta -= 0.0023;
+		delta -= 0.001839;
 	}
 }
 
 void	draw_player_start(t_cub *cub, t_img *img)
 {
-	int	a;
-	int	b;
-
 	fetch_player_start(cub);
 	if (!cub->player.pos_x || !cub->player.pos_y)
 		return ;
-	b = (cub->player.pos_y*50) - 9;
-	while (b < (cub->player.pos_y*50) + 10 + 1)
-	{
-		a = (cub->player.pos_x*50) - 9;
-		while (a < (cub->player.pos_x*50) + 10 + 1)
-		{
-			my_mlx_pixel_put(img, a, b, 0x000000);
-			a++;
-		}
-		b++;
-	}
-	//printf("player orientation is %f\n", cub->player.orientation);
+	printf("player orientation is %f\n", cub->player.orientation);
 	draw_fov(cub, img);
 }
