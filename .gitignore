@@ -1,4 +1,4 @@
-*.o
-*.d
-.vscode
-cub3d
+# *.o
+# *.d
+# .vscode
+# cub3d
