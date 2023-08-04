@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/03 00:39:41 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/04 12:15:54 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void	fetch_player_starting_orientation(t_cub *cub)
 	if (cub->map[player_tile_x][player_tile_y] == 'N')
 		cub->player.orientation = PI / 2;
 	else if (cub->map[player_tile_x][player_tile_y] == 'E')
-		cub->player.orientation = 2 * PI;
+		cub->player.orientation = PI;
 	else if (cub->map[player_tile_x][player_tile_y] == 'S')
 		cub->player.orientation = 3 * PI / 2;
 	else if (cub->map[player_tile_x][player_tile_y] == 'W')
-		cub->player.orientation = PI;
+		cub->player.orientation =  2 * PI;
 }
 
 void	fetch_player_start(t_cub *cub)
