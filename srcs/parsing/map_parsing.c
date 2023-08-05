@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/05 23:17:35 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/05 23:41:25 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_line(char *line, char *prev, char *next)
 	return (0);
 }
 
-int	check_map(char **map)
+int	check_map_limits(char **map)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ int	check_map(char **map)
 	{
 		if (check_line(map[i], map[i - 1], map[i + 1]) != 0)
 		{
-			printf("Error: The map has to be closed !\n");
+			printf("\033[31;01mInvalid map :\033[00m The map has to be closed\n");
 			return (1);
 		}
 		i++;
@@ -62,7 +62,7 @@ int	map_parsing(char *file)
 	// 	printf("%s\n", data.map[i]);
 	// 	i++;
 	// }
-	if (check_map(data.map) != 0)
+	if (check_map_limits(data.map) != 0)
 		return (1);
 	return (ft_free_arr(data.map), 0);
 }
