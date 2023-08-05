@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/05 01:04:52 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/05 22:30:13 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	fill_line(char *map, char *line)
 	map[i + 1] = 0;
 }
 
-void	fill_bot_limit(char *map, char *prev)
+char	*fill_bot_limit(char *prev)
 {
+	char	*map;
 	int	i;
 
 	map = malloc(sizeof(char) * (ft_strlen(prev) + 1));
-	printf("prev=%d\n", (int)ft_strlen(prev));
 	i = 0;
 	while (i < (int)ft_strlen(prev))
 	{
@@ -60,6 +60,7 @@ void	fill_bot_limit(char *map, char *prev)
 		i++;
 	}
 	map[i] = 0;
+	return (map);
 }
 
 int get_map(t_parsing *data)
@@ -69,7 +70,6 @@ int get_map(t_parsing *data)
 	int	i;
 
 	data->map = malloc(sizeof(char *) * (count_lines(data->file) + 3));
-	printf("%d\n", count_lines(data->file) + 3);
 	if (!data->map)
 		return (1);
 	fd = open(data->file, O_RDONLY, 0666);
@@ -90,10 +90,8 @@ int get_map(t_parsing *data)
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("i = %d\n", i);
-	fill_bot_limit(data->map[i + 1], data->map[i]);
-	printf("%s\n", data->map[i + 1]);
-	data->map[i + 2] = 0;
+	data->map[i] = fill_bot_limit(data->map[i - 1]);
+	data->map[i + 1] = 0;
 	return (0);
 }
 
