@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   get_checking_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/05 22:30:13 by jthuysba         ###   ########.fr       */
+/*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
+/*   Updated: 2023/08/05 22:49:19 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//Rempli la premiere ligne de la map avec des 'X'
 int	fill_top_limit(char **map, char *line)
 {
 	int	i;
@@ -29,6 +30,7 @@ int	fill_top_limit(char **map, char *line)
 	return (0);
 }
 
+//Copie une ligne du file dans la map en l'entourant de 'X'
 void	fill_line(char *map, char *line)
 {
 	int	i;
@@ -47,6 +49,7 @@ void	fill_line(char *map, char *line)
 	map[i + 1] = 0;
 }
 
+//Rempli la derniere ligne de la map avec des 'X'
 char	*fill_bot_limit(char *prev)
 {
 	char	*map;
@@ -63,7 +66,15 @@ char	*fill_bot_limit(char *prev)
 	return (map);
 }
 
-int get_map(t_parsing *data)
+// void	fill_content(char *map, char *line)
+// {
+// 	map = malloc(sizeof(char) * (ft_strlen(line) + 2));
+// 	map[0] = 'X';
+// 	fill_line(map, line);
+// }
+
+//Set la map de verification = map entouree de 'X'
+int get_checking_map(t_parsing *data)
 {
 	char	*line;
 	int	fd;
@@ -74,7 +85,7 @@ int get_map(t_parsing *data)
 		return (1);
 	fd = open(data->file, O_RDONLY, 0666);
 	if (fd < 0)
-		return(1);
+		return (1);
 	line = get_next_line(fd);
 	if (!line)
 		return (close(fd), 1);
@@ -84,7 +95,6 @@ int get_map(t_parsing *data)
 	while (line)
 	{
 		data->map[i] = malloc(sizeof(char) * (ft_strlen(line) + 2));
-		data->map[i][0] = 'X';
 		fill_line(data->map[i], line);
 		i++;
 		free(line);
@@ -92,24 +102,6 @@ int get_map(t_parsing *data)
 	}
 	data->map[i] = fill_bot_limit(data->map[i - 1]);
 	data->map[i + 1] = 0;
+	close(fd);
 	return (0);
-}
-
-void	parsing(char *file)
-{
-	t_parsing	data;
-
-	data.file = file;
-	if (get_map(&data) != 0)
-	{
-		// free_all
-		exit(1);
-	}
-	int	i = 0;
-	while (data.map[i])
-	{
-		printf("%s\n", data.map[i]);
-		i++;
-	}
-	free(data.map);
 }

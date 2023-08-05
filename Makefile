@@ -6,7 +6,7 @@
 #    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/08/05 00:40:35 by jthuysba         ###   ########.fr        #
+#    Updated: 2023/08/05 22:44:13 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ CORE		=	./srcs/display.c\
 				./srcs/init.c\
 				./srcs/utils.c\
 				./srcs/movement.c\
-				./srcs/parsing/parsing.c\
+				./srcs/parsing/map_parsing.c\
+				./srcs/parsing/get_checking_map.c\
 				./srcs/parsing/parse_utils.c\
 
 PARSING		=	
