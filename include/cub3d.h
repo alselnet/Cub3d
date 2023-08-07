@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/02 20:51:32 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:56:35 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define CUB2D_H
 
 # define PI 3.141592
+# define DELTA 1
+# define MS 0.1
+# define ROT_STEP PI / 36
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -38,8 +41,10 @@ typedef struct img {
 }				t_img;
 
 typedef struct s_player{
-	double	pos_x;
-	double	pos_y;
+
+	double	pos[2];
+	double	dir[2];
+	double	plane[2];
 	double	orientation;
 }				t_player;
 
@@ -63,6 +68,7 @@ void	draw_player_start(t_cub *cub, t_img *img);
 void	draw_direction(t_cub *cub);
 void	draw_ray(t_cub *cub, double vector, t_img *img);
 void	draw_fov(t_cub *cub, t_img *img);
+void	define_dir (t_cub *cub);
 
 //init.c
 void	init_mlx(t_cub *cub, int x, int y);
