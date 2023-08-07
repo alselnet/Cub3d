@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 16:56:35 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/07 17:30:16 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,18 @@ void	get_map_size(t_cub *cub);
 void	fetch_map(t_cub *cub);
 
 //utils.c
+void	correct_orientation(t_cub *cub);
 int	wclose(t_cub *cub);
+int	check_wall(double x, double y, t_cub *cub);
 
 //movement.c
 int	exec_key(int keycode, t_cub *cub);
+void	refresh_img(t_cub *cub);
+
+//movement2.c
+void	rotate(char dir, t_cub *cub);
+void	strafe(char dir, t_cub *cub);
+void	move(char dir, t_cub *cub);
+
 
 # endif
