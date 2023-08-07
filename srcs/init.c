@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:01 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 16:06:04 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/07 18:48:03 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	init_mlx(t_cub *cub, int x, int y)
 	cub->player.pos[1] = 0;
 	cub->player.dir[0] = 0;
 	cub->player.dir[1] = 0;
-	cub->player.plane[0] = 0;
-	cub->player.plane[1] = 0.8;
 	cub->mlx.mlx = mlx_init();
 	cub->mlx.win = mlx_new_window(cub->mlx.mlx, cub->res_x, cub->res_y, "Cub2d");
 	cub->img.img = mlx_new_image(cub->mlx.mlx, cub->res_x, cub->res_y);

@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 17:30:16 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/07 18:23:35 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CUB2D_H
 
 # define PI 3.141592
-# define DELTA 1
 # define MS 0.1
 # define ROT_STEP PI / 36
+# define VIS_DIST 1
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -44,7 +44,6 @@ typedef struct s_player{
 
 	double	pos[2];
 	double	dir[2];
-	double	plane[2];
 	double	orientation;
 }				t_player;
 

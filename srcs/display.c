@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 16:42:36 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/07 18:23:01 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	draw_map(t_cub *cub, t_img *img)
 
 void	define_dir (t_cub *cub)
 {
-	cub->player.dir[0] = (DELTA * cos(cub->player.orientation)); 
-	cub->player.dir[1] = (DELTA * sin(cub->player.orientation)); 
+	cub->player.dir[0] = (VIS_DIST * cos(cub->player.orientation)); 
+	cub->player.dir[1] = (VIS_DIST * sin(cub->player.orientation)); 
 }
 
 void	fetch_player_starting_orientation(t_cub *cub)
