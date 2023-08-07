@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/05 22:49:19 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/07 18:40:18 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	fill_top_limit(char **map, char *line)
 {
 	int	i;
 
-	map[0] = malloc(sizeof(char) * (ft_strlen(line) + 2));
+	map[0] = malloc(sizeof(char) * (ft_strlen(longest_line()) + 2));
 	if (!map[0])
 		return (1);
 	i = 0;
@@ -65,13 +65,6 @@ char	*fill_bot_limit(char *prev)
 	map[i] = 0;
 	return (map);
 }
-
-// void	fill_content(char *map, char *line)
-// {
-// 	map = malloc(sizeof(char) * (ft_strlen(line) + 2));
-// 	map[0] = 'X';
-// 	fill_line(map, line);
-// }
 
 //Set la map de verification = map entouree de 'X'
 int get_checking_map(t_parsing *data)

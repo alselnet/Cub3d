@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/05 22:49:52 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:26:39 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_parsing
 {
 	char	*file;
 	char	**map;
+	int	player_flag;
 }	t_parsing;
 
 //display.c
