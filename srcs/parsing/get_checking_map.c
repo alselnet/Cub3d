@@ -6,27 +6,50 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/07 18:40:18 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/08 20:22:17 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	get_width(t_parsing *data)
+{
+	int	fd;
+	char *line;
+
+	data->width = 0;
+	fd = open(data->file, O_RDONLY, 0666);
+	if (fd < 0)
+		return (1);
+	line = get_next_line(fd);
+	if (!line)
+		return (close(fd), 1);
+	while (line)
+	{
+		if ((int)ft_strlen(line) > data->width)
+			data->width = ft_strlen(line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (close(fd), 0);
+}
+
 //Rempli la premiere ligne de la map avec des 'X'
-int	fill_top_limit(char **map, char *line)
+int	fill_top_limit(t_parsing *data)
 {
 	int	i;
 
-	map[0] = malloc(sizeof(char) * (ft_strlen(longest_line()) + 2));
-	if (!map[0])
+	printf("%d\n", data->width);
+	data->map[0] = malloc(sizeof(char) * (data->width + 2));
+	if (!data->map[0])
 		return (1);
 	i = 0;
-	while (i < (int)ft_strlen(line) + 1)
+	while (i < data->width + 1)
 	{
-		map[0][i] = 'X';
+		data->map[0][i] = 'X';
 		i++;
 	}
-	map[0][i] = 0;
+	data->map[0][i] = 0;
 	return (0);
 }
 
@@ -73,6 +96,7 @@ int get_checking_map(t_parsing *data)
 	int	fd;
 	int	i;
 
+	get_width(data);
 	data->map = malloc(sizeof(char *) * (count_lines(data->file) + 3));
 	if (!data->map)
 		return (1);
@@ -82,7 +106,7 @@ int get_checking_map(t_parsing *data)
 	line = get_next_line(fd);
 	if (!line)
 		return (close(fd), 1);
-	if (fill_top_limit(data->map, line) != 0)
+	if (fill_top_limit(data) != 0)
 		return (close(fd), 1);
 	i = 1;
 	while (line)
