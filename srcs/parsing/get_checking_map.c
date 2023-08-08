@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/09 00:29:24 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:22:40 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	fill_line(char *map, char *line, t_parsing *data)
 	map[0] = 'X';
 	i = 1;
 	j = 0;
-	while (line[j] && line[j] == ' ')
+	while (line[j] && ft_isspace(line[j]))
 	{
 		map[i] = 'X';
 		i++;
@@ -69,7 +69,10 @@ void	fill_line(char *map, char *line, t_parsing *data)
 	}
 	while (line[j] && line[j] != '\n')
 	{
-		map[i] = line[j];
+		if (ft_isspace(line[j]))
+			map[i] = 'X';
+		else
+			map[i] = line[j];
 		i++;
 		j++;
 	}

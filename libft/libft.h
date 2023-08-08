@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:00:32 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/01 22:36:06 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 01:21:35 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ int			ft_printf(char const *s, ...);
 //MORE
 int	ft_arr_len(char **tab);
 void	ft_free_arr(char **arr);
+int	ft_isspace(char c);
 
 #endif
