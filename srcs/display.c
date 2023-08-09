@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/09 20:11:39 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/09 23:38:22 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ void	fetch_player_start(t_cub *cub)
 			if(ft_isinbase(cub->map[y][x], "NSEW"))
 			{
 				cub->player.pos[0] = x;
-				cub->player.pos[1] = y;
+				cub->player.pos[1] = cub->dimensions[0] - y;
 				fetch_player_starting_orientation(cub);
 				cub->player.pos[0] += 0.5;
-				cub->player.pos[1] += 0.5;
+				cub->player.pos[1] -= 0.5;
 				return;
 			}
 			x++;
@@ -215,10 +215,12 @@ void	cast_ray(t_cub *cub, double vector, t_img *img)
 	printf("vector is %.2f\n", vector);
 	if (vector > PI)
 	{
-		ray_y = round_to_nearest_50(cub->player.pos[1]) - 0.0001;
-		ray_x = cub->player.pos[1] - ray_y *atan(vector) + cub->player.pos[0];
-		delta_y = -50;
-		delta_x = -delta_y * atan(vector);
+		printf("cub->player.pos[0] is %.2f\n", cub->player.pos[0]);
+		printf("cub->player.pos[1] is %.2f\n", cub->player.pos[1]);
+		ray_y = (double)round(cub->player.pos[1]) - 1.0001;
+		ray_x = (((double)round(cub->player.pos[1]) - cub->player.pos[1] - 1)/ tan(vector)) + cub->player.pos[0];
+		delta_y = -1;
+		delta_x = delta_y / tan(vector);
 		printf("ray_x is %.2f\n", ray_x);
 		printf("ray_y is %.2f\n", ray_y);
 		printf("delta_x is %.2f\n", delta_x);
@@ -226,10 +228,12 @@ void	cast_ray(t_cub *cub, double vector, t_img *img)
 	}
 	else if (vector < PI)
 	{
-		ray_y = round_to_nearest_50(cub->player.pos[1]) + 50;
-		ray_x = cub->player.pos[1] - ray_y *atan(vector) + cub->player.pos[0];
-		delta_y = 50;
-		delta_x = -delta_y * atan(vector);
+		printf("cub->player.pos[0] is %.2f\n", cub->player.pos[0]);
+		printf("cub->player.pos[1] is %.2f\n", cub->player.pos[1]);
+		ray_y = (double)round(cub->player.pos[1]) + 0.0001;
+		ray_x = (((double)round(cub->player.pos[1]) - cub->player.pos[1])/ tan(vector)) + cub->player.pos[0];
+		delta_y = 1;
+		delta_x = delta_y / tan(vector);
 		printf("ray_x is %.2f\n", ray_x);
 		printf("ray_y is %.2f\n", ray_y);
 		printf("delta_x is %.2f\n", delta_x);
@@ -238,7 +242,7 @@ void	cast_ray(t_cub *cub, double vector, t_img *img)
 	else if (vector == 0.00 || vector == PI)
 	{
 		ray_x = cub->player.pos[0];
-		ray_y = cub->player.pos[1];
+		ray_y = 0;
 		delta_o = 8;
 		printf("ray_x is %.2f\n", ray_x);
 		printf("ray_y is %.2f\n", ray_y);
