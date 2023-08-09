@@ -6,33 +6,11 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/09 01:22:40 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:39:36 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_width(t_parsing *data)
-{
-	int	fd;
-	char *line;
-
-	data->width = 0;
-	fd = open(data->file, O_RDONLY, 0666);
-	if (fd < 0)
-		return (1);
-	line = get_next_line(fd);
-	if (!line)
-		return (close(fd), 1);
-	while (line)
-	{
-		if ((int)ft_strlen(line) > data->width)
-			data->width = ft_strlen(line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	return (close(fd), 0);
-}
 
 //Rempli la premiere ligne de la map avec des 'X'
 int	fill_top_limit(t_parsing *data)
@@ -108,7 +86,6 @@ int get_checking_map(t_parsing *data)
 	int	fd;
 	int	i;
 
-	get_width(data);
 	data->map = malloc(sizeof(char *) * (count_lines(data->file) + 3));
 	if (!data->map)
 		return (1);

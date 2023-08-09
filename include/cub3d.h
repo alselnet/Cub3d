@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/08 20:07:24 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:39:58 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int get_checking_map(t_parsing *data);
 
 //parse_utils.c
 int	count_lines(char *file);
+int	get_width(t_parsing *data);
 
 # endif

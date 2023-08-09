@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/09 01:11:12 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:40:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	map_parsing(char *file)
 
 	data.file = file;
 	data.player_flag = 0;
+	get_width(&data);
 	if (get_checking_map(&data) != 0)
 		return (ft_free_arr(data.map), 1);
 	int i = 0;
