@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:49 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 17:36:43 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/09 20:12:35 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	correct_orientation(t_cub *cub)
 		cub->player.orientation = 0;
 }
 
-int	check_wall(double x, double y, t_cub *cub)
+int	check_wall_player(double x, double y, t_cub *cub)
 {
 	int		x_tile;
 	int		y_tile;
@@ -31,7 +31,7 @@ int	check_wall(double x, double y, t_cub *cub)
 	// printf("y is %.2f\n", y);
 	// printf("x_tile is %d\n", x_tile);
 	// printf("y_tile is %d\n", y_tile);
-	if (cub->map[x_tile][y_tile] == '1')
+	if (cub->map[y_tile][x_tile] == '1')
 		return (1);
 	return (0);
 }

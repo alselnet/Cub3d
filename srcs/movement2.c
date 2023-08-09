@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 17:18:05 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 17:59:48 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/09 20:12:47 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rotate(char dir, t_cub *cub)
 	else if (dir == 'L')
 		cub->player.orientation += ROT_STEP;
 	correct_orientation(cub);
-	define_dir(cub);
+	printf("ORIENTATION IS NOW %.2f\n", cub->player.orientation);
 	refresh_img(cub);
 }
 
@@ -32,18 +32,18 @@ int	check_strafe(char dir, t_cub *cub)
 	if (dir =='L')
 	{
 		new_pos[0] += MS *
-			(cos(cub->player.orientation - (PI * 0.5)));
-		new_pos[1] += MS *
-			(sin(cub->player.orientation - (PI * 0.5)));
-	}
-	else if (dir == 'R')
-	{
-		new_pos[0] += MS *
 			(cos(cub->player.orientation + (PI * 0.5)));
 		new_pos[1] += MS *
 			(sin(cub->player.orientation + (PI * 0.5)));
 	}
-	if (check_wall(new_pos[0], new_pos[1], cub))
+	else if (dir == 'R')
+	{
+		new_pos[0] += MS *
+			(cos(cub->player.orientation - (PI * 0.5)));
+		new_pos[1] += MS *
+			(sin(cub->player.orientation - (PI * 0.5)));
+	}
+	if (check_wall_player(new_pos[0], new_pos[1], cub))
 		return (1);
 	return (0);
 }
@@ -55,16 +55,16 @@ void	strafe(char dir, t_cub *cub)
 	if (dir =='L')
 	{
 		cub->player.pos[0] += MS *
-			(cos(cub->player.orientation - (PI * 0.5)));
+			(cos(cub->player.orientation + (PI * 0.5)));
 		cub->player.pos[1] += MS *
-			(sin(cub->player.orientation - (PI * 0.5)));
+			(sin(cub->player.orientation + (PI * 0.5)));
 	}
 	else if (dir == 'R')
 	{
 		cub->player.pos[0] += MS *
-			(cos(cub->player.orientation + (PI * 0.5)));
+			(cos(cub->player.orientation - (PI * 0.5)));
 		cub->player.pos[1] += MS *
-			(sin(cub->player.orientation + (PI * 0.5)));
+			(sin(cub->player.orientation - (PI * 0.5)));
 	}
 	correct_orientation(cub);
 	refresh_img(cub);
@@ -78,15 +78,15 @@ int	check_move(char dir, t_cub *cub)
 	new_pos[1] = cub->player.pos[1];
 	if (dir == 'D')
 	{
-		new_pos[0] += MS * cos(cub->player.orientation);
-		new_pos[1] += MS * sin(cub->player.orientation);
-	}
-	else if (dir == 'U')
-	{
 		new_pos[0] -= MS * cos(cub->player.orientation);
 		new_pos[1] -= MS * sin(cub->player.orientation);
 	}
-	if (check_wall(new_pos[0], new_pos[1], cub))
+	else if (dir == 'U')
+	{
+		new_pos[0] += MS * cos(cub->player.orientation);
+		new_pos[1] += MS * sin(cub->player.orientation);
+	}
+	if (check_wall_player(new_pos[0], new_pos[1], cub))
 		return (1);
 	return (0);
 }
@@ -97,14 +97,13 @@ void	move(char dir, t_cub *cub)
 		return ;
 	if (dir == 'D')
 	{
-		cub->player.pos[0] += MS * cos(cub->player.orientation);
-		cub->player.pos[1] += MS * sin(cub->player.orientation);
-	}
-	else if (dir == 'U')
-	{
 		cub->player.pos[0] -= MS * cos(cub->player.orientation);
 		cub->player.pos[1] -= MS * sin(cub->player.orientation);
 	}
-	define_dir(cub);
+	else if (dir == 'U')
+	{
+		cub->player.pos[0] += MS * cos(cub->player.orientation);
+		cub->player.pos[1] += MS * sin(cub->player.orientation);
+	}
 	refresh_img(cub);
 }

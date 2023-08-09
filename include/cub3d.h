@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 18:23:35 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/09 20:12:54 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct img {
 typedef struct s_player{
 
 	double	pos[2];
-	double	dir[2];
 	double	orientation;
 }				t_player;
 
@@ -77,7 +76,7 @@ void	fetch_map(t_cub *cub);
 //utils.c
 void	correct_orientation(t_cub *cub);
 int	wclose(t_cub *cub);
-int	check_wall(double x, double y, t_cub *cub);
+int	check_wall_player(double x, double y, t_cub *cub);
 
 //movement.c
 int	exec_key(int keycode, t_cub *cub);
