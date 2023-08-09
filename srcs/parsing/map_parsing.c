@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/09 19:09:16 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:19:07 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,22 @@ int	check_map_player(t_parsing *data)
 int	check_bad_char(t_parsing *data)
 {
 	int	i;
+	int	j;
 	
 	i = 0;
-	while ()
+	j = 0;
+	while (data->map[i])
 	{
+		while (data->map[i][j])
+		{
+			if (!ft_isinbase(data->map[i][j], "01NSEWX"))
+			{
+				printf("\033[31;01mInvalid map :\033[00m Invalid character found !\n");
+				return (1);
+			}
+			j++;
+		}
+		j = 0;
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/09 17:39:36 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:19:53 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	fill_line(char *map, char *line, t_parsing *data)
 	{
 		if (ft_isspace(line[j]))
 			map[i] = 'X';
+		else if (line[j] == 'X')
+			map[i] = 'x';
 		else
 			map[i] = line[j];
 		i++;
