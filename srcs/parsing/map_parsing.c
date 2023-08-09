@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/09 17:40:12 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:09:16 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,34 +49,55 @@ int	check_map_limits(t_parsing *data)
 	return (0);
 }
 
-// int	check_line_player(char *line, t_parsing *data)
-// {
-// 	int	i;
+int	check_line_player(char *map, t_parsing *data)
+{
+	int	i;
 
-// 	i = 1;
-// 	while (line[i + 1])
-// 	{
-// 		if ()
-// 		{
+	i = 1;
+	while (map[i + 1])
+	{
+		if (ft_isinbase(map[i], "NSEW") && data->player_flag == 0)
+			data->player_flag = 1;
+		else if (ft_isinbase(map[i], "NSEW") && data->player_flag == 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
+int	check_map_player(t_parsing *data)
+{
+	int	i;
 
-// int	check_map_player(t_parsing *data)
-// {
-// 	int	i;
+	i = 1;
+	while (data->map[i])
+	{
+		if (check_line_player(data->map[i], data) != 0)
+		{
+			printf("\033[31;01mInvalid map :\033[00m Too many player positions !\n");
+			return (1);
+		}
+		i++;
+	}
+	if (data->player_flag == 0)
+	{
+		printf("\033[31;01mInvalid map :\033[00m No player position found !\n");
+		return (1);
+	}
+	return (0);
+}
 
-// 	i = 1;
-// 	while (data->map[i])
-// 	{
-// 		check_line_player(data->map[i], data);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+int	check_bad_char(t_parsing *data)
+{
+	int	i;
+	
+	i = 0;
+	while ()
+	{
+		i++;
+	}
+	return (0);
+}
 
 int	map_parsing(char *file)
 {
@@ -95,8 +116,10 @@ int	map_parsing(char *file)
 	}
 	if (check_map_limits(&data) != 0)
 		return (ft_free_arr(data.map), 1);
-	// if (check_map_player(&data) != 0)
-	// 	return (ft_free_arr(data.map), 1);
+	if (check_bad_char(&data) != 0)
+		return (ft_free_arr(data.map), 1);
+	if (check_map_player(&data) != 0)
+		return (ft_free_arr(data.map), 1);
 	printf("\033[32;01mGood !\033[00m\n");
 	return (ft_free_arr(data.map), 0);
 }
