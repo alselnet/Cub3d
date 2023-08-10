@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/10 17:20:51 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:07:37 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ int get_checking_map(t_parsing *data);
 int	check_bad_char(t_parsing *data);
 int	check_map_player(t_parsing *data);
 int	check_map_limits(t_parsing *data);
+
+//parse_args.c
+int	parse_args(int argc, char **argv, t_cub *cub);
 
 //parse_utils.c
 int	count_lines(char *file);
