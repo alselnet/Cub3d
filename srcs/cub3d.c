@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 18:40:10 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:14:58 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
+	// parse_args(argc, argv, cub);
 	if (argc != 2)
 		return (0);
 	if (ft_isinbase('/', argv[1]) == 0)
