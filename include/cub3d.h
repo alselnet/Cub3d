@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/09 20:12:54 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/10 03:05:28 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ typedef struct s_player{
 	double	orientation;
 }				t_player;
 
+typedef struct s_ray
+{
+	double	ray_x;
+	double	ray_y;
+	double	delta_x;
+	double	delta_y;
+	double	ray_len;
+	double	max_view;
+}				t_ray;
+
 typedef struct s_cub {
 	t_mlx	mlx;
 	t_img	img;
@@ -64,7 +74,7 @@ void	draw_tile(t_img *img, int x, int y, int color);
 void	draw_map(t_cub *cub, t_img *img);
 void	draw_player_start(t_cub *cub, t_img *img);
 void	draw_direction(t_cub *cub);
-void	draw_ray(t_cub *cub, double vector, t_img *img);
+void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray);
 void	draw_fov(t_cub *cub, t_img *img);
 void	define_dir (t_cub *cub);
 
@@ -87,5 +97,7 @@ void	rotate(char dir, t_cub *cub);
 void	strafe(char dir, t_cub *cub);
 void	move(char dir, t_cub *cub);
 
+//raycasting.c
+t_ray	cast_ray(t_cub *cub, double vector);
 
 # endif

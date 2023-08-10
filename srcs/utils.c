@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:49 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/09 22:32:09 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/10 00:51:19 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	correct_orientation(t_cub *cub)
 {
 	if (cub->player.orientation < 0)
-		cub->player.orientation = 2 * PI;
+		cub->player.orientation += 2 * PI;
 	else if (cub->player.orientation > 2 * PI)
-		cub->player.orientation = 0;
+		cub->player.orientation -= 2 * PI;
 }
 
 int	check_wall_player(double x, double y, t_cub *cub)

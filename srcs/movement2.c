@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 17:18:05 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/09 20:12:47 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/10 00:50:32 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	check_move(char dir, t_cub *cub)
 		return (1);
 	return (0);
 }
-
+ 
 void	move(char dir, t_cub *cub)
 {
 	if (check_move(dir, cub))

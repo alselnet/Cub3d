@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/09 23:38:22 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/10 04:18:05 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	fetch_player_starting_orientation(t_cub *cub)
 	int	player_tile_y;
 
 	player_tile_x = floor(cub->player.pos[0]);
-	player_tile_y = floor(cub->player.pos[1]);
+	player_tile_y = floor(cub->dimensions[0] - cub->player.pos[1]);
 
 	if (cub->map[player_tile_y][player_tile_x] == 'W')
 		cub->player.orientation = PI;
@@ -113,27 +113,36 @@ void	draw_at_loc(double x, double y, t_cub *cub, t_img *img)
 	y_px = (cub->dimensions[0] - (y + cub->player.pos[1])) * 50;
 	my_mlx_pixel_put(img, x_px, y_px, 0xdd001c);
 }
-void	draw_vertical_ray(t_cub * cub, double vector, t_img *img)
+
+void	draw_vertical_ray(t_cub * cub, t_img *img, double vector, t_ray ray)
 {
+	int	monitor;
 	double y;
 
 	y = 0;
-	while(cub->map[(int)(cub->dimensions[0] - (y + cub->player.pos[1]))][(int)(cub->player.pos[0])] != '1')
+	monitor = 0;
+	while(!monitor)
 	{
 		draw_at_loc(0, y, cub, img);
-		if ((vector > (PI * 0.4982) && vector < (PI * 0.50018)))
-		//if ((vector == PI * 0.5))
+		if (fabs(vector - PI * 0.5) < 0.0002)
+		{
+			if (y + cub->player.pos[1] >= ray.ray_y || y >= 8)
+				monitor = 1;
 			y += 0.001;
-		// else if ((vector == PI * 1.5))
-		else if ((vector > (PI * 1.4982) && vector < (PI * 1.50018)))
+		}
+		else if (fabs(vector - PI * 1.5) < 0.0002)
+		{
+			if (y + cub->player.pos[1] <= ray.ray_y || y <= -8)
+				monitor = 1;
 			y -= 0.001;
+		}
 		else
 			break;
 	}
 
 }
 
-void	draw_ray(t_cub *cub, double vector, t_img *img)
+void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray)
 {
 	double	x;
 	double	y;
@@ -142,117 +151,34 @@ void	draw_ray(t_cub *cub, double vector, t_img *img)
 
 	x = 0;
 	y = 0;
-	monitor = 0;
-	if ((vector > (PI * 0.4982) && vector < (PI * 0.50018))
-	|| (vector > (PI * 1.4982) && vector < (PI * 1.50018)))
-	// if ((vector == (PI * 0.5))
-	// || (vector == (PI * 1.5)))	
-	{
-		draw_vertical_ray(cub, vector, img);
-		return;
-	}
-
 	slope = tan(vector);
+	if (fabs(vector - PI * 1.5) < 0.0002 || fabs(vector - PI * 0.5) < 0.0002) // vertical
+	{
+		printf("hey\n");
+		draw_vertical_ray(cub, img, vector, ray);
+		return ;
+	}
+	monitor = 0;
 	//printf ("slope is %f\n", slope);
 	while(!monitor)
 	{
 		draw_at_loc(x, y, cub, img);
 		if (vector < (PI * 0.5) || vector > PI * 1.5)
-			x += 0.001;
-		else
-			x -= 0.001;
-		y = slope * x;
-		//if ((x_px % 50) <=  2 || (y_px % 50) <= 2 || (x_px % 50) >= 47 || (y_px % 50) >= 47)
-		//{
-			if (cub->map[(int)(cub->dimensions[0] - (y + cub->player.pos[1]))][(int)(x + cub->player.pos[0])] == '1')
-			{
+		{
+			if (x + cub->player.pos[0] >= ray.ray_x)
 				monitor = 1;
-				//if (x_px % 50 != 0 && x_px % 50 != 49 && y_px % 50 != 0 && y_px % 50 != 49)
-				//printf("PROBLEM\n");
-				// printf("ray hit the wall at pixel x = %d\n", x_px % 50);
-				// printf("ray hit the wall at pixel y = %d\n", y_px % 50);
-			}
-		//}
+			x += 0.001;
+		}
+		else
+		{
+			if (x + cub->player.pos[0] <= ray.ray_x)
+				monitor = 1;
+			x -= 0.001;
+		}
+		if ((vector < PI && (y + cub->player.pos[1] >= ray.ray_y)) || (vector > PI && (cub->player.pos[1] + y <= ray.ray_y)) || x >= 8)
+			monitor = 1;
+		y = slope * x;
 	}
-}
-double	round_to_nearest_50(double number)
-{
-	double	quotient;
-	double	nearest_multiple;
-
-	quotient = number / 50.0;
-	nearest_multiple = round(quotient) * 50.0;
-	if (fabs(number - nearest_multiple) < 25.0)
-        return nearest_multiple;
-	else if (number < nearest_multiple)
-        return nearest_multiple - 50.0;
-	else 
-        return nearest_multiple + 50.0;
-
-}
-
-void	cast_ray(t_cub *cub, double vector, t_img *img)
-{
-	int		map_x;
-	int		map_y;
-	double	ray_x;
-	double	ray_y;
-	double	delta_x;
-	double	delta_y;
-	double	delta_o;
-
-	map_x = 0;
-	map_y = 0;
-	ray_x = 0;
-	ray_y = 0;
-	delta_x = 0;
-	delta_y = 0;
-	delta_o = 0;
-	(void) img;
-	(void) map_x;
-	(void) map_y;
-	(void) delta_o;
-	printf("vector is %.2f\n", vector);
-	if (vector > PI)
-	{
-		printf("cub->player.pos[0] is %.2f\n", cub->player.pos[0]);
-		printf("cub->player.pos[1] is %.2f\n", cub->player.pos[1]);
-		ray_y = (double)round(cub->player.pos[1]) - 1.0001;
-		ray_x = (((double)round(cub->player.pos[1]) - cub->player.pos[1] - 1)/ tan(vector)) + cub->player.pos[0];
-		delta_y = -1;
-		delta_x = delta_y / tan(vector);
-		printf("ray_x is %.2f\n", ray_x);
-		printf("ray_y is %.2f\n", ray_y);
-		printf("delta_x is %.2f\n", delta_x);
-		printf("delta_y is %.2f\n", delta_y);
-	}
-	else if (vector < PI)
-	{
-		printf("cub->player.pos[0] is %.2f\n", cub->player.pos[0]);
-		printf("cub->player.pos[1] is %.2f\n", cub->player.pos[1]);
-		ray_y = (double)round(cub->player.pos[1]) + 0.0001;
-		ray_x = (((double)round(cub->player.pos[1]) - cub->player.pos[1])/ tan(vector)) + cub->player.pos[0];
-		delta_y = 1;
-		delta_x = delta_y / tan(vector);
-		printf("ray_x is %.2f\n", ray_x);
-		printf("ray_y is %.2f\n", ray_y);
-		printf("delta_x is %.2f\n", delta_x);
-		printf("delta_y is %.2f\n", delta_y);
-	}
-	else if (vector == 0.00 || vector == PI)
-	{
-		ray_x = cub->player.pos[0];
-		ray_y = 0;
-		delta_o = 8;
-		printf("ray_x is %.2f\n", ray_x);
-		printf("ray_y is %.2f\n", ray_y);
-	}
-	// while (delta_o < 8)
-	// {
-	// 	map_x = (int) ray_x;
-	// 	if ()
-	// }
-
 }
 
 void	draw_fov(t_cub *cub, t_img *img)
@@ -274,8 +200,10 @@ void	draw_fov(t_cub *cub, t_img *img)
 	// 	delta -= 0.001839;
 	// 	//delta -= 0.01;
 	// }
-	cast_ray(cub, cub->player.orientation, img);
-	draw_ray(cub, cub->player.orientation, img);
+	t_ray	ray;
+
+	ray = cast_ray(cub, cub->player.orientation);
+	draw_ray(cub, img, cub->player.orientation, ray);
 	return;
 }
 
@@ -284,7 +212,7 @@ void	draw_player_start(t_cub *cub, t_img *img)
 	fetch_player_start(cub);
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
-	printf("player orientation is %f\n", cub->player.orientation);
+	printf("player orientation is %.2f\n", cub->player.orientation);
 	(void) img;
 	draw_fov(cub, img);
 }
