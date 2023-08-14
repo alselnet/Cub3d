@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/14 19:33:09 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:45:23 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_ray	vertical_check_ray(t_cub *cub, double vector)
 		// printf("vray_x is %f \n", vray.ray_x);
 		// printf("vray_y is %f \n", vray.ray_y);
 		// printf("(int)(cub->dimensions[0] - vray.ray_y)is %d\n", (int)(cub->dimensions[0] - vray.ray_y));
-		if (vray.ray_y > -0.001 && vray.ray_y < cub->dimensions[0] && vray.ray_x > -0.001 && vray.ray_x < cub->dimensions[1] && cub->map[(int)(cub->dimensions[0] - vray.ray_y)][(int)(vray.ray_x)] == '1')
+		if (vray.ray_y > 0 && vray.ray_y < cub->dimensions[0] && vray.ray_x > 0 && vray.ray_x < cub->dimensions[1] && cub->map[(int)(cub->dimensions[0] - vray.ray_y)][(int)(vray.ray_x)] == '1')
 		{
 			vray.ray_len = hyp_len(cub->player.pos[0], vray.ray_x, cub->player.pos[1], vray.ray_y);
 			// printf("vray hit in {%f;%f} \n", vray.ray_x, vray.ray_y);

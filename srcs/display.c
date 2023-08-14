@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/14 19:35:53 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:49:38 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,8 @@ void	draw_fov(t_cub *cub, t_img *img)
 	delta = 0.0;
 	ray = cast_ray(cub, cub->player.orientation);
 	draw_ray(cub, img, cub->player.orientation, ray);
+	// (void) ray;
+	// (void) img;
 	while (delta < 0.8)
 	{
 		ray = cast_ray(cub, cub->player.orientation + delta);
@@ -202,7 +204,7 @@ void	draw_fov(t_cub *cub, t_img *img)
 		delta -= 0.001839;
 	}
 	// t_ray	ray;
-	// printf("vector is %f * PI\n", cub->player.orientation/ PI);
+	printf("vector is %f * PI\n", cub->player.orientation/ PI);
 
 	// ray = cast_ray(cub, cub->player.orientation);
 	// draw_ray(cub, img, cub->player.orientation, ray);
