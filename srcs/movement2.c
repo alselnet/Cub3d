@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 17:18:05 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/10 00:50:32 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/10 19:10:17 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rotate(char dir, t_cub *cub)
 	else if (dir == 'L')
 		cub->player.orientation += ROT_STEP;
 	correct_orientation(cub);
-	printf("ORIENTATION IS NOW %.2f\n", cub->player.orientation);
+	//printf("ORIENTATION IS NOW %.2f\n", cub->player.orientation);
 	refresh_img(cub);
 }
 

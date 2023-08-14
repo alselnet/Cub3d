@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/10 04:18:05 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/14 18:36:35 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray)
 	slope = tan(vector);
 	if (fabs(vector - PI * 1.5) < 0.0002 || fabs(vector - PI * 0.5) < 0.0002) // vertical
 	{
-		printf("hey\n");
 		draw_vertical_ray(cub, img, vector, ray);
 		return ;
 	}
@@ -167,13 +166,14 @@ void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray)
 		{
 			if (x + cub->player.pos[0] >= ray.ray_x)
 				monitor = 1;
-			x += 0.001;
+			x += 0.0001;
 		}
 		else
 		{
+		//	printf("hey\n");
 			if (x + cub->player.pos[0] <= ray.ray_x)
 				monitor = 1;
-			x -= 0.001;
+			x -= 0.0001;
 		}
 		if ((vector < PI && (y + cub->player.pos[1] >= ray.ray_y)) || (vector > PI && (cub->player.pos[1] + y <= ray.ray_y)) || x >= 8)
 			monitor = 1;
@@ -184,23 +184,25 @@ void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray)
 void	draw_fov(t_cub *cub, t_img *img)
 {
 	// double delta;
+	// t_ray	ray;
 
 	// delta = 0.001839;
-	// //delta = 0.01;
-	// draw_ray(cub, cub->player.orientation, img);
+	// ray = cast_ray(cub, cub->player.orientation);
+	// draw_ray(cub, img, cub->player.orientation, ray);
 	// while (delta < 0.8)
 	// {
-	// 	draw_ray(cub, cub->player.orientation + delta, img);
+	// 	ray = cast_ray(cub, cub->player.orientation + delta);
+	// 	draw_ray(cub, img, cub->player.orientation + delta, ray);
 	// 	delta += 0.001839;
-	// 	//delta += 0.01;
 	// }
 	// while (delta > 0)
 	// {
-	// 	draw_ray(cub, cub->player.orientation - delta, img);
+	// 	ray = cast_ray(cub, cub->player.orientation - delta);
+	// 	draw_ray(cub, img, cub->player.orientation - delta, ray);
 	// 	delta -= 0.001839;
-	// 	//delta -= 0.01;
 	// }
 	t_ray	ray;
+	printf("vector is %f * PI\n", cub->player.orientation/ PI);
 
 	ray = cast_ray(cub, cub->player.orientation);
 	draw_ray(cub, img, cub->player.orientation, ray);
@@ -213,6 +215,5 @@ void	draw_player_start(t_cub *cub, t_img *img)
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
 	printf("player orientation is %.2f\n", cub->player.orientation);
-	(void) img;
 	draw_fov(cub, img);
 }
