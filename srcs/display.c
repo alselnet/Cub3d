@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/15 04:46:05 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/15 05:02:46 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,21 +223,22 @@ void	draw_fov(t_cub *cub, t_img *img)
 	double delta;
 	t_ray	ray;
 	int		col;
-	int		corr_angle;
+	double	angle;
 
 	delta = -0.8;
 	col = 1151;
 	// (void) ray;
-	// (void) img;
+	(void) img;
 	while (delta < 0.8)
 	{
-		ray = cast_ray(cub, cub->player.orientation + delta);
-		draw_ray(cub, img, cub->player.orientation + delta, ray);
-		corr_angle = cub->player.orientation;
-		if (corr_angle < 0)
-			corr_angle += 2 * PI;
-		else if (corr_angle > 2 * PI)
-			corr_angle -= 2 * PI;
+
+		angle = cub->player.orientation + delta;
+		if (angle < 0)
+			angle += 2 * PI;
+		else if (angle > 2 * PI)
+			angle -= 2 * PI;
+		ray = cast_ray(cub, angle);
+		//draw_ray(cub, img, angle, ray);
 		ray.ray_len = ray.ray_len * cos(delta);
 		draw_col(cub, &cub->img3d, col, ray);
 		delta += 0.00137;
