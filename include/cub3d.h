@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/10 03:05:28 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/15 03:07:41 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ typedef struct s_ray
 
 typedef struct s_cub {
 	t_mlx	mlx;
+	t_mlx	mlx3d;
 	t_img	img;
+	t_img	img3d;
 	char	**map;
 	char	*path;
 	int		dimensions[2];

@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/14 19:49:38 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/15 04:46:05 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,33 +181,76 @@ void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray)
 	}
 }
 
+void	draw_col(t_cub *cub, t_img *img, int col, t_ray ray)
+{
+
+	int	y;
+	int	ceil;
+	int	wall_h;
+	(void) cub;
+	(void) ceil;
+	
+	y = -1;
+	wall_h = (int) (870) / ray.ray_len;
+	if (wall_h > 870)
+		wall_h = 870;
+	//printf("wall_h is %d\n", wall_h);
+	while (++y < ((870 - wall_h) / 2))
+	{
+		my_mlx_pixel_put(img, col, y, 0x000000);
+	}
+	ceil = y;
+	// while (y < wall_h)
+	// {
+	// 	my_mlx_pixel_put(img, col, y, 0x0000cc);
+	// 	y++;
+	// }
+	while (y < 870 - ceil)
+	{
+		my_mlx_pixel_put(img, col, y, 0x0000cc);
+		y++;
+	}
+	while (y < 870)
+	{
+		my_mlx_pixel_put(img, col, y, 0x994c00);
+		y++;
+	}
+	
+}
+
 void	draw_fov(t_cub *cub, t_img *img)
 {
 	double delta;
 	t_ray	ray;
+	int		col;
+	int		corr_angle;
 
-	delta = 0.0;
-	ray = cast_ray(cub, cub->player.orientation);
-	draw_ray(cub, img, cub->player.orientation, ray);
+	delta = -0.8;
+	col = 1151;
 	// (void) ray;
 	// (void) img;
 	while (delta < 0.8)
 	{
 		ray = cast_ray(cub, cub->player.orientation + delta);
 		draw_ray(cub, img, cub->player.orientation + delta, ray);
-		delta += 0.001839;
-	}
-	while (delta > 0)
-	{
-		ray = cast_ray(cub, cub->player.orientation - delta);
-		draw_ray(cub, img, cub->player.orientation - delta, ray);
-		delta -= 0.001839;
+		corr_angle = cub->player.orientation;
+		if (corr_angle < 0)
+			corr_angle += 2 * PI;
+		else if (corr_angle > 2 * PI)
+			corr_angle -= 2 * PI;
+		ray.ray_len = ray.ray_len * cos(delta);
+		draw_col(cub, &cub->img3d, col, ray);
+		delta += 0.00137;
+		col--;
 	}
 	// t_ray	ray;
-	printf("vector is %f * PI\n", cub->player.orientation/ PI);
+	// int		col;
+	// printf("vector is %f * PI\n", cub->player.orientation/ PI);
 
+	// col = 1152 / 2;
 	// ray = cast_ray(cub, cub->player.orientation);
 	// draw_ray(cub, img, cub->player.orientation, ray);
+	// draw_col(cub, &cub->img3d, col, ray);
 	return;
 }
 

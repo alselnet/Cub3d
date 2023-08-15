@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/07 17:18:58 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/15 04:03:17 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 void	refresh_img(t_cub *cub)
 {
 	mlx_destroy_image(cub->mlx.mlx, cub->img.img);
+	mlx_destroy_image(cub->mlx3d.mlx, cub->img3d.img);
 	cub->img.img = mlx_new_image(cub->mlx.mlx, cub->res_x, cub->res_y);
+	cub->img3d.img = mlx_new_image(cub->mlx3d.mlx, cub->res_x, cub->res_y);
 	cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bits_per_pixel,
 			&cub->img.line_length, &cub->img.endian);
+	cub->img3d.addr = mlx_get_data_addr(cub->img3d.img, &cub->img3d.bits_per_pixel,
+			&cub->img3d.line_length, &cub->img3d.endian);
 	draw_map(cub, &cub->img);
 	draw_fov(cub, &cub->img);
 	mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.win, cub->img.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx3d.mlx, cub->mlx3d.win, cub->img3d.img, 0, 0);
+
 }
 
 int	exec_key(int keycode, t_cub *cub)

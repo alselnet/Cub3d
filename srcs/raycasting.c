@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/14 19:45:23 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:54:22 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_ray	vertical_check_ray(t_cub *cub, double vector)
 	if (vector > PI * 0.5 && vector < PI * 1.5)
 	{
 		vray.ray_x = (double)(int)(cub->player.pos[0]) - 0.0001;
-		//vray.ray_x = (((int)(cub->player.pos[0]) >> 6) << 6) - 0.0001;
 		vray.ray_y = ((vray.ray_x - cub->player.pos[0]) * tan(vector)) + cub->player.pos[1];
 		vray.delta_x = -1;
 		vray.delta_y = vray.delta_x * tan(vector);
@@ -88,12 +87,11 @@ t_ray	vertical_check_ray(t_cub *cub, double vector)
 	else if (vector < PI * 0.5 || vector > PI * 1.5)
 	{
 		vray.ray_x = (double)(int)(cub->player.pos[0]) + 1.0001;
-		//vray.ray_x = (((int)(cub->player.pos[0]) >> 6) << 6) + 0.0001;
 		// printf("vray.ray_x is in %f\n", vray.ray_x);
 		// printf("cub->player.pos[0] is %f\n", cub->player.pos[0]);
 		// printf("tan(vector) is %f\n", tan(vector));
 		// printf("(vray.ray_x - cub->player.pos[0]) * tan(vector) is %f\n", (vray.ray_x - cub->player.pos[0]) * tan(vector));
-		vray.ray_y = ((cub->player.pos[0] - vray.ray_x) * -tan(vector)) + cub->player.pos[1];
+		vray.ray_y = ((vray.ray_x - cub->player.pos[0]) * tan(vector)) + cub->player.pos[1];
 		// printf("vray.ray_y is in %f\n", vray.ray_y);
 		vray.delta_x = 1;
 		vray.delta_y = vray.delta_x * tan(vector);

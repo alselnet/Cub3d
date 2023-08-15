@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/09 18:58:40 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/15 04:08:18 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ int	main(int argc, char **argv)
 	draw_map(&cub, &cub.img);
 	draw_player_start(&cub, &cub.img);
 	mlx_put_image_to_window(cub.mlx.mlx, cub.mlx.win, cub.img.img, 0, 0);
+	mlx_put_image_to_window(cub.mlx3d.mlx, cub.mlx3d.win, cub.img3d.img, 0, 0);
 	mlx_hook(cub.mlx.win, 17, 0, wclose, &cub);
+	mlx_hook(cub.mlx3d.win, 17, 0, wclose, &cub);
 	mlx_hook(cub.mlx.win, 2, 1L << 0, &exec_key, &cub);
+	mlx_hook(cub.mlx3d.win, 2, 1L << 0, &exec_key, &cub);
 	mlx_loop(cub.mlx.mlx);
+	mlx_loop(cub.mlx3d.mlx);
 	
 	return (0);
 }
