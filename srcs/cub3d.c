@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/10 20:05:52 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:29:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
+	(void) argc;
+	(void) argv;
 	if (parse_args(argc, argv, &cub) != 0)
 		return (1);
-	if (map_parsing(cub.path) != 0)
+	if (map_parsing(&cub) != 0)
 		return (free(cub.path), 1);
 	// if (!cub.path)
 	// 	return (0);

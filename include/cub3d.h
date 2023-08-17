@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/10 19:07:37 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:34:23 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	exec_key(int keycode, t_cub *cub);
 /*	PARSING */
 
 //map_parsing.c
-int	map_parsing(char *file);
+int	map_parsing(t_cub *cub);
 
 //get_checking_map.c
 int get_checking_map(t_parsing *data);
