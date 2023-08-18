@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/17 19:29:12 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/18 17:45:57 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int argc, char **argv)
 	// mlx_loop(cub.mlx.mlx);
 	
 	free(cub.path);//est cense ne jamais arriver la
+	ft_free_arr(cub.map);
 	return (0);
 }
