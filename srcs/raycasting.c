@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/14 19:54:22 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/18 17:38:01 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_ray	horizontal_check_ray(t_cub *cub, double vector)
 	else if (vector > PI)
 	{
 		hray.ray_y = (double)(int)(cub->player.pos[1]) - 0.0001;
-		// hray.ray_y = (((int)(cub->player.pos[1]) >> 6) << 6)- 0.0001;
 		hray.ray_x = ((hray.ray_y - cub->player.pos[1]))/ tan(vector) + cub->player.pos[0];
 		hray.delta_y = -1;
 		hray.delta_x = hray.delta_y / tan(vector);
@@ -40,18 +39,15 @@ t_ray	horizontal_check_ray(t_cub *cub, double vector)
 	else if (vector < PI)
 	{
 		hray.ray_y = (double)(int)(cub->player.pos[1]) + 1.0001;
-		// hray.ray_y = (((int)(cub->player.pos[1]) >> 6) << 6) + 0.0001;
 		hray.ray_x = ((hray.ray_y - cub->player.pos[1])/ tan(vector)) + cub->player.pos[0];
 		hray.delta_y = 1;
 		hray.delta_x = hray.delta_y / tan(vector);
 	}
-	while (hray.max_view < 8)
+	while (hray.max_view < 1000)
 	{
 		if (hray.ray_y > -0.001 && hray.ray_y < cub->dimensions[0] && hray.ray_x > -0.001 && hray.ray_x < cub->dimensions[1] && cub->map[(int)(cub->dimensions[0] - hray.ray_y)][(int)hray.ray_x] == '1')
 		{
 			hray.ray_len = hyp_len(cub->player.pos[0], hray.ray_x, cub->player.pos[1], hray.ray_y);
-			// printf("hray hit in {%f;%f} \n", hray.ray_x, hray.ray_y);
-			// printf("hray len is : %f \n", hray.ray_len);
 			return (hray);
 		}
 		else
@@ -61,7 +57,6 @@ t_ray	horizontal_check_ray(t_cub *cub, double vector)
 			hray.max_view++;
 		}
 	}
-	hray.ray_len = hyp_len(cub->player.pos[0], hray.ray_x, cub->player.pos[1], hray.ray_y);
 	return (hray);
 }
 
@@ -96,7 +91,7 @@ t_ray	vertical_check_ray(t_cub *cub, double vector)
 		vray.delta_x = 1;
 		vray.delta_y = vray.delta_x * tan(vector);
 	}
-	while (vray.max_view < 8)
+	while (vray.max_view < 1000)
 	{
 		// printf("vray_x is %f \n", vray.ray_x);
 		// printf("vray_y is %f \n", vray.ray_y);
@@ -115,7 +110,6 @@ t_ray	vertical_check_ray(t_cub *cub, double vector)
 			vray.max_view++;
 		}
 	}
-	vray.ray_len = hyp_len(cub->player.pos[0], vray.ray_x, cub->player.pos[1], vray.ray_y);
 	return (vray);
 }
 
@@ -123,6 +117,8 @@ t_ray	cast_ray(t_cub *cub, double vector)
 {
 	t_ray	hray;
 	t_ray	vray;
+	t_ray	ray;
+
 	// printf("-------------------\n");
 	// printf("player pos is {%f;%f} \n", cub->player.pos[0], cub->player.pos[1]);
 	// printf("vector is %f * PI\n", cub->player.orientation/ PI);
@@ -136,15 +132,8 @@ t_ray	cast_ray(t_cub *cub, double vector)
 	// 	return (hray);
 	// }
 	if (hray.ray_len < vray.ray_len)
-	{
-		// printf("RETURNING HRAY\n");
-		// printf("vray len was : %f \n", vray.ray_len);
-		return (hray);
-	}
+		ray = hray;
 	else
-	{
-		// printf("RETURNING VRAY\n");
-		// printf("hray len was : %f \n", hray.ray_len);
-		return (vray);
-	}
+		ray = vray;
+	return (ray);
 }

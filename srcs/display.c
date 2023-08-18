@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/15 05:02:46 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/18 17:37:58 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,14 +188,13 @@ void	draw_col(t_cub *cub, t_img *img, int col, t_ray ray)
 	int	ceil;
 	int	wall_h;
 	(void) cub;
-	(void) ceil;
 	
 	y = -1;
-	wall_h = (int) (870) / ray.ray_len;
+	wall_h = (int) ((870) / ray.ray_len);
 	if (wall_h > 870)
 		wall_h = 870;
 	//printf("wall_h is %d\n", wall_h);
-	while (++y < ((870 - wall_h) / 2))
+	while (++y < ((870 - (int) wall_h) / 2))
 	{
 		my_mlx_pixel_put(img, col, y, 0x000000);
 	}
