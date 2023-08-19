@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/18 17:46:57 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:17:09 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,19 @@ char	*fill_bot_limit(char *prev)
 int get_checking_map(t_parsing *data)
 {
 	char	*line;
-	int	fd;
 	int	i;
 
 	data->map = malloc(sizeof(char *) * (count_lines(data->file) + 3));
 	if (!data->map)
 		return (1);
-	fd = open(data->file, O_RDONLY, 0666);
-	if (fd < 0)
+	data->fd = open(data->file, O_RDONLY, 0666);
+	if (data->fd < 0)
 		return (1);
-	line = get_next_line(fd);
+	line = get_next_line(data->fd);
 	if (!line)
-		return (close(fd), 1);
+		return (close(data->fd), 1);
 	if (fill_top_limit(data) != 0)
-		return (close(fd), 1);
+		return (close(data->fd), 1);
 	i = 1;
 	while (line)
 	{
@@ -106,10 +105,10 @@ int get_checking_map(t_parsing *data)
 		fill_line(data->map[i], line, data);
 		i++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(data->fd);
 	}
 	data->map[i] = fill_bot_limit(data->map[i - 1]);
 	data->map[i + 1] = 0;
-	close(fd);
+	close(data->fd);
 	return (0);
 }

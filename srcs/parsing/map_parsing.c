@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/18 17:37:06 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:00:28 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**set_cub_map(t_parsing *data)
 //debug
 void	print_map(char *name, char **map)
 {
-	printf("\033[35;01m>>>%s<<<\033[00m\n", name);
+	printf("\n\033[35;01m>>>%s<<<\033[00m\n", name);
 	int i = 0;
 	int j = 0;
 	while (map[i])
@@ -66,41 +66,42 @@ void	print_map(char *name, char **map)
 			if (map[i][j] == 'X')
 				printf("[\033[30;01m%c\033[00m]", map[i][j]);
 			else if (ft_isinbase(map[i][j], "NSEW"))
-				printf("[\033[31;01m%c\033[00m]", map[i][j]);
+				printf("[\033[32;01m%c\033[00m]", map[i][j]);
 			else if (map[i][j] == '1')
 				printf("[\033[34;01m%c\033[00m]", map[i][j]);
-			else
+			else if (map[i][j] == '0')
 				printf("[\033[33;01m%c\033[00m]", map[i][j]);
+			else
+				printf("[\033[31;01m%c\033[00m]", map[i][j]);
 			j++;
 		}
 		printf("\n");
 		j = 0;
 		i++;
 	}
+	printf("\n");
 }
 
 int	map_parsing(t_cub *cub)
 {
-	t_parsing	data;
-
-	data.file = cub->path;
-	data.player_flag = 0;
-	get_width(&data);
-	if (get_checking_map(&data) != 0)
-		return (ft_free_arr(data.map), 1);
+	cub->parsing.file = cub->path;
+	cub->parsing.player_flag = 0;
+	get_width(&cub->parsing);
+	if (get_checking_map(&cub->parsing) != 0)
+		return (ft_free_arr(cub->parsing.map), 1);
 		
-	print_map("PARSING MAP", data.map);
+	print_map("PARSING MAP", cub->parsing.map);
 
-	if (check_map_limits(&data) != 0)
-		return (ft_free_arr(data.map), 1);
-	if (check_bad_char(&data) != 0)
-		return (ft_free_arr(data.map), 1);
-	if (check_map_player(&data) != 0)
-		return (ft_free_arr(data.map), 1);
+	if (check_map_limits(&cub->parsing) != 0)
+		return (ft_free_arr(cub->parsing.map), 1);
+	if (check_bad_char(&cub->parsing) != 0)
+		return (ft_free_arr(cub->parsing.map), 1);
+	if (check_map_player(&cub->parsing) != 0)
+		return (ft_free_arr(cub->parsing.map), 1);
 	printf("\033[32;01mGood !\033[00m\n");
-	cub->map = set_cub_map(&data);
+	cub->map = set_cub_map(&cub->parsing);
 	
 	print_map("CUB3D MAP", cub->map);
 	
-	return (ft_free_arr(data.map), 0);
+	return (ft_free_arr(cub->parsing.map), 0);
 }

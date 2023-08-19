@@ -1,7 +1,8 @@
- 11111   
- 1000011    
- 1110001111 
-   111N0011
-    1100011 
-    1111111 
-             
+NO ./assets/wall.xpm
+
+SO      ./assets/wall.xpm
+
+EA       ./assets/wall.xpm
+
+
+WE ./assets/wall.xpm

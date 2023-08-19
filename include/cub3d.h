@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/17 18:34:23 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:56:29 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ typedef struct s_player{
 	double	orientation;
 }				t_player;
 
+typedef struct	s_parsing
+{
+	char	*file;
+	int	fd;
+	char	**map;
+	int	player_flag;
+	int	width;
+}	t_parsing;
+
 typedef struct s_cub {
 	t_mlx	mlx;
 	t_img	img;
@@ -52,15 +61,9 @@ typedef struct s_cub {
 	int		res_x;
 	int		res_y;
 	t_player	player;
+	t_parsing parsing;
 }				t_cub;
 
-typedef struct	s_parsing
-{
-	char	*file;
-	char	**map;
-	int	player_flag;
-	int	width;
-}	t_parsing;
 
 //display.c
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
@@ -101,5 +104,8 @@ int	parse_args(int argc, char **argv, t_cub *cub);
 //parse_utils.c
 int	count_lines(char *file);
 int	get_width(t_parsing *data);
+
+//parse_infos.c
+int	parse_infos(t_cub *cub);
 
 # endif
