@@ -1,4 +1,4 @@
-NO ./assets/wall.xpm
+NO ./assets/wall.xpm   
 
 SO      ./assets/wall.xpm
 
@@ -6,3 +6,4 @@ EA       ./assets/wall.xpm
 
 
 WE ./assets/wall.xpm
+WE lol

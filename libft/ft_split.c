@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:06:15 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/19 20:09:14 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:51:26 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,22 @@
 static size_t	count_words(char const *s, char sep)
 {
 	size_t	i;
-	size_t	k;
-	size_t	words;
+	size_t	count;
 
 	i = 0;
-	k = 0;
-	words = 0;
+	count = 0;
 	while (s[i])
 	{
-		if (s[i] != sep && k == 0)
+		if (s[i] != sep)
 		{
-			k = 1;
-			words++;
+			count++;
+			while (s[i] && s[i] != sep)
+				i++;
 		}
-		if (s[i] == sep)
-			k = 0;
-		i++;
+		else
+			i++;
 	}
-	return (words);
+	return (count);
 }
 
 static size_t	count_char(char const *s, char sep)

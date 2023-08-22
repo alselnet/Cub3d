@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/19 19:38:53 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:43:52 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 
 	(void) argc;
 	(void) argv;
+	ft_memset(&cub, 0, sizeof(t_cub));
 	if (parse_args(argc, argv, &cub) != 0)
 		return (1);
 	if (parse_infos(&cub))
