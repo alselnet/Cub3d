@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:49 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/15 03:14:34 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/27 16:35:35 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,16 @@ int	wclose(t_cub *cub)
 {
 	ft_free_arr(cub->map);
 	free(cub->path);
-	mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
+	//mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
+	//mlx_destroy_display(cub->mlx.mlx);
+	mlx_destroy_image(cub->mlx3d.mlx, cub->img3d.img);
+	mlx_destroy_image(cub->mlx3d.mlx, cub->img_wall_n.img);
+	mlx_destroy_image(cub->mlx3d.mlx, cub->img_wall_s.img);
+	mlx_destroy_image(cub->mlx3d.mlx, cub->img_wall_e.img);
+	mlx_destroy_image(cub->mlx3d.mlx, cub->img_wall_w.img);
 	mlx_destroy_window(cub->mlx3d.mlx, cub->mlx3d.win);
-	mlx_destroy_display(cub->mlx.mlx);
 	mlx_destroy_display(cub->mlx3d.mlx);
-	free(cub->mlx.mlx);
+	//free(cub->mlx.mlx);
 	free(cub->mlx3d.mlx);
 	exit(EXIT_SUCCESS);
 	return (0);

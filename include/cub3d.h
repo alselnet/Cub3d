@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/15 04:56:50 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/27 13:07:02 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct img {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }				t_img;
 
 typedef struct s_player{
@@ -48,6 +50,8 @@ typedef struct s_player{
 
 typedef struct s_ray
 {
+	char	side;
+	int		wall_h;
 	double	ray_x;
 	double	ray_y;
 	double	delta_x;
@@ -61,6 +65,10 @@ typedef struct s_cub {
 	t_mlx	mlx3d;
 	t_img	img;
 	t_img	img3d;
+	t_img	img_wall_n;
+	t_img	img_wall_s;
+	t_img	img_wall_e;
+	t_img	img_wall_w;
 	char	**map;
 	char	*path;
 	int		dimensions[2];
@@ -81,6 +89,7 @@ void	draw_fov(t_cub *cub, t_img *img);
 void	define_dir (t_cub *cub);
 
 //init.c
+unsigned int	my_mlx_pixel_get(t_img *img, int x, int y);
 void	init_mlx(t_cub *cub, int x, int y);
 void	get_map_size(t_cub *cub);
 void	fetch_map(t_cub *cub);

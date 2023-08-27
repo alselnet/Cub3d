@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:11:00 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/18 17:37:58 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/27 12:45:28 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,38 +181,51 @@ void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray)
 	}
 }
 
-void	draw_col(t_cub *cub, t_img *img, int col, t_ray ray)
+// void	color_wall_pixel(t_cub *cub, t_ray ray)
+// {
+// 	__uint32_t	color;
+// 	double	wall_x;
+// 	double	wall_y;
+
+// 	if (ray.side == 'N' || ray.side == 'S')
+
+// 	else if (ray,side == 'W' || ray.side == 'E')
+
+// }
+
+void	draw_stripe(t_cub *cub, t_img *img, int col, t_ray ray)
 {
 
-	int	y;
+	int	x;
 	int	ceil;
-	int	wall_h;
-	(void) cub;
 	
-	y = -1;
-	wall_h = (int) ((870) / ray.ray_len);
-	if (wall_h > 870)
-		wall_h = 870;
-	//printf("wall_h is %d\n", wall_h);
-	while (++y < ((870 - (int) wall_h) / 2))
+	x = -1;
+	(void) ceil;
+	(void) cub;
+	ray.wall_h = (int) ((870) / ray.ray_len);
+	if (ray.wall_h > 870)
+		ray.wall_h = 870;
+	//printf("ray.wall_h is %d\n", ray.wall_h);
+	while (++x < ((870 - (int) ray.wall_h) / 2))
 	{
-		my_mlx_pixel_put(img, col, y, 0x000000);
+		my_mlx_pixel_put(img, col, x, 0x000000);
 	}
-	ceil = y;
-	// while (y < wall_h)
+	ceil = x;
+	// while (x < ray.wall_h)
 	// {
-	// 	my_mlx_pixel_put(img, col, y, 0x0000cc);
-	// 	y++;
+	// 	my_mlx_pixel_put(img, col, x, 0x0000cc);
+	// 	x++;
 	// }
-	while (y < 870 - ceil)
+	while (x < 870 - ceil)
 	{
-		my_mlx_pixel_put(img, col, y, 0x0000cc);
-		y++;
+		// color_wall_pixel(cub, ray);
+		my_mlx_pixel_put(img, col, x, 0x0000cc);
+		x++;
 	}
-	while (y < 870)
+	while (x < 870)
 	{
-		my_mlx_pixel_put(img, col, y, 0x994c00);
-		y++;
+		my_mlx_pixel_put(img, col, x, 0x994c00);
+		x++;
 	}
 	
 }
@@ -221,16 +234,16 @@ void	draw_fov(t_cub *cub, t_img *img)
 {
 	double delta;
 	t_ray	ray;
+	int		i;
 	int		col;
 	double	angle;
 
-	delta = -0.8;
+	delta = -0.6;
 	col = 1151;
 	// (void) ray;
 	(void) img;
-	while (delta < 0.8)
+	while (delta <= 0.6)
 	{
-
 		angle = cub->player.orientation + delta;
 		if (angle < 0)
 			angle += 2 * PI;
@@ -239,9 +252,14 @@ void	draw_fov(t_cub *cub, t_img *img)
 		ray = cast_ray(cub, angle);
 		//draw_ray(cub, img, angle, ray);
 		ray.ray_len = ray.ray_len * cos(delta);
-		draw_col(cub, &cub->img3d, col, ray);
-		delta += 0.00137;
-		col--;
+		i = 5;
+		while (--i > 0)
+		{
+			draw_stripe(cub, &cub->img3d, col, ray);
+			col--;
+		}
+		delta += 0.004166667;
+		//delta += 0.01;
 	}
 	// t_ray	ray;
 	// int		col;

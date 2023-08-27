@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:01 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/15 03:13:33 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/27 16:26:17 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	init_mlx(t_cub *cub, int x, int y)
 	cub->res_y = y;
 	cub->player.pos[0] = 0;
 	cub->player.pos[1] = 0;
-	cub->mlx.mlx = mlx_init();
+	//cub->mlx.mlx = mlx_init();
 	cub->mlx3d.mlx = mlx_init();
-	cub->mlx.win = mlx_new_window(cub->mlx.mlx, cub->res_x, cub->res_y, "Cub2d");
+	//cub->mlx.win = mlx_new_window(cub->mlx.mlx, cub->res_x, cub->res_y, "Cub2d");
 	cub->mlx3d.win = mlx_new_window(cub->mlx3d.mlx, cub->res_x, cub->res_y, "Cub3d");
-	cub->img.img = mlx_new_image(cub->mlx.mlx, cub->res_x, cub->res_y);
+//	cub->img.img = mlx_new_image(cub->mlx.mlx, cub->res_x, cub->res_y);
 	cub->img3d.img = mlx_new_image(cub->mlx3d.mlx, cub->res_x, cub->res_y);
-	cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bits_per_pixel,
-			&cub->img.line_length, &cub->img.endian);
+	//cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bits_per_pixel,
+	//		&cub->img.line_length, &cub->img.endian);
 	cub->img3d.addr = mlx_get_data_addr(cub->img3d.img, &cub->img3d.bits_per_pixel,
 			&cub->img3d.line_length, &cub->img3d.endian);
 }

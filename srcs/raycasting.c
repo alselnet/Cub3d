@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/18 17:38:01 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/18 19:27:19 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,20 @@ t_ray	cast_ray(t_cub *cub, double vector)
 	// 	return (hray);
 	// }
 	if (hray.ray_len < vray.ray_len)
+	{
 		ray = hray;
+		if (ray.ray_y > cub->player.pos[1])
+			ray.side = 'S';
+		else
+			ray.side = 'N';
+	}
 	else
+	{
 		ray = vray;
+		if (ray.ray_x > cub->player.pos[0])
+			ray.side = 'W';
+		else
+			ray.side = 'E';
+	}
 	return (ray);
 }
