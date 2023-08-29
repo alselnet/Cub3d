@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:55:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/22 18:16:59 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:08:21 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,26 @@ int	parse_elem(char *line, t_parsing *data)
 		if (!data->we)
 			return (ft_free_arr(buff), 1);
 	}
+	else
+	{
+		printf("\033[31;01mInfos error :\033[00m Invalid ID \"%s\" !\n", buff[0]);
+		return (ft_free_arr(buff), 1);
+	}
 	return (ft_free_arr(buff), 0);
+}
+
+void	free_parsing(t_parsing *data)
+{
+	if (data->file)
+		free(data->file);
+	if (data->no)
+		free(data->no);
+	if (data->so)
+		free(data->so);
+	if (data->ea)
+		free(data->ea);
+	if (data->we)
+		free(data->we);
 }
 
 int	parse_infos(t_cub *cub)
@@ -90,7 +109,7 @@ int	parse_infos(t_cub *cub)
 		{
 			if	(parse_elem(line, &cub->parsing) != 0)
 			{
-				//free struct
+				free_parsing(&cub->parsing);
 				return (free(line), close(cub->parsing.fd), 1);
 			}
 		}
