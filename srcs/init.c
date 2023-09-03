@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:01 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:05:36 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:46:59 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	get_map_size(t_cub *cub)
 		line = get_next_line(fd);
 		cub->dimensions[0]++;
 	}	
-	printf("dimension[0] is %d\n", cub->dimensions[0]);
 	free(line);
 	close(fd);
 	return ;
@@ -71,4 +70,47 @@ void	fetch_map(t_cub *cub)
 		}
 	}
 	close (fd);
+}
+
+void	fetch_player_starting_orientation(t_cub *cub)
+{
+	int	player_tile_x;
+	int	player_tile_y;
+
+	player_tile_x = floor(cub->player.pos[0]);
+	player_tile_y = floor(cub->dimensions[0] - cub->player.pos[1]);
+	if (cub->map[player_tile_y][player_tile_x] == 'W')
+		cub->player.orientation = PI;
+	else if (cub->map[player_tile_y][player_tile_x] == 'N')
+		cub->player.orientation = PI * 0.5;
+	else if (cub->map[player_tile_y][player_tile_x] == 'E')
+		cub->player.orientation = 0;
+	else if (cub->map[player_tile_y][player_tile_x] == 'S')
+		cub->player.orientation = PI * 1.5;
+}
+
+void	fetch_player_start(t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (cub->map[y])
+	{
+		x = 0;
+		while (cub->map[y][x])
+		{
+			if (ft_isinbase(cub->map[y][x], "NSEW"))
+			{
+				cub->player.pos[0] = x;
+				cub->player.pos[1] = cub->dimensions[0] - y;
+				fetch_player_starting_orientation(cub);
+				cub->player.pos[0] += 0.5;
+				cub->player.pos[1] -= 0.5;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:34:05 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 15:49:20 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:30:32 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,45 @@ void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray)
 			|| (vector > PI && (cub->player.pos[1] + y <= ray.ray_y)) || x >= 8)
 			monitor = 1;
 		y = slope * x;
+	}
+}
+
+void	draw_tile(t_img *img, int y, int x, int color)
+{
+	int	a;
+	int	b;
+
+	a = y * 50;
+	while (a < (y + 1) * 50)
+	{
+		b = x * 50;
+		while (b < (x + 1) * 50)
+		{
+			my_mlx_pixel_put(img, b, a, color);
+			b++;
+		}
+		a++;
+	}
+}
+
+void	draw_map(t_cub *cub, t_img *img)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < ft_arr_len(cub->map))
+	{
+		j = 0;
+		while (j < (int)ft_strlen(cub->map[i]))
+		{
+			if (ft_isinbase(cub->map[i][j], "0NSEW"))
+				draw_tile(img, i, j, 0xfff0f6);
+			else if (cub->map[i][j] == '1')
+				draw_tile(img, i, j, 0xfa6339);
+			j++;
+		}
+		i++;
 	}
 }
 

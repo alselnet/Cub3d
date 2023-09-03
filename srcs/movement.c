@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:06:37 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:42:56 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ void	refresh_img(t_cub *cub)
 	draw_3d(cub, -(FOV / 2));
 	mlx_put_image_to_window(cub->mlx3d.mlx,
 		cub->mlx3d.win, cub->img3d.img, 0, 0);
+}
+
+int	check_wall_player(double x, double y, t_cub *cub)
+{
+	int		x_tile;
+	int		y_tile;
+
+	x_tile = (int) x;
+	y_tile = (int) cub->dimensions[0] - y;
+	if (cub->map[y_tile][x_tile] == '1')
+		return (1);
+	return (0);
 }
 
 int	exec_key(int keycode, t_cub *cub)

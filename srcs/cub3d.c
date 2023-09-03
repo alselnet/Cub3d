@@ -6,61 +6,11 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 15:45:52 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:26:16 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	return (*(unsigned int *)dst);
-}
-
-void	load_textures_ns(t_cub *cub)
-{
-	cub->img_wall_n.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/bluestone.xpm", &cub->img_wall_n.width,
-			&cub->img_wall_n.height);
-	if (cub->img_wall_n.img)
-		cub->img_wall_n.addr = mlx_get_data_addr(cub->img_wall_n.img,
-				&cub->img_wall_n.bits_per_pixel, &cub->img_wall_n.line_length,
-				&cub->img_wall_n.endian);
-	cub->img_wall_s.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/purplestone.xpm", &cub->img_wall_s.width,
-			&cub->img_wall_s.height);
-	if (cub->img_wall_s.img)
-		cub->img_wall_s.addr = mlx_get_data_addr(cub->img_wall_s.img,
-				&cub->img_wall_s.bits_per_pixel, &cub->img_wall_s.line_length,
-				&cub->img_wall_s.endian);
-}
-
-void	load_textures_ew(t_cub *cub)
-{	
-	cub->img_wall_e.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/greystone.xpm", &cub->img_wall_n.width,
-			&cub->img_wall_n.height);
-	if (cub->img_wall_e.img)
-		cub->img_wall_e.addr = mlx_get_data_addr(cub->img_wall_e.img,
-				&cub->img_wall_n.bits_per_pixel, &cub->img_wall_n.line_length,
-				&cub->img_wall_n.endian);
-	cub->img_wall_w.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/colorstone.xpm", &cub->img_wall_n.width,
-			&cub->img_wall_n.height);
-	if (cub->img_wall_w.img)
-		cub->img_wall_w.addr = mlx_get_data_addr(cub->img_wall_e.img,
-				&cub->img_wall_n.bits_per_pixel, &cub->img_wall_n.line_length,
-				&cub->img_wall_n.endian);
-}
-
-void	load_textures(t_cub *cub)
-{
-	load_textures_ns(cub);
-	load_textures_ew(cub);
-}			
+#include "cub3d.h"	
 
 int	main(int argc, char **argv)
 {
