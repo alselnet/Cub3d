@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:01 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:46:59 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 20:44:58 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	init_mlx(t_cub *cub, int x, int y)
 	cub->mlx3d.mlx = mlx_init();
 	cub->mlx3d.win = mlx_new_window(cub->mlx3d.mlx,
 			cub->res_x, cub->res_y, "Cub3d");
+	cub->img_wall_n.img = 0;
+	cub->img_wall_s.img = 0;
+	cub->img_wall_e.img = 0;
+	cub->img_wall_w.img = 0;
 	cub->img3d.img = mlx_new_image(cub->mlx3d.mlx, cub->res_x, cub->res_y);
 	cub->img3d.addr = mlx_get_data_addr(cub->img3d.img,
 			&cub->img3d.bits_per_pixel, &cub->img3d.line_length,

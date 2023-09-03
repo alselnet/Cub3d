@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:39:51 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 20:49:29 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ void	draw_at_loc(double x, double y, t_cub *cub, t_img *img)
 
 void	draw_stripe(t_cub *cub, t_img *img, int col, t_ray ray)
 {
-	int	x;
-	int	ceil;
+	int				x;
+	int				ceil;
+	unsigned int	color;
+	int				i;
 
 	x = -1;
-	(void) ceil;
-	(void) cub;
+	i = 0;
 	ray.wall_h = (int)((870) / ray.ray_len);
 	if (ray.wall_h > 870)
 		ray.wall_h = 870;
@@ -40,9 +41,10 @@ void	draw_stripe(t_cub *cub, t_img *img, int col, t_ray ray)
 	ceil = x;
 	while (x < 870 - ceil)
 	{
-		// color_wall_pixel(cub, ray); WITH TEXTURE
-		my_mlx_pixel_put(img, col, x, 0x0000cc);
+		color = fetch_texture_px(cub, ray, i, 870 - ceil - x); //WITH TEXTURE
+		my_mlx_pixel_put(img, col, x, color);
 		x++;
+		i++;
 	}
 	while (x < 870)
 	{
@@ -55,7 +57,7 @@ void	draw_3d(t_cub *cub, double delta)
 {
 	t_ray	ray;
 	int		col;
-	int		i;
+	//int		i;
 	double	angle;
 
 	col = 1151;
@@ -68,13 +70,13 @@ void	draw_3d(t_cub *cub, double delta)
 			angle -= 2 * PI;
 		ray = cast_ray(cub, angle);
 		ray.ray_len = ray.ray_len * cos(delta);
-		i = 5;
-		while (--i > 0)
-		{
+		//i = 5;
+		//while (--i > 0)
+		//{
 			draw_stripe(cub, &cub->img3d, col, ray);
 			col--;
-		}
-		delta += 0.004166667;
+		//}
+		delta += 0.001042;
 	}
 	return ;
 }
@@ -83,6 +85,7 @@ void	draw_screen(t_cub *cub, t_img *img)
 {
 	(void) img; // minimap
 	fetch_player_start(cub);
+	load_textures(cub);
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
 	//printf("player orientation is %.2f\n", cub->player.orientation);

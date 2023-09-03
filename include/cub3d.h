@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:50:33 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 20:36:16 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ typedef struct s_cub {
 
 // -------------------------------------------- FUNCTIONS
 
+
+//TMP
+void	print_img(t_img wall_texture);
 //init.c
 void			init_mlx(t_cub *cub, int x, int y);
 void			get_map_size(t_cub *cub);
@@ -87,7 +90,7 @@ void			fetch_player_start(t_cub *cub);
 
 //utils.c
 double			hyp_len(double x1, double x2, double y1, double y2);
-unsigned int	my_mlx_pixel_get(t_img *img, int x, int y);
+unsigned int	 my_mlx_pixel_get(t_img *img, int x, int y);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			correct_orientation(t_cub *cub);
 
@@ -123,6 +126,8 @@ void			move(char dir, t_cub *cub);
 void			load_textures_ns(t_cub *cub);
 void			load_textures_ew(t_cub *cub);
 void			load_textures(t_cub *cub);
+unsigned int    fetch_texture_px(t_cub *cub, t_ray ray, int	i, int wall_h);
+
 
 //minimap.c
 void			draw_vertical_ray(t_cub *cub, t_img *img,
