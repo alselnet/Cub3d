@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 17:45:40 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 19:13:37 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct	s_parsing
 	char	*ea;
 	char	*we;
 	char	*lim_line;
-	char	*cursor;
 }	t_parsing;
 
 typedef struct s_cub {
@@ -90,6 +89,10 @@ int	wclose(t_cub *cub);
 
 //movement.c
 int	exec_key(int keycode, t_cub *cub);
+
+//destroy_all.c
+void	free_parsing(t_parsing *data);
+void	destroy_all(t_cub *cub);
 
 /*	PARSING */
 

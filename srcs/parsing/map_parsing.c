@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/03 18:26:50 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 19:02:52 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ int	map_parsing(t_cub *cub)
 	printf("\033[32;01mGood !\033[00m\n");
 	cub->map = set_cub_map(&cub->parsing);
 	print_map("CUB3D MAP", cub->map);
-	
-	ft_free_arr(cub->parsing.map);
+
 	return (ft_free_arr(cub->parsing.map), 0);
-	// return (0);
 }

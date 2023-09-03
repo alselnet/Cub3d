@@ -2,7 +2,6 @@ NO ./assets/wall.xpm
 WE ./assets/wall.xpm
 
 
-
 EA ./assets/wall.xpm
 SO       ./assets/wall.xpm
 
@@ -13,6 +12,6 @@ SO       ./assets/wall.xpm
 
 
 
- 1
-1N1
- 1
+ 111111111111
+1N00000  0011111111111
+ 1111111111111

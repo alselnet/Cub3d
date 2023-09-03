@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/03 18:26:15 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:54:35 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int get_checking_map(t_parsing *data, t_cub *cub)
 	int	i;
 	// (void) cub;
 	
-	data->map = ft_calloc(sizeof(char *), count_lines(data) + 3);
+	data->map = ft_calloc(count_lines(data) + 3, sizeof(char *));
 	if (!data->map)
 		return (1);
 	if (go_to_map(data, cub) != 0)
