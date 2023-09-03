@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 15:42:52 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 16:05:09 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_parsing
 	char	*so;
 	char	*ea;
 	char	*we;
+	char	*lim_line;
 }	t_parsing;
 
 typedef struct s_cub {
