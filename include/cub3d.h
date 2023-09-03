@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:05:09 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 17:45:40 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_parsing
 	char	*ea;
 	char	*we;
 	char	*lim_line;
+	char	*cursor;
 }	t_parsing;
 
 typedef struct s_cub {
@@ -96,7 +97,7 @@ int	exec_key(int keycode, t_cub *cub);
 int	map_parsing(t_cub *cub);
 
 //get_checking_map.c
-int get_checking_map(t_parsing *data);
+int get_checking_map(t_parsing *data, t_cub *cub);
 
 //check_map.c
 int	check_bad_char(t_parsing *data);
@@ -107,8 +108,9 @@ int	check_map_limits(t_parsing *data);
 int	parse_args(int argc, char **argv, t_cub *cub);
 
 //parse_utils.c
-int	count_lines(char *file);
+int	count_lines(t_parsing *data);
 int	get_width(t_parsing *data);
+int	go_to_map(t_parsing *data, t_cub *cub);
 
 //parse_infos.c
 int	parse_infos(t_cub *cub);

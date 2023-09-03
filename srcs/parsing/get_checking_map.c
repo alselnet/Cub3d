@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/19 17:17:09 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:26:15 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,25 @@ char	*fill_bot_limit(char *prev)
 }
 
 //Set la map de verification = map entouree de 'X'
-int get_checking_map(t_parsing *data)
+int get_checking_map(t_parsing *data, t_cub *cub)
 {
 	char	*line;
 	int	i;
-
-	data->map = malloc(sizeof(char *) * (count_lines(data->file) + 3));
+	// (void) cub;
+	
+	data->map = ft_calloc(sizeof(char *), count_lines(data) + 3);
 	if (!data->map)
 		return (1);
-	data->fd = open(data->file, O_RDONLY, 0666);
-	if (data->fd < 0)
-		return (1);
+	if (go_to_map(data, cub) != 0)
+		return (1);//WIP
 	line = get_next_line(data->fd);
 	if (!line)
 		return (close(data->fd), 1);
+	while (line && line[0] == '\n')
+	{
+		free(line);
+		line = get_next_line(data->fd);
+	}
 	if (fill_top_limit(data) != 0)
 		return (close(data->fd), 1);
 	i = 1;
