@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 20:49:29 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 21:07:56 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ void	draw_stripe(t_cub *cub, t_img *img, int col, t_ray ray)
 	if (ray.wall_h > 870)
 		ray.wall_h = 870;
 	while (++x < ((870 - (int) ray.wall_h) / 2))
-	{
 		my_mlx_pixel_put(img, col, x, 0x000000);
-	}
 	ceil = x;
 	while (x < 870 - ceil)
 	{
-		color = fetch_texture_px(cub, ray, i, 870 - ceil - x); //WITH TEXTURE
+		color = fetch_texture_px(cub, ray, i, 870 - (ceil * 2));
 		my_mlx_pixel_put(img, col, x, color);
 		x++;
 		i++;
@@ -57,7 +55,6 @@ void	draw_3d(t_cub *cub, double delta)
 {
 	t_ray	ray;
 	int		col;
-	//int		i;
 	double	angle;
 
 	col = 1151;
@@ -70,12 +67,8 @@ void	draw_3d(t_cub *cub, double delta)
 			angle -= 2 * PI;
 		ray = cast_ray(cub, angle);
 		ray.ray_len = ray.ray_len * cos(delta);
-		//i = 5;
-		//while (--i > 0)
-		//{
-			draw_stripe(cub, &cub->img3d, col, ray);
-			col--;
-		//}
+		draw_stripe(cub, &cub->img3d, col, ray);
+		col--;
 		delta += 0.001042;
 	}
 	return ;
@@ -83,12 +76,10 @@ void	draw_3d(t_cub *cub, double delta)
 
 void	draw_screen(t_cub *cub, t_img *img)
 {
-	(void) img; // minimap
+	(void) img;
 	fetch_player_start(cub);
 	load_textures(cub);
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
-	//printf("player orientation is %.2f\n", cub->player.orientation);
 	draw_3d(cub, -(FOV / 2));
-	//draw_minimap(cub, img, delta); // minimap
 }

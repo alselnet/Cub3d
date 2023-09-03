@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:25:18 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 20:50:08 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 21:07:14 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,72 +48,45 @@ void	load_textures_ew(t_cub *cub)
 				&cub->img_wall_w.endian);
 }
 
-t_img	fetch_texture(t_cub *cub, t_ray ray)
-{
-	if (ray.side == 'N')
-		return (cub->img_wall_n);
-	else if (ray.side == 'S')
-		return (cub->img_wall_s);
-	else if (ray.side == 'E')
-		return (cub->img_wall_e);
-	else if (ray.side == 'W')
-		return (cub->img_wall_w);
-	return (cub->img_wall_n);
-}
-
-int	set_texture_x(t_ray ray, t_img wall_texture)
-{
-	double texture_x;
-
-(void) wall_texture;
-	if (ray.side == 'N' || ray.side == 'S')
-		texture_x = (ray.ray_x - floor(ray.ray_x));
-	else if (ray.side == 'E' || ray.side == 'W')
-		texture_x = (ray.ray_y - floor(ray.ray_y));
-	//return ((int) (texture_x * wall_texture.width));
-	return ((int) (texture_x * 64));
-}
-
-void	print_img(t_img wall_texture)
-{	
-	printf("texture.height is %d\n", wall_texture.height);
-	printf("texture.width is %d\n", wall_texture.width);
-	printf("texture.line_length is %d\n", wall_texture.line_length);
-	printf("texture.addr is %p\n", wall_texture.addr);
-	printf("texture.endian is %d\n", wall_texture.endian);
-	printf("texture.bpp is %d\n", wall_texture.bits_per_pixel);
-}
-
-unsigned int fetch_texture_px(t_cub *cub, t_ray ray, inti, int wall_h)
-{
-	t_img		wall_texture;
-	unsigned int 	color;
-	int			texture_x;
-	int			texture_y;
-
-	wall_texture = fetch_texture(cub, ray);
-	// wall_texture.height = 64;
-	// wall_texture.width = 64;
-	// wall_texture.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-	// 		"textures/colorstone.xpm", &wall_texture.width,
-	// 		&wall_texture.height);
-	// wall_texture.addr = mlx_get_data_addr(wall_texture.img, &wall_texture.bits_per_pixel, &wall_texture.line_length, &wall_texture.endian);
-	//print_img(wall_texture);
-	texture_x = set_texture_x(ray, wall_texture);
-	texture_y = i * 64 / wall_h;
-	//texture_y = i * wall_texture.height / wall_h;
-	// printf("texture_x is %d\n", texture_x);
-	// printf("texture_y is %d\n", texture_y);
-	//printf("hey1\n");
-	color = my_mlx_pixel_get(&wall_texture, texture_x, texture_y);//segfault
-	//mlx_destroy_image(cub->mlx3d.mlx, wall_texture.img);
-	// printf("hey2\n");
-	// printf("color is %u\n", color);
-	return (color);
-}
-
 void	load_textures(t_cub *cub)
 {
 	load_textures_ns(cub);
 	load_textures_ew(cub);
 }	
+
+int	set_texture_x(t_ray ray, t_img wall_texture)
+{
+	double	texture_x;
+
+	if (ray.side == 'N' || ray.side == 'S')
+		texture_x = (ray.ray_x - floor(ray.ray_x));
+	else if (ray.side == 'E' || ray.side == 'W')
+		texture_x = (ray.ray_y - floor(ray.ray_y));
+	return ((int)(texture_x * wall_texture.width));
+}
+
+unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, int i, int wall_h)
+{
+	t_img			wall_texture;
+	unsigned int	color;
+	int				texture_x;
+	int				texture_y;
+
+	wall_texture = fetch_texture(cub, ray);
+	if (ray.side == 'N')
+		wall_texture = cub->img_wall_n;
+	else if (ray.side == 'S')
+		wall_texture = cub->img_wall_s;
+	else if (ray.side == 'E')
+		wall_texture = cub->img_wall_e;
+	else
+		wall_texture = cub->img_wall_w;
+	texture_x = set_texture_x(ray, wall_texture);
+	texture_y = i * wall_texture.height / wall_h;
+	if (texture_x >= wall_texture.width)
+		texture_x = wall_texture.width - 1;
+	if (texture_y >= wall_texture.height)
+		texture_y = wall_texture.height - 1;
+	color = my_mlx_pixel_get(&wall_texture, texture_x, texture_y);
+	return (color);
+}

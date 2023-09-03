@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:49 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 20:05:11 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 21:03:20 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,12 @@ double	hyp_len(double x1, double x2, double y1, double y2)
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-unsigned int my_mlx_pixel_get(t_img *img, int x, int y)
+unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
 {
 	char	*dst;
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	//*(unsigned int *)dst = 0x000000;
-	// printf("hoho\n");
-	// printf("dst is %p\n", dst);
-	// printf("dst is %u\n", *(unsigned int *)dst);
 	return (*(unsigned int *)dst);
-	//return (dst);
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
