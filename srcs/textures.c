@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:25:18 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 21:07:14 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 21:11:35 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, int i, int wall_h)
 	int				texture_x;
 	int				texture_y;
 
-	wall_texture = fetch_texture(cub, ray);
 	if (ray.side == 'N')
 		wall_texture = cub->img_wall_n;
 	else if (ray.side == 'S')
@@ -83,10 +82,10 @@ unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, int i, int wall_h)
 		wall_texture = cub->img_wall_w;
 	texture_x = set_texture_x(ray, wall_texture);
 	texture_y = i * wall_texture.height / wall_h;
-	if (texture_x >= wall_texture.width)
-		texture_x = wall_texture.width - 1;
-	if (texture_y >= wall_texture.height)
-		texture_y = wall_texture.height - 1;
+	if (texture_x > wall_texture.width)
+		texture_x = wall_texture.width;
+	if (texture_y > wall_texture.height)
+		texture_y = wall_texture.height;
 	color = my_mlx_pixel_get(&wall_texture, texture_x, texture_y);
 	return (color);
 }
