@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/27 13:07:02 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:21:21 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define MS 0.1
 # define ROT_STEP PI / 36
 # define VIS_DIST 1
+# define FOV 1.2
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -81,11 +82,15 @@ typedef struct s_cub {
 //display.c
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_tile(t_img *img, int x, int y, int color);
+void	draw_at_loc(double x, double y, t_cub *cub, t_img *img);
 void	draw_map(t_cub *cub, t_img *img);
+void	fetch_player_start(t_cub *cub);
 void	draw_player_start(t_cub *cub, t_img *img);
 void	draw_direction(t_cub *cub);
 void	draw_ray(t_cub *cub, t_img *img, double vector, t_ray ray);
-void	draw_fov(t_cub *cub, t_img *img);
+void	draw_screen(t_cub *cub, t_img *img);
+void	draw_3d(t_cub *cub, double delta);
+void	draw_minimap(t_cub *cub, t_img *img, double delta);
 void	define_dir (t_cub *cub);
 
 //init.c
@@ -97,6 +102,7 @@ void	fetch_map(t_cub *cub);
 //utils.c
 void	correct_orientation(t_cub *cub);
 int	wclose(t_cub *cub);
+double	hyp_len(double x1, double x2, double y1, double y2);
 int	check_wall_player(double x, double y, t_cub *cub);
 
 //movement.c
