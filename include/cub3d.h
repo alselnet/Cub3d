@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/22 17:45:53 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 15:42:52 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,12 @@ int	get_width(t_parsing *data);
 
 //parse_infos.c
 int	parse_infos(t_cub *cub);
+void	free_parsing(t_parsing *data);
+
+//set_card_path.c
+int	set_no(char **buff, t_parsing *data);
+int	set_so(char **buff, t_parsing *data);
+int	set_ea(char **buff, t_parsing *data);
+int	set_we(char **buff, t_parsing *data);
 
 # endif

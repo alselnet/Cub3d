@@ -1,8 +1,21 @@
-NO ./assets/wall.xpm   
-
-SO      ./assets/wall.xpm
-
-EA       ./assets/wall.xpm
+NO ./assets/wall.xpm
+WE ./assets/wall.xpm
+EA ./assets/wall.xpm
 
 
-We ./assets/wall.xpm
+
+
+
+
+SO       ./assets/wall.xpm
+
+
+
+
+
+
+
+
+111111
+100001
+111111

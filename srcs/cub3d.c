@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/29 14:45:11 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 15:51:41 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse_infos(&cub))
 		return (free(cub.path), 1);
-	// if (map_parsing(&cub) != 0)
-		// return (free(cub.path), 1);
-	// if (!cub.path)
-	// 	return (0);
+	if (map_parsing(&cub) != 0)
+		return (free(cub.path), 1);
+	if (!cub.path)
+		return (0);
 	// init_mlx(&cub, 1152, 870);
 	// fetch_map(&cub);
 	// if (!cub.map)
@@ -39,6 +39,7 @@ int	main(int argc, char **argv)
 	// mlx_loop(cub.mlx.mlx);
 	
 	free(cub.path);//est cense ne jamais arriver la
+	free_parsing(&cub.parsing);
 	// ft_free_arr(cub.map);//WIP
 	return (0);
 }

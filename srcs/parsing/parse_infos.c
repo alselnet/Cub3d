@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:55:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/29 15:08:21 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/03 15:51:24 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,46 +26,22 @@ int	parse_elem(char *line, t_parsing *data)
 	}
 	if (ft_strcmp(buff[0], "NO") == 0)
 	{
-		if (data->no)
-		{
-			printf("\033[31;01mInfos error :\033[00m Multiple NO textures paths !\n");
-			return (1);
-		}
-		data->no = ft_strdup(buff[0]);
-		if (!data->no)
+		if (set_no(buff, data) != 0)
 			return (ft_free_arr(buff), 1);
 	}
 	else if (ft_strcmp(buff[0], "SO") == 0)
 	{
-		if (data->so)
-		{
-			printf("\033[31;01mInfos error :\033[00m Multiple SO textures paths !\n");
-			return (1);
-		}
-		data->so = ft_strdup(buff[0]);
-		if (!data->so)
+		if (set_so(buff, data) != 0)
 			return (ft_free_arr(buff), 1);
 	}
 	else if (ft_strcmp(buff[0], "EA") == 0)
 	{
-		if (data->ea)
-		{
-			printf("\033[31;01mInfos error :\033[00m Multiple EA textures paths !\n");
-			return (1);
-		}
-		data->ea = ft_strdup(buff[0]);
-		if (!data->ea)
+		if (set_ea(buff, data) != 0)
 			return (ft_free_arr(buff), 1);
 	}
 	else if (ft_strcmp(buff[0], "WE") == 0)
 	{
-		if (data->we)
-		{
-			printf("\033[31;01mInfos error :\033[00m Multiple WE textures paths !\n");
-			return (1);
-		}
-		data->we = ft_strdup(buff[0]);
-		if (!data->we)
+		if (set_we(buff, data) != 0)
 			return (ft_free_arr(buff), 1);
 	}
 	else
@@ -90,6 +66,19 @@ void	free_parsing(t_parsing *data)
 		free(data->we);
 }
 
+int	check_full_elem(t_parsing *data)
+{
+	if (!data->no)
+		return (0);
+	if (!data->so)
+		return (0);
+	if (!data->ea)
+		return (0);
+	if (!data->we)
+		return (0);
+	return (1);
+}
+
 int	parse_infos(t_cub *cub)
 {
 	char	*line;
@@ -103,12 +92,17 @@ int	parse_infos(t_cub *cub)
 		printf("\033[31;01mFile error :\033[00m Empty file !\n");
 		return (close(cub->parsing.fd), 1);
 	}
-	while (line)
+	while (line && !check_full_elem(&cub->parsing))
 	{
 		if (line[0] != '\n')
 		{
 			if	(parse_elem(line, &cub->parsing) != 0)
 			{
+				while (line)
+				{
+					free(line);
+					line = get_next_line(cub->parsing.fd);
+				}
 				free_parsing(&cub->parsing);
 				return (free(line), close(cub->parsing.fd), 1);
 			}
@@ -117,5 +111,6 @@ int	parse_infos(t_cub *cub)
 		// return (close(cub->parsing.fd), 0);//WIP
 		line = get_next_line(cub->parsing.fd);
 	}
-	return (close(cub->parsing.fd), 0);
+	printf("full !\n");
+	return (0);
 }
