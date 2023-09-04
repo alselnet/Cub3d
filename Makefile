@@ -6,7 +6,7 @@
 #    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/09/03 19:14:59 by jthuysba         ###   ########.fr        #
+#    Updated: 2023/09/04 13:55:27 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ CORE		=	./srcs/display.c\
 				./srcs/parsing/parse_args.c\
 				./srcs/parsing/parse_infos.c\
 				./srcs/parsing/set_card_path.c\
+				./srcs/parsing/set_rgb.c\
 
 PARSING		=	
 

@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 19:13:37 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:37:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ typedef struct s_player{
 	double	orientation;
 }				t_player;
 
+typedef struct s_rgb
+{
+	char	*red;
+	char	*green;
+	char	*blue;
+	int	r;
+	int	g;
+	int	b;
+	int	color;
+}	t_rgb;
+
 typedef struct	s_parsing
 {
 	char	*file;
@@ -54,6 +65,8 @@ typedef struct	s_parsing
 	char	*so;
 	char	*ea;
 	char	*we;
+	int		c;
+	int		f;
 	char	*lim_line;
 }	t_parsing;
 
@@ -124,5 +137,8 @@ int	set_no(char **buff, t_parsing *data);
 int	set_so(char **buff, t_parsing *data);
 int	set_ea(char **buff, t_parsing *data);
 int	set_we(char **buff, t_parsing *data);
+
+//set_rgb.c
+int	set_rgb(char *str);
 
 # endif

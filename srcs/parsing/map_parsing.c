@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/03 19:02:52 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:50:56 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	print_map(char *name, char **map)
 int	map_parsing(t_cub *cub)
 {
 	cub->parsing.file = cub->path;
-	cub->parsing.player_flag = 0;
 	get_width(&cub->parsing);
 	
 	if (go_to_map(&cub->parsing, cub) != 0)
