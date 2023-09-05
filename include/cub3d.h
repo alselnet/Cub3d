@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 21:09:31 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:36:36 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void			load_textures_ns(t_cub *cub);
 void			load_textures_ew(t_cub *cub);
 void			load_textures(t_cub *cub);
 int				set_texture_x(t_ray ray, t_img wall_texture);
-unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, int i, int wall_h);
+unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, double i);
 
 //minimap.c
 void			draw_vertical_ray(t_cub *cub, t_img *img,

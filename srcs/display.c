@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 21:07:56 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:36:57 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,30 @@ void	draw_stripe(t_cub *cub, t_img *img, int col, t_ray ray)
 	int				x;
 	int				ceil;
 	unsigned int	color;
-	int				i;
+	double			i;
+	int				wall_h;
+	double			i_offset;
 
 	x = -1;
-	i = 0;
+	i_offset = 0;
 	ray.wall_h = (int)((870) / ray.ray_len);
 	if (ray.wall_h > 870)
-		ray.wall_h = 870;
-	while (++x < ((870 - (int) ray.wall_h) / 2))
+	{
+		wall_h = 870;
+		i_offset = (ray.wall_h - 870) / 2.0;
+	}
+	else
+		wall_h = ray.wall_h;
+	while (++x < ((870 - (int) wall_h) / 2))
 		my_mlx_pixel_put(img, col, x, 0x000000);
 	ceil = x;
+	i = i_offset * ((64.0 / (double)(ray.wall_h)));
 	while (x < 870 - ceil)
 	{
-		color = fetch_texture_px(cub, ray, i, 870 - (ceil * 2));
+		color = fetch_texture_px(cub, ray, i);
 		my_mlx_pixel_put(img, col, x, color);
 		x++;
-		i++;
+		i += (64.0 / (double)(ray.wall_h));
 	}
 	while (x < 870)
 	{

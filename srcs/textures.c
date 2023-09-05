@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:25:18 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 21:11:35 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:36:08 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	set_texture_x(t_ray ray, t_img wall_texture)
 	return ((int)(texture_x * wall_texture.width));
 }
 
-unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, int i, int wall_h)
+
+unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, double i)
 {
 	t_img			wall_texture;
 	unsigned int	color;
 	int				texture_x;
-	int				texture_y;
 
 	if (ray.side == 'N')
 		wall_texture = cub->img_wall_n;
@@ -81,11 +81,6 @@ unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, int i, int wall_h)
 	else
 		wall_texture = cub->img_wall_w;
 	texture_x = set_texture_x(ray, wall_texture);
-	texture_y = i * wall_texture.height / wall_h;
-	if (texture_x > wall_texture.width)
-		texture_x = wall_texture.width;
-	if (texture_y > wall_texture.height)
-		texture_y = wall_texture.height;
-	color = my_mlx_pixel_get(&wall_texture, texture_x, texture_y);
+	color = my_mlx_pixel_get(&wall_texture, texture_x, (int)i);
 	return (color);
 }
