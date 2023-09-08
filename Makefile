@@ -6,7 +6,7 @@
 #    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/09/08 19:50:43 by aselnet          ###   ########.fr        #
+#    Updated: 2023/09/08 20:05:25 by aselnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,15 @@ CORE		=	./srcs/display.c\
 				./srcs/movement2.c\
 				./srcs/raycasting.c\
 				./srcs/close.c\
+				./srcs/destroy_all.c\
+				./srcs/parsing/map_parsing.c\
+				./srcs/parsing/get_checking_map.c\
+				./srcs/parsing/parse_utils.c\
+				./srcs/parsing/check_map.c\
+				./srcs/parsing/parse_args.c\
+				./srcs/parsing/parse_infos.c\
+				./srcs/parsing/set_card_path.c\
+				./srcs/parsing/set_rgb.c\
 
 PARSING		=	
 

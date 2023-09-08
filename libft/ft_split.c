@@ -3,128 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:06:15 by aselnet           #+#    #+#             */
-/*   Updated: 2023/05/18 20:36:04 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/08/22 16:51:26 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_make_a_split(char const *s, size_t size)
+static size_t	count_words(char const *s, char sep)
 {
-	unsigned int	i;
-	char			*split;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
-	split = (char *) malloc(size + 1);
-	if (!split)
-		return (0);
-	while (i < size)
-	{
-		split[i] = s[i];
-		i++;
-	}
-	split[i] = 0;
-	return (split);
-}
-
-int	ft_strslen(char const *s, int c)
-{
-	int	slen;
-	int	i;
-	int	j;
-
-	slen = 0;
-	i = 0;
+	count = 0;
 	while (s[i])
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		j = 0;
-		while (s[i] && s[i] != c)
+		if (s[i] != sep)
 		{
-			i++;
-			j++;
+			count++;
+			while (s[i] && s[i] != sep)
+				i++;
 		}
-		if (j)
-			slen++;
+		else
+			i++;
 	}
-	return (slen);
+	return (count);
 }
 
-char	**clear_tab(char **split_tab, unsigned int n)
+static size_t	count_char(char const *s, char sep)
 {
-	unsigned int	i;
-
-	i = -1;
-	while (++i < n)
-		free(split_tab[n]);
-	return (0);
-}
-
-char	**splitting(char **split_tab, char const *s, char c)
-{
-	unsigned int		i;
-	unsigned int		j;
-	unsigned int		n;
+	size_t	i;
 
 	i = 0;
-	n = -1;
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		j = 0;
-		while (s[i + j] && s[i + j] != c)
-			j++;
-		i += j;
-		if (j)
-		{
-			split_tab[++n] = ft_make_a_split(s + i - j, j);
-			if (!split_tab[n])
-				return (clear_tab(split_tab, n));
-		}
-	}
-	split_tab[++n] = 0;
-	return (split_tab);
+	while (s[i] != sep && s[i])
+		i++;
+	return (i);
 }
 
-char	**ft_split(char const *s, char c)
+static void	copy_words(char *dest, const char *src, char sep)
 {
-	char				**split_tab;
-
-	split_tab = (char **) malloc((ft_strslen(s, c) + 1) * sizeof(char *));
-	if (!split_tab)
-		return (0);
-	split_tab = splitting(split_tab, s, c);
-	return (split_tab);
-}
-
-/* #include <stdio.h>
-int	main()
-{
-	char**	split_tab;
-	int	i;
+	size_t	i;
 
 	i = 0;
-	char string[] = "hey everyone im your new best split !!!\n";
-	split_tab = ft_split(string, ' ');
-	if (!split_tab)
-		return (0);
-	printf("ft_strslen returns: %d\n", ft_strslen(string, ' '));
-	printf("processing the following string : %s\n", string);
-	while (split_tab[i])
+	while (src[i] != sep && src[i])
 	{
-		printf("%s\n", split_tab[i]);
+		dest[i] = src[i];
 		i++;
 	}
-	while (i >= 0)
+	dest[i] = '\0';
+}
+
+char	**ft_split(char const *s, char sep)
+{
+	size_t	i;
+	size_t	x;
+	char	**arr;
+
+	i = 0;
+	x = 0;
+	arr = malloc(sizeof(char *) * (count_words(s, sep) + 1));
+	if (!arr)
+		return (NULL);
+	while (s[i])
 	{
-		free(split_tab[i]);
-		i--;
+		if (s[i] == sep)
+			i++;
+		else
+		{
+			arr[x] = malloc(sizeof(char) * (count_char(s + i, sep) + 1));
+			if (!arr[x])
+				return (NULL);
+			copy_words(arr[x++], s + i, sep);
+			i += count_char(s + i, sep);
+		}
 	}
-	free(split_tab);
-	return (0);
-} */
+	arr[x] = 0;
+	return (arr);
+}

@@ -6,7 +6,7 @@
 #    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 15:46:29 by aselnet           #+#    #+#              #
-#    Updated: 2023/08/01 22:39:27 by jthuysba         ###   ########.fr        #
+#    Updated: 2023/08/22 18:21:38 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ ft_arr_len.c\
 ft_free_arr.c\
 ft_calloc.c\
 ft_bzero.c\
+ft_isspace.c\
+ft_memset.c\
 
 
 OBJS = ${SRCS:.c=.o}

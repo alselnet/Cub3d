@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:31:09 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:36:20 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/08 20:04:49 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	wclose(t_cub *cub)
 {
-	ft_free_arr(cub->map);
-	free(cub->path);
 	mlx_destroy_image(cub->mlx3d.mlx, cub->img3d.img);
 	mlx_destroy_image(cub->mlx3d.mlx, cub->img_wall_n.img);
 	mlx_destroy_image(cub->mlx3d.mlx, cub->img_wall_s.img);
@@ -24,6 +22,7 @@ int	wclose(t_cub *cub)
 	mlx_destroy_window(cub->mlx3d.mlx, cub->mlx3d.win);
 	mlx_destroy_display(cub->mlx3d.mlx);
 	free(cub->mlx3d.mlx);
+	destroy_all(cub);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

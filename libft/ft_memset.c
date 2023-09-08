@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 19:51:25 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/03 18:59:32 by jthuysba         ###   ########.fr       */
+/*   Created: 2023/08/22 18:20:42 by jthuysba          #+#    #+#             */
+/*   Updated: 2023/08/22 18:21:24 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_arr(char **arr)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	int	i;
+	char		*ss;
+	size_t		i;
 
 	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
+	ss = (char *)s;
+	while (i < n)
 	{
-		free(arr[i]);
+		ss[i] = (char)c;
 		i++;
 	}
-	free(arr);
+	s = (void *)ss;
+	return (s);
 }

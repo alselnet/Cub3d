@@ -6,19 +6,44 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 21:07:29 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/08 20:03:04 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"	
 
+void	init_parsing(t_parsing *data)
+{
+	data->file = 0;
+	data->fd = 0;
+	data->no = 0;
+	data->so = 0;
+	data->ea = 0;
+	data->we = 0;
+	data->c = -1;
+	data->f = -1;
+	data->lim_line = 0;
+	data->width = 0;
+	data->map = 0;
+	data->player_flag = 0;
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	if (argc != 2)
-		return (0);
-	cub.path = ft_strjoin("maps/", argv[1]);
+	(void) argc;
+	(void) argv;
+	ft_memset(&cub, 0, sizeof(t_cub));
+	init_parsing(&cub.parsing);
+	if (parse_args(argc, argv, &cub) != 0)
+		return (destroy_all(&cub), 1);
+	if (parse_infos(&cub))
+		return (destroy_all(&cub), 1);
+	if (go_to_map(&cub.parsing, &cub) != 0)
+		return (destroy_all(&cub), 1);
+	if (map_parsing(&cub) != 0)
+		return (destroy_all(&cub), 1);
 	if (!cub.path)
 		return (0);
 	init_mlx(&cub, 1152, 870);

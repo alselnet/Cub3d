@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   destroy_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 19:51:25 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/03 18:59:32 by jthuysba         ###   ########.fr       */
+/*   Created: 2023/09/03 19:08:12 by jthuysba          #+#    #+#             */
+/*   Updated: 2023/09/03 19:16:02 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	ft_free_arr(char **arr)
+void	free_parsing(t_parsing *data)
 {
-	int	i;
+	if (data->lim_line)
+		free(data->lim_line);
+	if (data->no)
+		free(data->no);
+	if (data->so)
+		free(data->so);
+	if (data->ea)
+		free(data->ea);
+	if (data->we)
+		free(data->we);
+}
 
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+void	destroy_all(t_cub *cub)
+{
+	if (cub->path)
+		free(cub->path);
+	if (cub->map)
+		ft_free_arr(cub->map);
+	free_parsing(&cub->parsing);
 }
