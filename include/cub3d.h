@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/05 20:36:36 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/08 19:36:05 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,16 @@ typedef struct s_cub {
 
 //TMP
 void			print_img(t_img wall_texture);
+
 //init.c
 void			init_mlx(t_cub *cub, int x, int y);
 void			get_map_size(t_cub *cub);
 void			fetch_map(t_cub *cub);
 void			fetch_player_starting_orientation(t_cub *cub);
 void			fetch_player_start(t_cub *cub);
+
+//init2.c
+void			init_ray(t_ray *ray);
 
 //utils.c
 double			hyp_len(double x1, double x2, double y1, double y2);

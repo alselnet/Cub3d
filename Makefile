@@ -6,7 +6,7 @@
 #    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/09/03 16:32:10 by aselnet          ###   ########.fr        #
+#    Updated: 2023/09/08 19:50:43 by aselnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,9 @@ LIBFT		=	./libft/libft.a
 MAIN		=	./srcs/cub3d.c
 
 CORE		=	./srcs/display.c\
-				./srcs/minimap.c\
 				./srcs/textures.c\
 				./srcs/init.c\
+				./srcs/init2.c\
 				./srcs/utils.c\
 				./srcs/movement.c\
 				./srcs/movement2.c\

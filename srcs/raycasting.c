@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:36:03 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/08 19:43:04 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_hray(t_cub *cub, t_ray *hray, double vector)
 		hray->delta_y = -1;
 		hray->delta_x = hray->delta_y / tan(vector);
 	}
-	else if (vector < PI)
+	else
 	{
 		hray->ray_y = (double)(int)(cub->player.pos[1]) + 1.0001;
 		hray->ray_x = ((hray->ray_y - cub->player.pos[1])
@@ -85,7 +85,7 @@ void	set_vray(t_cub *cub, t_ray *vray, double vector)
 		vray->delta_x = -1;
 		vray->delta_y = vray->delta_x * tan(vector);
 	}
-	else if (vector < PI * 0.5 || vector > PI * 1.5)
+	else
 	{
 		vray->ray_x = (double)(int)(cub->player.pos[0]) + 1.0001;
 		vray->ray_y = ((vray->ray_x - cub->player.pos[0])
@@ -126,25 +126,25 @@ t_ray	cast_ray(t_cub *cub, double vector)
 {
 	t_ray	hray;
 	t_ray	vray;
-	t_ray	ray;
 
+	init_ray(&hray);
+	init_ray(&vray);
 	hray = horizontal_check_ray(cub, vector);
 	vray = vertical_check_ray(cub, vector);
 	if (hray.ray_len < vray.ray_len)
 	{
-		ray = hray;
-		if (ray.ray_y > cub->player.pos[1])
-			ray.side = 'S';
+		if (hray.ray_y > cub->player.pos[1])
+			hray.side = 'S';
 		else
-			ray.side = 'N';
+			hray.side = 'N';
+		return (hray);
 	}
 	else
 	{
-		ray = vray;
-		if (ray.ray_x > cub->player.pos[0])
-			ray.side = 'W';
+		if (vray.ray_x > cub->player.pos[0])
+			vray.side = 'W';
 		else
-			ray.side = 'E';
+			vray.side = 'E';
+		return (vray);
 	}
-	return (ray);
 }

@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:25:18 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/05 20:36:08 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/08 19:51:31 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	set_texture_x(t_ray ray, t_img wall_texture)
 		texture_x = (ray.ray_y - floor(ray.ray_y));
 	return ((int)(texture_x * wall_texture.width));
 }
-
 
 unsigned int	fetch_texture_px(t_cub *cub, t_ray ray, double i)
 {
