@@ -1,12 +1,12 @@
-NO lol
-WE ./assets/wall.xpm
+NO ./textures/wood.xpm
+WE ./textures/pillar.xpm
 
 
-EA ./assets/wall.xpm
-SO       ./assets/wall.xpm
+EA ./textures/purplestone.xpm
+SO       ./textures/bluestone.xpm
 
 C 1,1,1
-F 1,1,
+F           1,1,2
 
 
 
