@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:12:01 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 19:03:45 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 22:34:12 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,13 @@ void	init_mlx(t_cub *cub, int x, int y)
 
 void	get_map_size(t_cub *cub)
 {
-	int		fd;
-	char	*line;
+	int	i;
 
-	cub->dimensions[0] = 0;
-	fd = open(cub->path, O_RDONLY);
-	line = get_next_line(fd);
-	if (!line)
-		return (free(cub->path));
-	cub->dimensions[1] = ft_strlen(line);
-	while (line && *line)
-	{
-		free (line);
-		line = get_next_line(fd);
-		cub->dimensions[0]++;
-	}	
-	free(line);
-	close(fd);
+	cub->dimensions[1] = ft_strlen(cub->map[0]);
+	i = 0;
+	while (cub->map[i])
+		i++;
+	cub->dimensions[0] = i;
 	return ;
 }
 
