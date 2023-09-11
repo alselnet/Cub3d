@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 16:45:22 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:56:17 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	draw_screen(t_cub *cub, t_img *img)
 	get_map_size(cub);
 	fetch_player_start(cub);
 	load_textures(cub);
+	printf("cub->parsing.no is %s\n", cub->parsing.no);
+	printf("cub->parsing.c is %d\n", cub->parsing.c);
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
 	draw_3d(cub, -(FOV / 2));

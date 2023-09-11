@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:25:18 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/08 19:51:31 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:52:59 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	load_textures_ns(t_cub *cub)
 {
 	cub->img_wall_n.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/bluestone.xpm", &cub->img_wall_n.width,
+			cub->parsing.no, &cub->img_wall_n.width,
 			&cub->img_wall_n.height);
 	if (cub->img_wall_n.img)
 		cub->img_wall_n.addr = mlx_get_data_addr(cub->img_wall_n.img,
 				&cub->img_wall_n.bits_per_pixel, &cub->img_wall_n.line_length,
 				&cub->img_wall_n.endian);
 	cub->img_wall_s.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/purplestone.xpm", &cub->img_wall_s.width,
+			cub->parsing.so, &cub->img_wall_s.width,
 			&cub->img_wall_s.height);
 	if (cub->img_wall_s.img)
 		cub->img_wall_s.addr = mlx_get_data_addr(cub->img_wall_s.img,
@@ -33,14 +33,14 @@ void	load_textures_ns(t_cub *cub)
 void	load_textures_ew(t_cub *cub)
 {	
 	cub->img_wall_e.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/greystone.xpm", &cub->img_wall_e.width,
+			cub->parsing.ea, &cub->img_wall_e.width,
 			&cub->img_wall_e.height);
 	if (cub->img_wall_e.img)
 		cub->img_wall_e.addr = mlx_get_data_addr(cub->img_wall_e.img,
 				&cub->img_wall_e.bits_per_pixel, &cub->img_wall_e.line_length,
 				&cub->img_wall_e.endian);
 	cub->img_wall_w.img = mlx_xpm_file_to_image(cub->mlx3d.mlx,
-			"textures/colorstone.xpm", &cub->img_wall_w.width,
+			cub->parsing.we, &cub->img_wall_w.width,
 			&cub->img_wall_w.height);
 	if (cub->img_wall_w.img)
 		cub->img_wall_w.addr = mlx_get_data_addr(cub->img_wall_w.img,
