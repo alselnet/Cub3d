@@ -6,7 +6,7 @@
 #    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/09/08 20:05:25 by aselnet          ###   ########.fr        #
+#    Updated: 2023/09/11 18:44:40 by aselnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ RM			=	rm -f
 
 CC			=	gcc
 
-FLAGS		=	-MMD -Wall -Wextra -Werror -I include/
+FLAGS		=	-MMD -Wall -Wextra -Werror -g -I include/
 
 FLAGS_LIB	= -lXext -lX11
 

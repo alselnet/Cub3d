@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 16:29:59 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:55:46 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ double			hyp_len(double x1, double x2, double y1, double y2);
 unsigned int	my_mlx_pixel_get(t_img *img, int x, int y);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			correct_orientation(t_cub *cub);
+int				ft_strlen_map(const char *s);
 
 //close.c
 int				wclose(t_cub *cub);

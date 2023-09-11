@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:42:56 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:14:42 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	refresh_img(t_cub *cub)
 	cub->img3d.addr = mlx_get_data_addr(cub->img3d.img,
 			&cub->img3d.bits_per_pixel, &cub->img3d.line_length,
 			&cub->img3d.endian);
-	draw_3d(cub, -(FOV / 2));
+	draw_3d(cub, - (FOV / 2));
 	mlx_put_image_to_window(cub->mlx3d.mlx,
 		cub->mlx3d.win, cub->img3d.img, 0, 0);
 }

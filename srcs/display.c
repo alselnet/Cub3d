@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 18:06:34 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:51:44 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	draw_3d(t_cub *cub, double delta)
 	double	angle;
 
 	col = 1151;
+		printf("cub->player.pos[0] is %f\n", cub->player.pos[0]);
+	printf("cub->player.pos[1] is %f\n", cub->player.pos[1]);
 	while (delta <= 0.6)
 	{
 		angle = cub->player.orientation + delta;
@@ -81,8 +83,9 @@ void	draw_screen(t_cub *cub, t_img *img)
 	get_map_size(cub);
 	fetch_player_start(cub);
 	load_textures(cub);
-	printf("cub->parsing.no is %s\n", cub->parsing.no);
-	printf("cub->parsing.c is %d\n", cub->parsing.c);
+	print_map("map before display\n", cub->map);
+	printf("dimension[0] is %d\n", cub->dimensions[0]);
+	printf("dimension[1] is %d\n", cub->dimensions[1]);
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
 	draw_3d(cub, -(FOV / 2));
