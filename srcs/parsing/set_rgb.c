@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/11 16:06:48 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:05:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	set_rgb(char *str)
 	rgb.red = ft_atoi(arr[0]);
 	rgb.green = ft_atoi(arr[1]);
 	rgb.blue = ft_atoi(arr[2]);
-	printf("%d,%d,%d\n", rgb.red, rgb.green, rgb.blue);
 	rgb.color = convert_rgb(rgb.red, rgb.green, rgb.blue);
 	ft_free_arr(arr);
 	return (rgb.color);

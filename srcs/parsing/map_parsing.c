@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/11 16:47:11 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 17:05:49 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ int	map_parsing(t_cub *cub)
 		return (1);//WIP
 	if (get_checking_map(&cub->parsing, cub) != 0)
 		return (ft_free_arr(cub->parsing.map), 1);
-		
-	print_map("PARSING MAP", cub->parsing.map);
-
 	if (check_map_limits(&cub->parsing) != 0)
 		return (ft_free_arr(cub->parsing.map), 1);
 	if (check_bad_char(&cub->parsing) != 0)
@@ -102,7 +99,6 @@ int	map_parsing(t_cub *cub)
 		return (ft_free_arr(cub->parsing.map), 1);
 	printf("\033[32;01mGood !\033[00m\n");
 	cub->map = set_cub_map(&cub->parsing);
-	print_map("CUB3D MAP", cub->map);
 
 	return (ft_free_arr(cub->parsing.map), 0);
 }
