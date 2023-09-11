@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 16:56:17 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:06:34 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_stripe(t_cub *cub, t_img *img, int col, t_ray ray)
 	else
 		wall_h = ray.wall_h;
 	while (++x < ((870 - (int) wall_h) / 2))
-		my_mlx_pixel_put(img, col, x, 0x000000);
+		my_mlx_pixel_put(img, col, x, cub->parsing.c);
 	i = i_offset * ((64.0 / (double)(ray.wall_h)));
 	while (x < (870 + (int)wall_h) / 2)
 	{
@@ -49,7 +49,7 @@ void	draw_stripe(t_cub *cub, t_img *img, int col, t_ray ray)
 	}
 	x--;
 	while (++x < 870)
-		my_mlx_pixel_put(img, col, x, 0x994c00);
+		my_mlx_pixel_put(img, col, x, cub->parsing.f);
 }
 
 void	draw_3d(t_cub *cub, double delta)
