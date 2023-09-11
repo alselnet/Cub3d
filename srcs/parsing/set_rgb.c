@@ -3,90 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   set_rgb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/08 20:51:33 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:06:48 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_rgb(t_rgb *rgb)
+int convert_rgb(int red, int green, int blue)
 {
-	if (rgb->red)
-		free(rgb->red);
-	if (rgb->green)
-		free(rgb->green);
-	if (rgb->blue)
-		free(rgb->blue);
-}
+	int	color;
 
-int	ft_strlen_lim(char *str, char lim)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != lim)
-		i++;
-	return (i);
-}
-
-int	create_spaces(char *str, t_rgb *rgb)
-{
-	int r_len;
-	int	g_len;
-	int	b_len;
-
-	r_len = ft_strlen_lim(str, ',');
-	rgb->red = malloc(sizeof(char) * (r_len + 1));
-	if (!rgb->red)
-		return (1);
-	g_len = ft_strlen_lim(str + r_len + 1, ',') ;
-	rgb->green = malloc(sizeof(char) * (g_len + 1));
-	if (!rgb->green)
-		return (1);
-	b_len = ft_strlen_lim(str + r_len + g_len + 2, ',');
-	rgb->blue = malloc(sizeof(char) * (b_len + 1));
-	if (!rgb->blue)
-		return (1);
-	return (0);
-}
-
-int	fill_rgb(char *str, char *dest, int *i)
-{
-	// int	j;
-
-	// j = 0;
-	// while (str[*i] && str[*i] != ',')
-	// {
-	// 	dest[j] = str[*i];
-	// 	*i++;
-	// }
-	// dest[j] = 0;
-	// ++*i;
-	(void) str;
-	(void) dest;
-	(void) i;
-	return (0);
+	if (red < 0 || red > 255)
+		return (-1);
+	if (green < 0 || green > 255)
+		return (-1);
+	if (blue < 0 || blue > 255)
+		return (-1);
+	color = (red << 16) | (green << 8) | blue;
+   return (color);
 }
 
 int	set_rgb(char *str)
 {
 	t_rgb	rgb;
-	int		i;
-	int		j;
+	char	**arr;
 
-	(void) j;
-	if (create_spaces(str, &rgb) != 0)
-		return (free_rgb(&rgb), 1);
-	i = 0;
-	fill_rgb(str, rgb.red, &i);
-	printf("%d\n", i);
-	fill_rgb(str, rgb.green, &i);
-	printf("%d\n", i);
-
-	fill_rgb(str, rgb.blue, &i);
-	printf("%d\n", i);
-	return (0);
+	arr = ft_split(str, ',');
+	rgb.red = ft_atoi(arr[0]);
+	rgb.green = ft_atoi(arr[1]);
+	rgb.blue = ft_atoi(arr[2]);
+	printf("%d,%d,%d\n", rgb.red, rgb.green, rgb.blue);
+	rgb.color = convert_rgb(rgb.red, rgb.green, rgb.blue);
+	ft_free_arr(arr);
+	return (rgb.color);
 }

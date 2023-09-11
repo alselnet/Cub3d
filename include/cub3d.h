@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/08 20:01:13 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:09:34 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,9 @@ typedef struct s_ray
 }				t_ray;
 typedef struct s_rgb
 {
-	char	*red;
-	char	*green;
-	char	*blue;
-	int	r;
-	int	g;
-	int	b;
+	int	red;
+	int	green;
+	int	blue;
 	int	color;
 }	t_rgb;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/08 20:03:04 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:13:07 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	main(int argc, char **argv)
 	if (!cub.path)
 		return (0);
 	init_mlx(&cub, 1152, 870);
-	fetch_map(&cub);
-	if (!cub.map)
-		return (0);
+	// fetch_map(&cub);
+	// if (!cub.map)
+	// 	return (0);
 	draw_screen(&cub, &cub.img3d);
 	mlx_put_image_to_window(cub.mlx3d.mlx, cub.mlx3d.win, cub.img3d.img, 0, 0);
 	mlx_hook(cub.mlx3d.win, 17, 0, wclose, &cub);

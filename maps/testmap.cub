@@ -5,8 +5,8 @@ WE ./assets/wall.xpm
 EA ./assets/wall.xpm
 SO       ./assets/wall.xpm
 
-
-C 0,444,1111111
+C 1,1,1
+F 1,1,1
 
 
 
