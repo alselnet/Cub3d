@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:55:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/04 13:35:32 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/11 22:01:11 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,17 @@ int	parse_elem(char *line, t_parsing *data)
 			return (ft_free_arr(buff), 1);
 	}
 	else if (ft_strcmp(buff[0], "C") == 0)
+	{
 		data->c = set_rgb(buff[1]);
+		if (data->c < 0)
+			return (1);		
+	}
 	else if (ft_strcmp(buff[0], "F") == 0)
+	{
 		data->f = set_rgb(buff[1]);
+		if (data->f < 0)
+			return (1);		
+	}
 	else
 	{
 		printf("\033[31;01mInfos error :\033[00m Invalid ID \"%s\" !\n", buff[0]);

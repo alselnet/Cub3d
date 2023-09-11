@@ -6,7 +6,7 @@ EA ./assets/wall.xpm
 SO       ./assets/wall.xpm
 
 C 1,1,1
-F 1,1,1
+F 1,1,
 
 
 

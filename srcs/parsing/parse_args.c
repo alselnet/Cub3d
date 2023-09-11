@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:14:12 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/03 16:27:57 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/11 21:44:30 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ int	check_file(t_cub *cub)
 		printf("\033[31;01mInvalid file :\033[00m Not a .cub file !\n");
 		return (close(fd), 1);
 	}
-	// line = get_next_line(fd);
-	// if (!line)
-	// {
-	// 	printf("\033[31;01mInvalid file :\033[00m Empty file !\n");
-	// 	return (close(fd), 1);
-	// }
-	// free(line);
-	// printf("lol\n");
 	close(fd);
 	return (0);
 }
