@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 17:18:05 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/03 16:08:29 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:38:58 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_strafe(char dir, t_cub *cub)
 		new_pos[1] += MS
 			* (sin(cub->player.orientation - (PI * 0.5)));
 	}
-	if (check_wall_player(new_pos[0], new_pos[1], cub))
+	if (check_wall(new_pos[0], new_pos[1], cub))
 		return (1);
 	return (0);
 }
@@ -85,7 +85,7 @@ int	check_move(char dir, t_cub *cub)
 		new_pos[0] += MS * cos(cub->player.orientation);
 		new_pos[1] += MS * sin(cub->player.orientation);
 	}
-	if (check_wall_player(new_pos[0], new_pos[1], cub))
+	if (check_wall(new_pos[0], new_pos[1], cub))
 		return (1);
 	return (0);
 }

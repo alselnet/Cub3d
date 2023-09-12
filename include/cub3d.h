@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 16:34:53 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:13:14 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define PI 3.141592
 # define MS 0.1
 # define ROT_STEP 0.087266
+# define PADDING 0.05
 # define VIS_DIST 1
 # define  FOV 1
 # include <stdio.h>
@@ -142,6 +143,7 @@ void			draw_screen(t_cub *cub, t_img *img);
 //movement.c
 void			refresh_img(t_cub *cub);
 int				check_wall_player(double x, double y, t_cub *cub);
+int				check_wall(double x, double y, t_cub *cub);
 int				exec_key(int keycode, t_cub *cub);
 
 //movement2.c
