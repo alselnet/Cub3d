@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 14:13:53 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:13:41 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define MS 0.1
 # define ROT_STEP 0.087266
 # define VIS_DIST 1
-# define FOV 1.2
+# define  FOV 1
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>

@@ -1,9 +1,9 @@
-NO ./textures/bluestone.xpm
 SO ./textures/colorstone.xpm
+NO ./textures/bluestone.xpm
+EA                                 ./textures/mossy.xpm                
 WE ./textures/eagle.xpm
-EA ./textures/mossy.xpm
-F 220,100,0
-C 225,30,0
+C 255,0,0
+F                   0,0,0
 1111111111111111
 100000000S000001
 1000000000000001
@@ -12,3 +12,12 @@ C 225,30,0
 1000000000000001
 1000000000000001
 1111111111111111
+1
+1
+1
+1
+1
+1
+1
+1
+1

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 02:03:46 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:14:22 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_3d(t_cub *cub, double delta)
 	double	angle;
 
 	col = 1151;
-	while (delta <= 0.6)
+	while (delta <= ((double)FOV / 2.0))
 	{
 		angle = cub->player.orientation + delta;
 		if (angle < 0)
@@ -69,7 +69,7 @@ void	draw_3d(t_cub *cub, double delta)
 		ray.ray_len = ray.ray_len * cos(delta);
 		draw_stripe(cub, &cub->img3d, col, ray);
 		col--;
-		delta += 0.001042;
+		delta += (double) FOV / 1152.0;
 	}
 	return ;
 }
@@ -85,5 +85,5 @@ void	draw_screen(t_cub *cub, t_img *img)
 	printf("dimension[1] is %d\n", cub->dimensions[1]);
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
-	draw_3d(cub, -(FOV / 2));
+	draw_3d(cub, -((double)FOV / 2.0));
 }
