@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:59 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 16:46:34 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:39:22 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	set_no(char **buff, t_parsing *data)
 {
 	int	fd;
-	
+
 	if (data->no)
 	{
 		printf("\033[31;01mInfos error :\033[00m Multiple NO textures paths !\n");

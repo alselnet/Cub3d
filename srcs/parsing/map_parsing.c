@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 17:03:40 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:40:29 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	map_parsing(t_cub *cub)
 	cub->parsing.file = cub->path;
 	get_width(&cub->parsing);
 	if (go_to_map(&cub->parsing, cub) != 0)
-		return (1);//WIP
+		return (1);
 	if (get_checking_map(&cub->parsing, cub) != 0)
 		return (ft_free_arr(cub->parsing.map), 1);
 	if (check_map_limits(&cub->parsing) != 0)

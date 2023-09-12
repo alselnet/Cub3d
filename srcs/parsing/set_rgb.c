@@ -6,13 +6,13 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 16:33:08 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:38:58 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int convert_rgb(int red, int green, int blue)
+int	convert_rgb(int red, int green, int blue)
 {
 	int	color;
 
@@ -23,7 +23,7 @@ int convert_rgb(int red, int green, int blue)
 	if (blue < 0 || blue > 255)
 		return (-1);
 	color = (red << 16) | (green << 8) | blue;
-   return (color);
+	return (color);
 }
 
 int	check_rgb(char *str)
@@ -53,7 +53,8 @@ int	set_rgb(char *str)
 
 	if (check_rgb(str) != 0)
 	{
-		printf("\033[31;01mInfos error :\033[00m Invalid character in RGB value !\n");
+		printf("\033[31;01mInfos error : \033[00m");
+		printf("Invalid character in RGB value !\n");
 		return (-1);
 	}
 	arr = ft_split(str, ',');
