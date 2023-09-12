@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 17:28:47 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 19:58:03 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	check_wall_player(double x, double y, t_cub *cub)
 
 	x_tile = (int) x;
 	y_tile = (int)(cub->dimensions[0] - y);
-	if (x_tile < 0 || x_tile > cub->dimensions[0])
+	if (x_tile < 0 || x_tile > cub->dimensions[1])
 		return (1);
-	else if (y_tile < 0 || y_tile > cub->dimensions[1])
+	else if (y_tile < 0 || y_tile > cub->dimensions[0])
 		return (1);
 	if (cub->map[y_tile][x_tile] == '1')
 		return (1);

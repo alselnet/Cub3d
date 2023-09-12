@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:34:52 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 19:01:33 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 20:01:09 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int	launch_file(char **line, t_cub *cub)
 		printf("\033[31;01mFile error :\033[00m Empty file !\n");
 		return (close(cub->parsing.fd), 1);
 	}
+	skip_empty_lines(line, cub->parsing.fd);
 	return (0);
 }
