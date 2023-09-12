@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:14:12 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/11 21:44:30 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:17:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	check_file(t_cub *cub)
 {
 	int	size;
 	int	fd;
-	// char	*line;
 
 	size = ft_strlen(cub->path);
 	fd = open(cub->path, O_RDONLY, 0666);

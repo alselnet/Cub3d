@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:17:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/10 17:18:24 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:53:58 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ int	check_map_limits(t_parsing *data)
 	i = 1;
 	while (data->map[i + 1])
 	{
-		if (check_line_limits(data->map[i], data->map[i - 1], data->map[i + 1]) != 0)
+		if (check_line_limits(data->map[i], data->map[i - 1],
+				data->map[i + 1]) != 0)
 		{
-			printf("\033[31;01mInvalid map :\033[00m The map has to be closed !\n");
+			printf("\033[31;01mInvalid map : \033[00m");
+			printf("The map has to be closed !\n");
 			return (1);
 		}
 		i++;
@@ -74,7 +76,8 @@ int	check_map_player(t_parsing *data)
 	{
 		if (check_line_player(data->map[i], data) != 0)
 		{
-			printf("\033[31;01mInvalid map :\033[00m Too many player positions !\n");
+			printf("\033[31;01mInvalid map : \033[00m");
+			printf("Too many player positions !\n");
 			return (1);
 		}
 		i++;
@@ -91,7 +94,7 @@ int	check_bad_char(t_parsing *data)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	while (data->map[i])
@@ -100,7 +103,8 @@ int	check_bad_char(t_parsing *data)
 		{
 			if (!ft_isinbase(data->map[i][j], "01NSEWX"))
 			{
-				printf("\033[31;01mInvalid map :\033[00m Invalid character found !\n");
+				printf("\033[31;01mInvalid map : \033[00m");
+				printf("Invalid character found !\n");
 				return (1);
 			}
 			j++;

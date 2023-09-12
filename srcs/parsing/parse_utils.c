@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 00:36:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/03 18:03:35 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:09:11 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,13 @@ int	go_to_map(t_parsing *data, t_cub *cub)
 	}
 	printf("err\n");
 	return (1);
+}
+
+void	skip_empty_lines(char *line, int fd)
+{
+	while (line && line[0] == '\n')
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 }

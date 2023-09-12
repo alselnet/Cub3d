@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/11 17:05:49 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:16:30 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strdup_sub(char *str, char to_find, char sub)
 {
 	char	*res;
-	int	i;
+	int		i;
 
 	res = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!res)
@@ -36,8 +36,8 @@ char	*ft_strdup_sub(char *str, char to_find, char sub)
 char	**set_cub_map(t_parsing *data)
 {
 	char	**cub_map;
-	int	i;
-	
+	int		i;
+
 	cub_map = malloc(sizeof(char *) * (ft_arr_len(data->map) + 1));
 	if (!cub_map)
 		return (NULL);
@@ -56,9 +56,12 @@ char	**set_cub_map(t_parsing *data)
 //debug
 void	print_map(char *name, char **map)
 {
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	printf("\n\033[35;01m>>>%s<<<\033[00m\n", name);
-	int i = 0;
-	int j = 0;
 	while (map[i])
 	{
 		while (map[i][j])
@@ -86,7 +89,6 @@ int	map_parsing(t_cub *cub)
 {
 	cub->parsing.file = cub->path;
 	get_width(&cub->parsing);
-	
 	if (go_to_map(&cub->parsing, cub) != 0)
 		return (1);//WIP
 	if (get_checking_map(&cub->parsing, cub) != 0)
@@ -99,6 +101,5 @@ int	map_parsing(t_cub *cub)
 		return (ft_free_arr(cub->parsing.map), 1);
 	printf("\033[32;01mGood !\033[00m\n");
 	cub->map = set_cub_map(&cub->parsing);
-
 	return (ft_free_arr(cub->parsing.map), 0);
 }

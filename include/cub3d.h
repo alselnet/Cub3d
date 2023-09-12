@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 18:55:46 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:13:53 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,35 +173,40 @@ void	destroy_all(t_cub *cub);
 /*	PARSING */
 
 //map_parsing.c
-int	map_parsing(t_cub *cub);
+int		map_parsing(t_cub *cub);
 
 //get_checking_map.c
-int get_checking_map(t_parsing *data, t_cub *cub);
+int 	get_checking_map(t_parsing *data, t_cub *cub);
+
+//get_checking_map_2.c
+void	fill_line(char *map, char *line, t_parsing *data);
+char	*fill_bot_limit(char *prev);
 
 //check_map.c
-int	check_bad_char(t_parsing *data);
-int	check_map_player(t_parsing *data);
-int	check_map_limits(t_parsing *data);
+int		check_bad_char(t_parsing *data);
+int		check_map_player(t_parsing *data);
+int		check_map_limits(t_parsing *data);
 
 //parse_args.c
-int	parse_args(int argc, char **argv, t_cub *cub);
+int		parse_args(int argc, char **argv, t_cub *cub);
 
 //parse_utils.c
-int	count_lines(t_parsing *data);
-int	get_width(t_parsing *data);
-int	go_to_map(t_parsing *data, t_cub *cub);
+int		count_lines(t_parsing *data);
+int		get_width(t_parsing *data);
+int		go_to_map(t_parsing *data, t_cub *cub);
+void	skip_empty_lines(char *line, int fd);
 
 //parse_infos.c
-int	parse_infos(t_cub *cub);
+int		parse_infos(t_cub *cub);
 void	free_parsing(t_parsing *data);
 
 //set_card_path.c
-int	set_no(char **buff, t_parsing *data);
-int	set_so(char **buff, t_parsing *data);
-int	set_ea(char **buff, t_parsing *data);
-int	set_we(char **buff, t_parsing *data);
+int		set_no(char **buff, t_parsing *data);
+int		set_so(char **buff, t_parsing *data);
+int		set_ea(char **buff, t_parsing *data);
+int		set_we(char **buff, t_parsing *data);
 
 //set_rgb.c
-int	set_rgb(char *str);
+int		set_rgb(char *str);
 
 # endif

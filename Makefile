@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
+#    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/09/11 18:44:40 by aselnet          ###   ########.fr        #
+#    Updated: 2023/09/12 14:14:07 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ CORE		=	./srcs/display.c\
 				./srcs/destroy_all.c\
 				./srcs/parsing/map_parsing.c\
 				./srcs/parsing/get_checking_map.c\
+				./srcs/parsing/get_checking_map_2.c\
 				./srcs/parsing/parse_utils.c\
 				./srcs/parsing/check_map.c\
 				./srcs/parsing/parse_args.c\
