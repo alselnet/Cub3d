@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 14:13:10 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:06:08 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,19 @@ void	fill_map(char *line, t_parsing *data)
 int	get_checking_map(t_parsing *data, t_cub *cub)
 {
 	char	*line;
+	int		c;
 
-	data->map = ft_calloc(count_lines(data) + 3, sizeof(char *));
+	c = count_lines(data);
+	if (c < 0)
+	{
+		printf("\033[31;01mInvalid map :\033[00m No map !\n");
+		return (close(data->fd), 1);
+	}
+	data->map = ft_calloc(c + 3, sizeof(char *));
 	if (!data->map)
-		return (1);
+		return (close(data->fd), 1);
 	if (go_to_map(data, cub) != 0)
-		return (1);//WIP
+		return (close(data->fd), 1);
 	line = get_next_line(data->fd);
 	if (!line)
 		return (close(data->fd), 1);

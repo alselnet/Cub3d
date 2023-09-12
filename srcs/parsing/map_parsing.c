@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 23:49:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 14:16:30 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:03:40 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,37 +53,37 @@ char	**set_cub_map(t_parsing *data)
 	return (cub_map);
 }
 
-//debug
-void	print_map(char *name, char **map)
-{
-	int	i;
-	int	j;
+// //debug
+// void	print_map(char *name, char **map)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	j = 0;
-	printf("\n\033[35;01m>>>%s<<<\033[00m\n", name);
-	while (map[i])
-	{
-		while (map[i][j])
-		{
-			if (map[i][j] == 'X')
-				printf("[\033[30;01m%c\033[00m]", map[i][j]);
-			else if (ft_isinbase(map[i][j], "NSEW"))
-				printf("[\033[32;01m%c\033[00m]", map[i][j]);
-			else if (map[i][j] == '1')
-				printf("[\033[34;01m%c\033[00m]", map[i][j]);
-			else if (map[i][j] == '0')
-				printf("[\033[33;01m%c\033[00m]", map[i][j]);
-			else
-				printf("[\033[31;01m%c\033[00m]", map[i][j]);
-			j++;
-		}
-		printf("\n");
-		j = 0;
-		i++;
-	}
-	printf("\n");
-}
+// 	i = 0;
+// 	j = 0;
+// 	printf("\n\033[35;01m>>>%s<<<\033[00m\n", name);
+// 	while (map[i])
+// 	{
+// 		while (map[i][j])
+// 		{
+// 			if (map[i][j] == 'X')
+// 				printf("[\033[30;01m%c\033[00m]", map[i][j]);
+// 			else if (ft_isinbase(map[i][j], "NSEW"))
+// 				printf("[\033[32;01m%c\033[00m]", map[i][j]);
+// 			else if (map[i][j] == '1')
+// 				printf("[\033[34;01m%c\033[00m]", map[i][j]);
+// 			else if (map[i][j] == '0')
+// 				printf("[\033[33;01m%c\033[00m]", map[i][j]);
+// 			else
+// 				printf("[\033[31;01m%c\033[00m]", map[i][j]);
+// 			j++;
+// 		}
+// 		printf("\n");
+// 		j = 0;
+// 		i++;
+// 	}
+// 	printf("\n");
+// }
 
 int	map_parsing(t_cub *cub)
 {
