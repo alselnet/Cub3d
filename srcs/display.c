@@ -6,10 +6,9 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 18:51:44 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 02:03:46 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -59,8 +58,6 @@ void	draw_3d(t_cub *cub, double delta)
 	double	angle;
 
 	col = 1151;
-		printf("cub->player.pos[0] is %f\n", cub->player.pos[0]);
-	printf("cub->player.pos[1] is %f\n", cub->player.pos[1]);
 	while (delta <= 0.6)
 	{
 		angle = cub->player.orientation + delta;
