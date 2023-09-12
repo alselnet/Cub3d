@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 02:07:49 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:33:46 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ t_ray	horizontal_check_ray(t_cub *cub, double vector)
 	set_hray(cub, &hray, vector);
 	while (hray.max_view < 1000)
 	{
-		if (hray.ray_y > -0.001 && hray.ray_y < cub->dimensions[0]
-			&& hray.ray_x > -0.001 && hray.ray_x < cub->dimensions[1]
+		if (hray.ray_y >= 0.0 && hray.ray_y < cub->dimensions[0]
+			&& hray.ray_x >= 0.0 && hray.ray_x < cub->dimensions[1]
 			&& cub->map[(int)(cub->dimensions[0]
 				- hray.ray_y)][(int)hray.ray_x] == '1')
 		{
@@ -105,8 +105,8 @@ t_ray	vertical_check_ray(t_cub *cub, double vector)
 	set_vray(cub, &vray, vector);
 	while (vray.max_view < 1000)
 	{
-		if (vray.ray_y > 0 && vray.ray_y < cub->dimensions[0]
-			&& vray.ray_x > 0 && vray.ray_x < cub->dimensions[1]
+		if (vray.ray_y >= 0.0 && vray.ray_y < cub->dimensions[0]
+			&& vray.ray_x >= 0.0 && vray.ray_x < cub->dimensions[1]
 			&& cub->map[(int)(cub->dimensions[0]
 				- vray.ray_y)][(int)(vray.ray_x)] == '1')
 		{
