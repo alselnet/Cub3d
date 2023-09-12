@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:55:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 19:04:14 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:15:07 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,16 @@ int	parse_infos(t_cub *cub)
 		if (line[0] != '\n')
 		{	
 			if (parse_elem(line, &cub->parsing) != 0)
-				return (skip_empty_lines(line, cub->parsing.fd), free(line),
-					close(cub->parsing.fd), 1);
+			{
+				skip_file(line, cub->parsing.fd);
+				return (close(cub->parsing.fd), 1);
+			}
 		}
 		if (check_full_elem(&cub->parsing))
 		{
 			cub->parsing.lim_line = ft_strdup(line);
-			skip_empty_lines(line, cub->parsing.fd);
-			return (free(line), close(cub->parsing.fd), (0));
+			skip_file(line, cub->parsing.fd);
+			return (close(cub->parsing.fd), (0));
 		}
 		free(line);
 		line = get_next_line(cub->parsing.fd);

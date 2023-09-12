@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:42:46 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 17:06:08 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:22:10 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	get_checking_map(t_parsing *data, t_cub *cub)
 	line = get_next_line(data->fd);
 	if (!line)
 		return (close(data->fd), 1);
-	skip_empty_lines(line, data->fd);
+	skip_empty_lines(&line, data->fd);
 	if (fill_top_limit(data) != 0)
 		return (close(data->fd), 1);
 	fill_map(line, data);

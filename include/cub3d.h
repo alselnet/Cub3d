@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:33 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 19:00:55 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:22:03 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,8 @@ int				parse_args(int argc, char **argv, t_cub *cub);
 int				count_lines(t_parsing *data);
 int				get_width(t_parsing *data);
 int				go_to_map(t_parsing *data, t_cub *cub);
-void			skip_empty_lines(char *line, int fd);
+void			skip_empty_lines(char **line, int fd);
+void			skip_file(char *line, int fd);
 
 //parse_infos.c
 int				parse_infos(t_cub *cub);
