@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 00:36:21 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 14:09:11 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:06:14 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,20 @@ int	get_width(t_parsing *data)
 
 int	count_lines(t_parsing *data)
 {
-	int	i;
+	int		i;
 	char	*line;
 
 	i = 0;
 	line = get_next_line(data->fd);
-	if (!line)
-		return (0);
-	while (line && line[0] == '\n')
+	if (!line || (*line && line[0] == 0))
+		return (-1);
+	while (line && *line && line[0] == '\n')
 	{
 		free(line);
 		line = get_next_line(data->fd);
 	}
+	if (!line)
+		return (-1);
 	while (line)
 	{
 		i++;

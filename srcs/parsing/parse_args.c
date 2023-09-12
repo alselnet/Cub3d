@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:14:12 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 14:17:12 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:24:33 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int	parse_args(int argc, char **argv, t_cub *cub)
 	else
 		cub->path = ft_strdup(argv[1]);
 	if (check_file(cub) != 0)
-		return (free(cub->path), 1);
+		return (1);
 	return (0);
 }

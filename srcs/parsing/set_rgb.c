@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:35:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/11 22:44:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:33:08 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	set_rgb(char *str)
 	if (ft_arr_len(arr) != 3)
 	{
 		printf("\033[31;01mInfos error :\033[00m Invalid RGB value !\n");
-		return (-1);
+		return (ft_free_arr(arr), -1);
 	}
 	rgb.red = ft_atoi(arr[0]);
 	rgb.green = ft_atoi(arr[1]);

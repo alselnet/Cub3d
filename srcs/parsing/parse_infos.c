@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:55:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 16:01:42 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:37:40 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,6 @@ int	parse_infos(t_cub *cub)
 		line = get_next_line(cub->parsing.fd);
 	}
 	//errWIP
-	printf("lol\n");
+	printf(">>>LOL<<<\n");
 	return (1);
 }

@@ -6,7 +6,11 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/12 17:16:11 by aselnet          ###   ########.fr       */
+=======
+/*   Updated: 2023/09/12 16:35:10 by jthuysba         ###   ########.fr       */
+>>>>>>> dbe4518fcc020a0f7946b8167bcac3e9c0c4a532
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +84,6 @@ void	draw_screen(t_cub *cub, t_img *img)
 	get_map_size(cub);
 	fetch_player_start(cub);
 	load_textures(cub);
-	print_map("map before display\n", cub->map);
-	printf("dimension[0] is %d\n", cub->dimensions[0]);
-	printf("dimension[1] is %d\n", cub->dimensions[1]);
 	if (!cub->player.pos[0] || !cub->player.pos[1])
 		return ;
 	draw_3d(cub, -((double)FOV / 2.0));
