@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:38:23 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/08/01 19:54:14 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:59:13 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_arr_len(char **arr)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!arr)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:00:32 by aselnet           #+#    #+#             */
-/*   Updated: 2023/08/19 20:09:31 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:59:50 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char		*ft_strdup(const char *s);
 int			ft_strenvcmp(const char *s1, char *env, size_t n);
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 char		*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dest, const char *src);
+size_t		ft_strlcat(char *dest, const char *src);
 size_t		ft_strlcpy(char *dst, char const *src, size_t size);
 size_t		ft_strlen(const char *s);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -82,10 +82,10 @@ void		ft_lstiter(t_list *lst, int (*f)(int));
 t_list		*ft_lstmap(t_list *lst, int (*f)(int));
 
 //GET_NEXT_LINE
-char	*get_next_line(int fd);
-size_t	ft_strcpy(char *dest, const char *src);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin_gnl(char *s1, char *s2);
+char		*get_next_line(int fd);
+size_t		ft_strcpy(char *dest, const char *src);
+size_t		ft_strlen(const char *str);
+char		*ft_strjoin_gnl(char *s1, char *s2);
 
 //PRINTF
 int			ft_put_lower_hex_fd(unsigned long int value, int fd);
@@ -95,8 +95,9 @@ void		ft_putunsigned_fd(unsigned int n, int fd, int *count);
 int			ft_printf(char const *s, ...);
 
 //MORE
-int	ft_arr_len(char **tab);
-void	ft_free_arr(char **arr);
-int	ft_isspace(char c);
+int			ft_arr_len(char **tab);
+void		ft_free_arr(char **arr);
+int			ft_isspace(char c);
+char		**ft_split_spaces(char const *s);
 
 #endif

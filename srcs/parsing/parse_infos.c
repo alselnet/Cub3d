@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:55:11 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 16:37:40 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:00:16 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_elem(char *line, t_parsing *data)
 	char	**buff;
 
 	line[ft_strlen(line) - 1] = 0;
-	buff = ft_split(line, ' ');
+	buff = ft_split_spaces(line);
 	if (ft_arr_len(buff) != 2)
 	{
 		if (ft_arr_len(buff) > 2)
