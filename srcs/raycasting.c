@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/11 18:46:20 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 02:07:49 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_ray	horizontal_check_ray(t_cub *cub, double vector)
 	t_ray	hray;
 
 	hray.max_view = 0;
+	init_ray(&hray);
 	set_hray(cub, &hray, vector);
 	while (hray.max_view < 1000)
 	{
@@ -100,6 +101,7 @@ t_ray	vertical_check_ray(t_cub *cub, double vector)
 	t_ray	vray;
 
 	vray.max_view = 0;
+	init_ray(&vray);
 	set_vray(cub, &vray, vector);
 	while (vray.max_view < 1000)
 	{
@@ -127,8 +129,6 @@ t_ray	cast_ray(t_cub *cub, double vector)
 	t_ray	hray;
 	t_ray	vray;
 
-	init_ray(&hray);
-	init_ray(&vray);
 	hray = horizontal_check_ray(cub, vector);
 	vray = vertical_check_ray(cub, vector);
 	if (hray.ray_len < vray.ray_len)
