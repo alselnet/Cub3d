@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 17:24:02 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:28:47 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_wall_player(double x, double y, t_cub *cub)
 	int		y_tile;
 
 	x_tile = (int) x;
-	y_tile = (int) (cub->dimensions[0] - y);
+	y_tile = (int)(cub->dimensions[0] - y);
 	if (x_tile < 0 || x_tile > cub->dimensions[0])
 		return (1);
 	else if (y_tile < 0 || y_tile > cub->dimensions[1])
