@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:34:52 by jthuysba          #+#    #+#             */
-/*   Updated: 2023/09/12 18:37:13 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:01:33 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	check_full_elem(t_parsing *data)
 	return (1);
 }
 
-int	launch_file(char *line, t_cub *cub)
+int	launch_file(char **line, t_cub *cub)
 {
 	cub->parsing.fd = open(cub->path, O_RDONLY, 0666);
 	if (cub->parsing.fd < 0)
 		return (1);
-	line = get_next_line(cub->parsing.fd);
-	if (!line)
+	*line = get_next_line(cub->parsing.fd);
+	if (line && !*line)
 	{
 		printf("\033[31;01mFile error :\033[00m Empty file !\n");
 		return (close(cub->parsing.fd), 1);

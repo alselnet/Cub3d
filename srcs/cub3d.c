@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:40:50 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 13:36:20 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:54:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	init_parsing(&cub.parsing);
 	if (parse_args(argc, argv, &cub) != 0)
 		return (destroy_all(&cub), 1);
-	if (parse_infos(&cub))
+	if (parse_infos(&cub) != 0)
 		return (destroy_all(&cub), 1);
 	if (go_to_map(&cub.parsing, &cub) != 0)
 		return (destroy_all(&cub), 1);
