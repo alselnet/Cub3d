@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 15:31:25 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 16:14:22 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:16:11 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void	draw_3d(t_cub *cub, double delta)
 	{
 		angle = cub->player.orientation + delta;
 		if (angle < 0)
-			angle += 2 * PI;
+			angle += 2.0 * PI;
 		else if (angle > 2 * PI)
-			angle -= 2 * PI;
+			angle -= 2.0 * PI;
 		ray = cast_ray(cub, angle);
 		ray.ray_len = ray.ray_len * cos(delta);
 		draw_stripe(cub, &cub->img3d, col, ray);
 		col--;
-		delta += (double) FOV / 1152.0;
+		delta += ((double) FOV / 1152.0);
 	}
 	return ;
 }

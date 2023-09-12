@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 02:10:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 16:33:46 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:21:43 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_hray(t_cub *cub, t_ray *hray, double vector)
 	}
 	else if (vector > PI)
 	{
-		hray->ray_y = (double)(int)(cub->player.pos[1]) - 0.0001;
+		hray->ray_y = (double)(int)(cub->player.pos[1]) - 0.000001;
 		hray->ray_x = ((hray->ray_y - cub->player.pos[1]))
 			/ tan(vector) + cub->player.pos[0];
 		hray->delta_y = -1;
@@ -32,7 +32,7 @@ void	set_hray(t_cub *cub, t_ray *hray, double vector)
 	}
 	else
 	{
-		hray->ray_y = (double)(int)(cub->player.pos[1]) + 1.0001;
+		hray->ray_y = (double)(int)(cub->player.pos[1]) + 1.000001;
 		hray->ray_x = ((hray->ray_y - cub->player.pos[1])
 				/ tan(vector)) + cub->player.pos[0];
 		hray->delta_y = 1;
@@ -80,7 +80,7 @@ void	set_vray(t_cub *cub, t_ray *vray, double vector)
 	}
 	if (vector > PI * 0.5 && vector < PI * 1.5)
 	{
-		vray->ray_x = (double)(int)(cub->player.pos[0]) - 0.0001;
+		vray->ray_x = (double)(int)(cub->player.pos[0]) - 0.000001;
 		vray->ray_y = ((vray->ray_x - cub->player.pos[0])
 				* tan(vector)) + cub->player.pos[1];
 		vray->delta_x = -1;
@@ -88,7 +88,7 @@ void	set_vray(t_cub *cub, t_ray *vray, double vector)
 	}
 	else
 	{
-		vray->ray_x = (double)(int)(cub->player.pos[0]) + 1.0001;
+		vray->ray_x = (double)(int)(cub->player.pos[0]) + 1.000001;
 		vray->ray_y = ((vray->ray_x - cub->player.pos[0])
 				* tan(vector)) + cub->player.pos[1];
 		vray->delta_x = 1;

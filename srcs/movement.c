@@ -6,7 +6,7 @@
 /*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 23:47:58 by aselnet           #+#    #+#             */
-/*   Updated: 2023/09/12 16:42:47 by aselnet          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:24:02 by aselnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ int	check_wall_player(double x, double y, t_cub *cub)
 int	check_wall(double x, double y, t_cub *cub)
 {
 	if (check_wall_player(x, y, cub) == 1)
-		return (1);
-	else if (check_wall_player(x + PADDING, y + PADDING, cub) == 1)
-		return (1);
-	else if (check_wall_player(x - PADDING, y - PADDING, cub) == 1)
 		return (1);
 	else if (check_wall_player(x, y + PADDING, cub) == 1)
 		return (1);
