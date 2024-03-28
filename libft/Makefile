@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
+#    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 15:46:29 by aselnet           #+#    #+#              #
-#    Updated: 2023/07/06 18:34:00 by aselnet          ###   ########.fr        #
+#    Updated: 2023/09/12 17:57:39 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,15 @@ ft_strrev.c\
 ft_strtrim.c\
 get_next_line.c\
 get_next_line_utils.c\
+ft_arr_len.c\
+ft_free_arr.c\
+ft_calloc.c\
+ft_bzero.c\
+ft_isspace.c\
+ft_memset.c\
+ft_atoi.c\
+ft_isdigit.c\
+ft_split_spaces.c\
 
 
 OBJS = ${SRCS:.c=.o}

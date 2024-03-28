@@ -3,78 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 14:06:11 by aselnet           #+#    #+#             */
-/*   Updated: 2023/04/05 20:36:19 by aselnet          ###   ########.fr       */
+/*   Created: 2022/05/24 15:10:54 by jthuysba          #+#    #+#             */
+/*   Updated: 2023/08/01 22:36:53 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+size_t	ft_strcpy(char *dest, const char *src)
 {
-	unsigned int	i;
-	char			*p;
+	size_t	i;
 
 	i = 0;
-	p = (char *)s;
-	while (i < n)
+	while (src[i])
 	{
-		*p = 0;
-		p++;
+		dest[i] = src[i];
 		i++;
 	}
-	return ;
+	dest[i] = '\0';
+	return (ft_strlen(src));
 }
 
-void	*ft_calloc(size_t count, size_t size)
+size_t	ft_strlcat(char *dest, const char *src)
 {
-	void	*result;
-
-	result = (void *)malloc (count * size);
-	if (!result)
-		return (0);
-	ft_bzero (result, count * size);
-	return (result);
-}
-
-int	ft_chr_is_in_base(const char *s, int c)
-{
-	int	i;
+	size_t	i;
+	size_t	j;
+	size_t	d;
 
 	i = 0;
-	while (s[i])
+	j = 0;
+	d = ft_strlen(dest);
+	while (dest[i])
+		i++;
+	while (src[j])
 	{
-		if (s[i] == c)
-			return (1);
+		dest[i] = src[j];
+		j++;
 		i++;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (d + ft_strlen(src));
 }
 
 char	*ft_strjoin_gnl(char *s1, char *s2)
 {
-	int		len;
-	int		i;
-	int		j;
-	char	*join;
+	size_t	i;
+	size_t	j;
+	char	*dest;
 
-	i = -1;
+	i = 0;
 	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	join = malloc(len + 1);
-	if (!join)
-		return (0);
-	while (s1[++i])
-		join[i] = s1[i];
-	while (s2[j])
+	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dest)
+		return (NULL);
+	while (s1[i])
 	{
-		join[i + j] = s2[j];
+		dest[j] = s1[i];
+		i++;
 		j++;
 	}
-	join[i + j] = 0;
-	if (s1)
-		free (s1);
-	return (join);
+	i = 0;
+	while (s2[i])
+	{
+		dest[j] = s2[i];
+		i++;
+		j++;
+	}
+	dest[j] = '\0';
+	return (free(s1), dest);
 }

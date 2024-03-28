@@ -3,98 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 14:05:20 by aselnet           #+#    #+#             */
-/*   Updated: 2023/05/23 14:15:22 by aselnet          ###   ########.fr       */
+/*   Created: 2023/08/01 22:31:39 by jthuysba          #+#    #+#             */
+/*   Updated: 2023/08/01 22:52:42 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*fetch_line(int fd, char *line, char *newline)
+int	check_endline(char *buffer)
 {
-	int		tracker;
+	int	i;
+
+	i = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*get_read(char *stock, int fd)
+{
+	int		bytes;
 	char	*buffer;
 
-	tracker = 1;
-	buffer = (char *) ft_calloc (sizeof(char), BUFFER_SIZE + 1);
+	bytes = 1;
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (0);
-	line = (char *) ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+		return (NULL);
+	while (bytes > 0 && !check_endline(stock))
+	{
+		bytes = read(fd, buffer, BUFFER_SIZE);
+		if (bytes < 0)
+			return (free(stock), free(buffer), NULL);
+		buffer[bytes] = '\0';
+		stock = ft_strjoin_gnl(stock, buffer);
+	}
+	if (stock[0] == '\0')
+		return (free(stock), free (buffer), NULL);
+	return (free(buffer), stock);
+}
+
+char	*get_line(char *stock, char *line)
+{
+	int	i;
+
+	i = 0;
+	while (stock[i] != '\n' && stock[i])
+		i++;
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
-		return (0);
-	line = ft_strjoin_gnl(line, newline);
-	while (tracker > 0 && !ft_chr_is_in_base(line, '\n'))
+		return (NULL);
+	i = 0;
+	while (stock[i] != '\n' && stock[i])
 	{
-		tracker = read (fd, buffer, BUFFER_SIZE);
-		if (tracker >= 0)
-			buffer[tracker] = 0;
-		line = ft_strjoin(line, buffer);
+		line[i] = stock[i];
+		i++;
 	}
-	free (buffer);
-	if (tracker < 0)
+	if (stock[i] == '\n')
 	{
-		free (line);
-		return (0);
+		line[i] = '\n';
+		line[i + 1] = '\0';
 	}
+	else
+		line[i] = '\0';
 	return (line);
 }
 
-char	*make_newline(char *line, char *newline)
+char	*get_rest(char *stock)
 {
-	int	i;
-	int	j;
+	int		i;
+	char	*rest;
 
 	i = 0;
-	j = 0;
-	while (line[i] && line[i] != '\n')
+	while (stock[i] != '\n' && stock[i])
 		i++;
-	if (!line[i] && newline)
-		ft_bzero(newline, ft_strlen(newline));
-	else if (line[i] == '\n')
-		i++;
-	while (line[i])
-	{
-		newline[j] = line[i];
-		line[i] = 0;
-		i++;
-		j++;
-	}
-	newline[j] = 0;
-	return (newline);
-}
-
-char	*reset_arr(char *arr)
-{
-	free(arr);
-	return (0);
+	if (stock[i] == '\0' || (stock[i] == '\n' && stock[i + 1] == '\0'))
+		return (free(stock), NULL);
+	rest = malloc(sizeof(char) * (ft_strlen(stock + i + 1) + 1));
+	if (!rest)
+		return (free(stock), NULL);
+	ft_strcpy(rest, stock + i + 1);
+	return (free(stock), rest);
 }
 
 char	*get_next_line(int fd)
 {
+	static char	*stock;
 	char		*line;
-	static char	*newline;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (0);
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
 	line = 0;
-	if (!newline)
+	if (!stock)
 	{
-		newline = (char *) ft_calloc (sizeof(char), BUFFER_SIZE);
-		if (!newline)
-			return (0);
+		stock = malloc(sizeof(char));
+		if (!stock)
+			return (NULL);
+		stock[0] = '\0';
 	}
-	line = fetch_line(fd, line, newline);
-	if (!line || !*line)
-	{
-		free(line);
-		newline = reset_arr(newline);
-		return (0);
-	}
-	if (ft_chr_is_in_base(line, '\n'))
-		newline = make_newline(line, newline);
-	else if (newline)
-		newline = reset_arr(newline);
+	stock = get_read(stock, fd);
+	if (!stock || stock[0] == '\0')
+		return (free(stock), NULL);
+	line = get_line(stock, line);
+	if (line == NULL)
+		return (free(stock), NULL);
+	stock = get_rest(stock);
 	return (line);
 }

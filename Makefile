@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aselnet <aselnet@student.42.fr>            +#+  +:+       +#+         #
+#    By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 16:55:17 by aselnet           #+#    #+#              #
-#    Updated: 2023/08/01 16:59:26 by aselnet          ###   ########.fr        #
+#    Updated: 2023/09/12 18:36:18 by jthuysba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME		=	cub3d
 
 LIB_DIR		=	./libft
 
-MLX_DIR		=	./minilibx-linux
+MLX_DIR		=	./mlx
 
-MLX 		= ./minilibx-linux/libmlx.a
+MLX 		=  ./mlx/libmlx.a
 
 DEPS		=	${OBJS:.o=.d}
 
@@ -24,11 +24,30 @@ LIBFT		=	./libft/libft.a
 
 MAIN		=	./srcs/cub3d.c
 
-# CORE		=	./srcs/core/mlx_init.c ./srcs/core/raycast.c ./srcs/core/linecrossed.c ./srcs/core/texture.c ./srcs/core/hooks.c ./srcs/core/tools.c
+CORE		=	./srcs/display.c\
+				./srcs/textures.c\
+				./srcs/init.c\
+				./srcs/init2.c\
+				./srcs/utils.c\
+				./srcs/movement.c\
+				./srcs/movement2.c\
+				./srcs/raycasting.c\
+				./srcs/close.c\
+				./srcs/destroy_all.c\
+				./srcs/parsing/map_parsing.c\
+				./srcs/parsing/get_checking_map.c\
+				./srcs/parsing/get_checking_map_2.c\
+				./srcs/parsing/parse_utils.c\
+				./srcs/parsing/check_map.c\
+				./srcs/parsing/parse_args.c\
+				./srcs/parsing/parse_infos.c\
+				./srcs/parsing/parse_infos_2.c\
+				./srcs/parsing/set_card_path.c\
+				./srcs/parsing/set_rgb.c\
 
 PARSING		=	
 
-SRCS		=	${MAIN} ${PARSING} #${CORE}
+SRCS		=	${MAIN} ${PARSING} ${CORE}
 
 OBJS		=	${SRCS:.c=.o}
 
@@ -36,7 +55,7 @@ RM			=	rm -f
 
 CC			=	gcc
 
-FLAGS		=	-MMD -Wall -Wextra -Werror -I include/
+FLAGS		=	-MMD -Wall -Wextra -Werror -g -I include/
 
 FLAGS_LIB	= -lXext -lX11
 
